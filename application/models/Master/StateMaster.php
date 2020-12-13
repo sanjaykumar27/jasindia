@@ -36,11 +36,12 @@ class StateMaster extends CI_Model {
         return $id;
     }
 
-    function checkStateExists($state_name)
+    function checkStateExists($state_name, $state_id)
     {
         $this->db->select('state_id');
         $this->db->from('m_states');
         $this->db->where('state_name', $state_name);
+        $this->db->where('state_id !=', $state_id);
         $data = $this->db->get();
         $num = $data->num_rows();
         if ($num > 0)

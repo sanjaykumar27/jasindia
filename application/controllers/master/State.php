@@ -114,7 +114,7 @@ class State extends CI_Controller {
             $userid = $this->session->userdata('sess_user_id');
             $state = $this->input->POST('state_name');
             $state_id = $this->input->POST('state_id');
-            $is_exist = $this->StateMaster->checkStateExists(trim($state));
+            $is_exist = $this->StateMaster->checkStateExists(trim($state), $state_id);
             if ($is_exist)
             {
                 $data = array('code' => 3, 'response' => 'This state already exist!');
