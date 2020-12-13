@@ -1,0 +1,39 @@
+html * {
+font-family: 'Open Sans', sans-serif;
+font-weight: 400;
+}
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item>.m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item>.m-menu__link .m-menu__link-text .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item .m-menu__submenu .m-menu__item>.m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item .m-menu__submenu .m-menu__item>.m-menu__link .m-menu__link-text{
+    color: #d3d5e6;
+}
+
+.m-datatable>.m-datatable__table>.m-datatable__foot .m-datatable__row>.m-datatable__cell>span, .m-datatable>.m-datatable__table>.m-datatable__head .m-datatable__row>.m-datatable__cell>span 
+{
+	color: #4d4d4e;
+    font-weight: 700;
+}
+
+.m-datatable.m-datatable--default>.m-datatable__table>.m-datatable__body .m-datatable__row>.m-datatable__cell>span {
+    color: #4c4c4c;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+label {
+	font-weight: 600 !important;
+	color: #4a4a4a;
+}
+.modal .modal-content .modal-header .modal-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.modal .modal-content .modal-header {
+    padding: 20px;
+}
+@media (min-width: 1025px) {
+    .m-stack.m-stack--desktop.m-stack--ver>.m-stack__item.m-stack__item--fluid {
+        width: 100%;
+        background: #2f3142;
+    }
+}
