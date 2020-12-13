@@ -42,14 +42,14 @@ class Manufacturer extends CI_Controller {
             $manufacturer_website = $this->input->POST('manufacturer_website');
             $manufacturer_address = $this->input->POST('manufacturer_address');
             $manufacturer_email = $this->input->POST('manufacturer_email');
-            $is_exist = $this->ManufacturerMaster->checkManufacturerExists(trim($manufacturer));
+            $is_exist = $this->ManufacturerMaster->checkManufacturerExists(trim($manufacturer),'');
             if ($is_exist)
             {
                 $data = array('code' => 3, 'response' => 'This manufacturer already exist');
             } else
             {
                 $param = array(
-                    'manufacturer_name' => trim($manufacturer),
+                    'manufacturer_name' => ucwords(trim($manufacturer)),
                     'manufacturer_website' => trim($manufacturer_website),
                     'manufacturer_address' => trim($manufacturer_address),
                     'manufacturer_email' => trim($manufacturer_email),
@@ -108,7 +108,7 @@ class Manufacturer extends CI_Controller {
             } else
             {
                 $param = array(
-                    'manufacturer_name' => trim($manufacturer_name),
+                    'manufacturer_name' => ucwords(trim($manufacturer_name)),
                     'manufacturer_email' => $manufacturer_email,
                     'manufacturer_address' => $manufacturer_address,
                     'manufacturer_website' => $manufacturer_website,

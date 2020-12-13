@@ -46,14 +46,14 @@ class State extends CI_Controller {
             $sCount = count($states);
             foreach ($states as $val)
             {
-                $is_exist = $this->StateMaster->checkStateExists(trim($val));
+                $is_exist = $this->StateMaster->checkStateExists(trim($val),'');
                 if ($is_exist)
                 {
                     $states_exist[] = trim($val);
                 } else
                 {
                     $param = array(
-                        'state_name' => trim($val),
+                        'state_name' => ucwords(trim($val)),
                         'created_by' => $userid,
                     );
                     $cid = $this->StateMaster->createState($param);
@@ -121,7 +121,7 @@ class State extends CI_Controller {
             } else
             {
                 $param = array(
-                    'state_name' => trim($state),
+                    'state_name' => ucwords(trim($state)),
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );

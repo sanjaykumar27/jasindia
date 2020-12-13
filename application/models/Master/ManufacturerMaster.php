@@ -40,7 +40,9 @@ class ManufacturerMaster extends CI_Model {
         $this->db->select('manufacturer_id');
         $this->db->from('m_vehicle_manufacturer');
         $this->db->where('manufacturer_name', $manufacturer_name);
-        $this->db->where('manufacturer_id !=',$manufacturer_id);
+        if($manufacturer_id){
+           $this->db->where('manufacturer_id !=',$manufacturer_id); 
+        }
         $data = $this->db->get();
         $num = $data->num_rows();
         if ($num > 0)
