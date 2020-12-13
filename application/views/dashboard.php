@@ -26,10 +26,10 @@
                         <div class="m-widget11">
                             <div class="m-widget11__action">
                                 <a href="<?php echo base_url() ?>master/manufacturer" class="btn m-btn--pill btn-outline-brand m-btn btn-sm mr-1">
-                                    Vehicle Manufacturer
+                                    Vehicle Manufacturer Master
                                 </a>
                                 <a href="<?php echo base_url() ?>master/state" class="btn m-btn--pill btn-outline-brand m-btn btn-sm">
-                                    States
+                                    States Master
                                 </a>
                             </div>
                         </div>
