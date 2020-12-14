@@ -51,7 +51,7 @@ class Manufacturer extends CI_Controller {
                 $param = array(
                     'manufacturer_name' => ucwords(trim($manufacturer)),
                     'manufacturer_website' => trim($manufacturer_website),
-                    'manufacturer_address' => trim($manufacturer_address),
+                    'manufacturer_address' => ucwords(trim($manufacturer_address)),
                     'manufacturer_email' => trim($manufacturer_email),
                     'created_by' => $userid,
                 );
