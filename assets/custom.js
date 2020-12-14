@@ -23,7 +23,8 @@ function saveAjax(controller_url, modal = '', form_data)
 		$('#'+modal+' .modal-content').unblock();
                 $('#preloader').css("display", "none");
                 swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
-                    location.reload();
+//                    location.reload();
+
                 });
             } else
             {

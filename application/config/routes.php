@@ -60,7 +60,7 @@ $route['manufacturer/edit'] = 'master/manufacturer/edit';
 $route['manufacturer/update'] = 'master/manufacturer/update';
 
 //State Master
-$route['state/list/GetStates'] = 'master/State/GetStates';
+$route['state/list'] = 'master/State/list';
 $route['state/create'] = 'master/State/Create';
 $route['state/edit'] = 'master/State/edit';
 $route['state/update'] = 'master/State/update';

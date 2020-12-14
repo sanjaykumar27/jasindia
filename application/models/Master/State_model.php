@@ -1,32 +1,39 @@
 <?php
 
-class StateMaster extends CI_Model {
+class State_model extends CI_Model {
 
     function __construct()
     {
         parent::__construct();
     }
 
-    function selectAll()
+    function selectAll($limit, $offset, $search, $count)
     {
-        // , ROW_NUMBER() OVER(ORDER BY StateID DESC) AS row_num
         $this->db->select('*');
         $this->db->from('m_states');
         $this->db->where('deleted_on', null);
-        // $this->db->order_by('StateID','DESC');
-        $data = $this->db->get();
-        $num = $data->num_rows();
-        if ($num > 0)
+        if ($search)
         {
-            $result = $data->result_array();
-            if (isset($result))
+            $keyword = $search['keyword'];
+            if ($keyword)
             {
-                return $result;
-            } else
-            {
-                return '';
+                $this->db->where("state_name LIKE '%$keyword%'");
             }
         }
+        if ($count)
+        {
+            return $this->db->count_all_results();
+        }
+        else {
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0)
+            {
+                return $query->result();
+            }
+        }
+        return array();
     }
 
     function createState($param)
@@ -41,7 +48,8 @@ class StateMaster extends CI_Model {
         $this->db->select('state_id');
         $this->db->from('m_states');
         $this->db->where('state_name', $state_name);
-        if($state_id){
+        if ($state_id)
+        {
             $this->db->where('state_id !=', $state_id);
         }
         $data = $this->db->get();
@@ -70,7 +78,7 @@ class StateMaster extends CI_Model {
             return $query->row();
         }
     }
-    
+
     function updateState($param, $state_id)
     {
         $this->db->where('state_id', $state_id);
