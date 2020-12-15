@@ -7,25 +7,33 @@ class ManufacturerMaster extends CI_Model {
         parent::__construct();
     }
 
-    function selectAll()
+    function selectAll($limit, $offset, $search, $count)
     {
-        // , ROW_NUMBER() OVER(ORDER BY CompanyID DESC) AS row_num
         $this->db->select('*');
         $this->db->from('m_vehicle_manufacturer');
         $this->db->where('deleted_on', null);
-        $data = $this->db->get();
-        $num = $data->num_rows();
-        if ($num > 0)
+        if ($search)
         {
-            $result = $data->result_array();
-            if (isset($result))
+            $keyword = $search['keyword'];
+            if ($keyword)
             {
-                return $result;
-            } else
-            {
-                return '';
+                $this->db->where("manufacturer_name LIKE '%$keyword%'");
             }
         }
+        if ($count)
+        {
+            return $this->db->count_all_results();
+        }
+        else {
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0)
+            {
+                return $query->result();
+            }
+        }
+        return array();
     }
 
     function createManufacturer($param)

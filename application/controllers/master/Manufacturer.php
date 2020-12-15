@@ -8,6 +8,7 @@ class Manufacturer extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Master/ManufacturerMaster');
+        $this->load->library('pagination');
     }
 
     public function index()
@@ -21,12 +22,36 @@ class Manufacturer extends CI_Controller {
         }
     }
 
-    public function GetManufacturers()
+    public function list()
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $data['records'] = $this->ManufacturerMaster->selectAll();
-            echo json_encode($data['records']);
+            $search = array(
+                'keyword' => trim($this->input->post('search_key')),
+            );
+            $limit = 10;
+            $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $config['base_url'] = site_url('master/Manufacturer/list');
+            $config['total_rows'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = true);
+            $config['uri_segment'] = 4;
+            $config['num_links'] = 4;
+            $this->pagination->initialize($config);
+            $data['records'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = false);
+            $pagelinks = $this->pagination->create_links();
+            $html = '<table class="table m-table m-table--head-bg-success"><thead><tr><th>#</th><th>State Name</th>'
+                    . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
+            if (!empty($data['records']))
+            {
+                $i = 1 + $offset;
+                foreach ($data['records'] as $value)
+                {
+                    $html .= '<tr><td>'.$i.'</td><td>' . $value->manufacturer_name . '</td><td>' . $value->manufacturer_email . '</td><td>' . $value->manufacturer_website . '</td>'
+                            . '<td>' . $value->manufacturer_address . '</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-success">Edit </a></td>';
+                $i++; }
+            }
+            $html .= '</tbody></table>' . $pagelinks;
+            echo $html;
         } else
         {
             redirect('/Auth');
