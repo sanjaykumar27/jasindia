@@ -18,7 +18,7 @@
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search by state name" />
             </div>
             <div class="col-5"><button type="button" id="searchBtn" class="btn btn-primary m-btn--wide">Search</button>
-            <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide">Search</button></div>
+            <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide">Reset</button></div>
         </div>
          <div class="d-flex flex-row mt-3">
             <div class="col-12 px-0">
