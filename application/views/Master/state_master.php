@@ -120,7 +120,7 @@
             e.preventDefault();
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>state/create', 'ModalNewState', formData);
-            var page_url = '<?php echo base_url() ?>master/state/list/' + ($("#active-page").text() - 1) * 5;
+            var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 5;
             ajaxlist(page_url);
             e.preventDefault();
         });
@@ -160,7 +160,7 @@
                         $('#ModalUpdateState').modal('hide');
                         swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                             //location.reload();
-                            var page_url = '<?php echo base_url() ?>master/state/list/' + ($("#active-page").text() - 1) * 10;
+                            var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 10;
                             ajaxlist(page_url);
                             e.preventDefault();
                         });
@@ -202,7 +202,7 @@
         {
             var search_key = $("#search_key").val();
             var dataString = 'search_key=' + search_key;
-            var base_url = '<?php echo site_url('state/list') ?>';
+            var base_url = '<?php echo site_url('state/getStates') ?>';
             if (page_url == false) {
                 var page_url = base_url;
             }
