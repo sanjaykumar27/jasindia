@@ -177,6 +177,13 @@
         /*--first time load--*/
         ajaxlist(page_url = false);
 
+        $('#search_key').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+               ajaxlist(page_url = false);
+               event.preventDefault();
+            }
+        });
         /*-- Search keyword--*/
         $(document).on('click', "#searchBtn", function (event) {
             ajaxlist(page_url = false);

@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label>Manufacturer Address</label>
-                        <textarea class="form-control" name="manufacturer_address" id="m_manufacturer_address" required></textarea>
+                        <textarea class="form-control"  name="manufacturer_address" id="m_manufacturer_address" required></textarea>
                     </div>					
                     <div class="float-right">
                         <input type="button" class="btn" data-dismiss="modal" aria-label="Close" value="Close">
@@ -182,6 +182,14 @@
 
     });
     
+        $('#search_key').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+               ajaxlist(page_url = false);
+               event.preventDefault();
+            }
+        });
+        
         ajaxlist(page_url = false);
         $(document).on('click', "#searchBtn", function (event) {
             ajaxlist(page_url = false);
