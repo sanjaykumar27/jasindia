@@ -141,10 +141,10 @@
 
     $(document).on("click", "#updateBtn", function (e) {
         e.preventDefault();
-        $('#ModalUpdateCompany .modal-content').block({
-            message: '<p class="h5 mb-0 py-1">Processing</p>',
-            css: {border: '0px solid #a00'}
-        });
+//        $('#ModalUpdateCompany .modal-content').block({
+//            message: '<p class="h5 mb-0 py-1">Processing</p>',
+//            css: {border: '0px solid #a00'}
+//        });
         var edit_manufacturer_id = $("#m_manufacturer_id").val();
         var edit_manufacturer_name = $("#m_manufacturer_name").val();
         var edit_manufacturer_email = $("#m_manufacturer_email").val();
@@ -165,7 +165,7 @@
                 if (data.code == 1)
                 {
                     $('#ModalUpdateCompany').modal('hide');
-                    $('#ModalUpdateCompany').unblock();
+//                    $('#ModalUpdateCompany').unblock();
                     swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                         //location.reload();
                         var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
