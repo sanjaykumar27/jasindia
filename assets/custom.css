@@ -37,3 +37,7 @@ label {
         background: #2f3142;
     }
 }
+
+.form-control-feedback{
+    color: red;
+}

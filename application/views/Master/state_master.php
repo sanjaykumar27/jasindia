@@ -18,9 +18,9 @@
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search by state name" />
             </div>
             <div class="col-5"><button type="button" id="searchBtn" class="btn btn-primary m-btn--wide">Search</button>
-            <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide">Reset</button></div>
+                <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide">Reset</button></div>
         </div>
-         <div class="d-flex flex-row mt-3">
+        <div class="d-flex flex-row mt-3">
             <div class="col-12 px-0">
                 <div id="ajaxContent" ></div>
             </div>
@@ -143,45 +143,47 @@
         });
 
         $(document).on("click", "#updateBtn", function (e) {
-            e.preventDefault();
-            var edit_state_id = $("#m_state_id").val();
-            var edit_state_name = $("#m_state_name").val();
-            $.ajax({
-                url: "<?php echo base_url(); ?>state/update",
-                type: 'POST',
-                dataType: "json",
-                data: {
-                    state_id: edit_state_id,
-                    state_name: edit_state_name
-                },
-                success: function (data) {
-                    if (data.code == 1)
-                    {
-                        $('#ModalUpdateState').modal('hide');
-                        swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
-                            //location.reload();
-                            var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 10;
-                            ajaxlist(page_url);
-                            e.preventDefault();
-                        });
-                    } else
-                    {
-                        $('#ModalUpdateState').unblock();
-                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+            if ($("#update_state").valid())
+            {
+                e.preventDefault();
+                var edit_state_id = $("#m_state_id").val();
+                var edit_state_name = $("#m_state_name").val();
+                $.ajax({
+                    url: "<?php echo base_url(); ?>state/update",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        state_id: edit_state_id,
+                        state_name: edit_state_name
+                    },
+                    success: function (data) {
+                        if (data.code == 1)
+                        {
+                            $('#ModalUpdateState').modal('hide');
+                            swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                                //location.reload();
+                                var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 10;
+                                ajaxlist(page_url);
+                                e.preventDefault();
+                            });
+                        } else
+                        {
+                            $('#ModalUpdateState').unblock();
+                            swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                        }
                     }
-                }
-            });
-
+                });
+            }
         });
 
         /*--first time load--*/
         ajaxlist(page_url = false);
 
-        $('#search_key').keypress(function(event){
+        $('#search_key').keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-               ajaxlist(page_url = false);
-               event.preventDefault();
+            if (keycode == '13') {
+                ajaxlist(page_url = false);
+                event.preventDefault();
             }
         });
         /*-- Search keyword--*/

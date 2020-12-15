@@ -75,7 +75,7 @@
 
             </div>
             <div class="modal-body">
-                <form action="" method="post" id="create_company">
+                <form action="" method="post" id="update_company">
                     <div class="form-group">
                         <label>Manufacturer Name</label>
                         <input type="hidden" name="manufacturer_name" id="m_manufacturer_id">
@@ -140,6 +140,7 @@
     });
 
     $(document).on("click", "#updateBtn", function (e) {
+        if($("#update_company").valid()) {
         e.preventDefault();
 //        $('#ModalUpdateCompany .modal-content').block({
 //            message: '<p class="h5 mb-0 py-1">Processing</p>',
@@ -179,7 +180,7 @@
                 }
             }
         });
-
+        }
     });
     
         $('#search_key').keypress(function(event){
