@@ -189,7 +189,7 @@
         });
         $(document).on('click', "#resetBtn", function (event) {
             $("#search_key").val('');
-            ajaxlist(page_url = tr);
+            ajaxlist(page_url = false);
             event.preventDefault();
         });
         $(document).on('click', ".pagination li a", function (event) {
