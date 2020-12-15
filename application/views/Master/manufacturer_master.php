@@ -140,88 +140,93 @@
     });
 
     $(document).on("click", "#updateBtn", function (e) {
-        if($("#update_company").valid()) {
-        e.preventDefault();
+        if ($("#update_company").valid()) {
+            e.preventDefault();
 //        $('#ModalUpdateCompany .modal-content').block({
 //            message: '<p class="h5 mb-0 py-1">Processing</p>',
 //            css: {border: '0px solid #a00'}
 //        });
-        var edit_manufacturer_id = $("#m_manufacturer_id").val();
-        var edit_manufacturer_name = $("#m_manufacturer_name").val();
-        var edit_manufacturer_email = $("#m_manufacturer_email").val();
-        var edit_manufacturer_address = $("#m_manufacturer_address").val();
-        var edit_manufacturer_website = $("#m_manufacturer_website").val();
-        $.ajax({
-            url: "<?php echo base_url(); ?>manufacturer/update",
-            type: 'POST',
-            dataType: "json",
-            data: {
-                manufacturer_id: edit_manufacturer_id,
-                manufacturer_name: edit_manufacturer_name,
-                manufacturer_email: edit_manufacturer_email,
-                manufacturer_address: edit_manufacturer_address,
-                manufacturer_website: edit_manufacturer_website
-            },
-            success: function (data) {
-                if (data.code == 1)
-                {
-                    $('#ModalUpdateCompany').modal('hide');
-//                    $('#ModalUpdateCompany').unblock();
-                    swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
-                        //location.reload();
-                        var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
-                        ajaxlist(page_url);
-                        e.preventDefault();
-                    });
-                } else
-                {
-                    $('#ModalUpdateCompany').unblock();
-                    swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
-                }
-            }
-        });
-        }
-    });
-    
-        $('#search_key').keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-               ajaxlist(page_url = false);
-               event.preventDefault();
-            }
-        });
-        
-        ajaxlist(page_url = false);
-        $(document).on('click', "#searchBtn", function (event) {
-            ajaxlist(page_url = false);
-            event.preventDefault();
-        });
-        $(document).on('click', "#resetBtn", function (event) {
-            $("#search_key").val('');
-            ajaxlist(page_url = false);
-            event.preventDefault();
-        });
-        $(document).on('click', ".pagination li a", function (event) {
-            var page_url = $(this).attr('href');
-            ajaxlist(page_url);
-            event.preventDefault();
-        });
-
-        function ajaxlist(page_url = false)
-        {
-            var search_key = $("#search_key").val();
-            var dataString = 'search_key=' + search_key;
-            var base_url = '<?php echo site_url('manufacturer/getManufacturer') ?>';
-            if (page_url == false) {
-                var page_url = base_url;
-            }
+            var edit_manufacturer_id = $("#m_manufacturer_id").val();
+            var edit_manufacturer_name = $("#m_manufacturer_name").val();
+            var edit_manufacturer_email = $("#m_manufacturer_email").val();
+            var edit_manufacturer_address = $("#m_manufacturer_address").val();
+            var edit_manufacturer_website = $("#m_manufacturer_website").val();
             $.ajax({
-                type: "POST",
-                url: page_url,
-                data: dataString,
-                success: function (response) {
-                    $("#ajaxContent").html(response);
+                url: "<?php echo base_url(); ?>manufacturer/update",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    manufacturer_id: edit_manufacturer_id,
+                    manufacturer_name: edit_manufacturer_name,
+                    manufacturer_email: edit_manufacturer_email,
+                    manufacturer_address: edit_manufacturer_address,
+                    manufacturer_website: edit_manufacturer_website
+                },
+                success: function (data) {
+                    if (data.code == 1)
+                    {
+                        $('#ModalUpdateCompany').modal('hide');
+//                    $('#ModalUpdateCompany').unblock();
+                        swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                            //location.reload();
+                            var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
+                            if ($("#search_key").val()) {
+                                ajaxlist(page_url = false);
+                            } else
+                            {
+                                ajaxlist(page_url);
+                            }
+                            e.preventDefault();
+                        });
+                    } else
+                    {
+                        $('#ModalUpdateCompany').unblock();
+                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                    }
                 }
             });
         }
+    });
+
+    $('#search_key').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            ajaxlist(page_url = false);
+            event.preventDefault();
+        }
+    });
+
+    ajaxlist(page_url = false);
+    $(document).on('click', "#searchBtn", function (event) {
+        ajaxlist(page_url = false);
+        event.preventDefault();
+    });
+    $(document).on('click', "#resetBtn", function (event) {
+        $("#search_key").val('');
+        ajaxlist(page_url = false);
+        event.preventDefault();
+    });
+    $(document).on('click', ".pagination li a", function (event) {
+        var page_url = $(this).attr('href');
+        ajaxlist(page_url);
+        event.preventDefault();
+    });
+
+    function ajaxlist(page_url = false)
+    {
+        var search_key = $("#search_key").val();
+        var dataString = 'search_key=' + search_key;
+        var base_url = '<?php echo site_url('manufacturer/getManufacturer') ?>';
+        if (page_url == false) {
+            var page_url = base_url;
+        }
+        $.ajax({
+            type: "POST",
+            url: page_url,
+            data: dataString,
+            success: function (response) {
+                $("#ajaxContent").html(response);
+            }
+        });
+    }
 </script>

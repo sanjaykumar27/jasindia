@@ -163,7 +163,13 @@
                             swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                                 //location.reload();
                                 var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 10;
-                                ajaxlist(page_url);
+                                if ($("#search_key").val()) {
+                                    ajaxlist(page_url = false);
+                                }
+                                else
+                                {
+                                    ajaxlist(page_url);
+                                }
                                 e.preventDefault();
                             });
                         } else
