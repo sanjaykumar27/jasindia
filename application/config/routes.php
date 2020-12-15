@@ -54,7 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //Company Master
-$route['manufacturer/list'] = 'master/Manufacturer/list';
+$route['manufacturer/getManufacturer'] = 'master/Manufacturer/getManufacturer';
 $route['manufacturer/create'] = 'master/Manufacturer/Create';
 $route['manufacturer/edit'] = 'master/manufacturer/edit';
 $route['manufacturer/update'] = 'master/manufacturer/update';

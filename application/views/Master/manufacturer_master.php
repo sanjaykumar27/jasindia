@@ -168,7 +168,7 @@
                     $('#ModalUpdateCompany').unblock();
                     swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                         //location.reload();
-                        var page_url = '<?php echo base_url() ?>master/manufacturer/list/' + ($("#active-page").text() - 1) * 10;
+                        var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
                         ajaxlist(page_url);
                         e.preventDefault();
                     });
@@ -202,7 +202,7 @@
         {
             var search_key = $("#search_key").val();
             var dataString = 'search_key=' + search_key;
-            var base_url = '<?php echo site_url('manufacturer/list') ?>';
+            var base_url = '<?php echo site_url('manufacturer/getManufacturer') ?>';
             if (page_url == false) {
                 var page_url = base_url;
             }

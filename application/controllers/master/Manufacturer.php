@@ -22,7 +22,7 @@ class Manufacturer extends CI_Controller {
         }
     }
 
-    public function list()
+    public function getManufacturer()
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
@@ -31,7 +31,7 @@ class Manufacturer extends CI_Controller {
             );
             $limit = 10;
             $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $config['base_url'] = site_url('master/Manufacturer/list');
+            $config['base_url'] = site_url('master/Manufacturer/getManufacturer');
             $config['total_rows'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = true);
             $config['uri_segment'] = 4;
             $config['num_links'] = 4;
