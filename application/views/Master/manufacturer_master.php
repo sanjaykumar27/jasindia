@@ -117,6 +117,7 @@
         e.preventDefault();
         var formData = new FormData(this);
         saveAjax('<?php echo base_url(); ?>manufacturer/create', 'ModalNewCompany', formData);
+        $("#create_company").trigger("reset");
     });
 
     $(document).on("click", "#m_editbutton", function (e) {

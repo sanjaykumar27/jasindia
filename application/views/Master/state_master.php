@@ -120,6 +120,7 @@
             e.preventDefault();
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>state/create', 'ModalNewState', formData);
+            $("#create_state").trigger("reset");
             var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 5;
             ajaxlist(page_url);
             e.preventDefault();

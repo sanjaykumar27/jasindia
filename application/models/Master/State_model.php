@@ -18,13 +18,14 @@ class State_model extends CI_Model {
             if ($keyword)
             {
                 $this->db->where("state_name LIKE '%$keyword%'");
+               
             }
         }
         if ($count)
         {
             return $this->db->count_all_results();
-        }
-        else {
+        } else
+        {
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
 

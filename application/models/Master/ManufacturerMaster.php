@@ -18,6 +18,9 @@ class ManufacturerMaster extends CI_Model {
             if ($keyword)
             {
                 $this->db->where("manufacturer_name LIKE '%$keyword%'");
+                $this->db->or_where("manufacturer_address LIKE '%$keyword%'");
+                $this->db->or_where("manufacturer_website LIKE '%$keyword%'");
+                $this->db->or_where("manufacturer_email LIKE '%$keyword%'");
             }
         }
         if ($count)
@@ -50,6 +53,7 @@ class ManufacturerMaster extends CI_Model {
         $this->db->where('manufacturer_name', $manufacturer_name);
         if($manufacturer_id){
            $this->db->where('manufacturer_id !=',$manufacturer_id); 
+            
         }
         $data = $this->db->get();
         $num = $data->num_rows();
