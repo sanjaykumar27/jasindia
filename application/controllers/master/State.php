@@ -38,15 +38,17 @@ class State extends CI_Controller {
             $this->pagination->initialize($config);
             $data['records'] = $this->State_model->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
-            $html = '<table class="table m-table m-table--head-bg-success"><thead><tr><th>#</th><th>State Name</th><th>Action</th></tr></thead><tbody>';
+            $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State Name</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = 1 + $offset;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td>' . $value->state_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->state_id.'"  data-target="#ModalUpdateState" class="btn m-btn--pill btn-success">Edit </a></td>';
-                $i++; }
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="' . $value->state_id . '"  data-target="#ModalUpdateState" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<button class="ml-2 btn btn-outline-primary btn-sm m-btn m-btn--pill"><i class="fa fa-plus"></i> District</button></td>';
+                    $i++;
+                }
             }
             $html .= '</tbody></table>' . $pagelinks;
             echo $html;

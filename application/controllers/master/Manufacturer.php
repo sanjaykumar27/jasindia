@@ -38,7 +38,7 @@ class Manufacturer extends CI_Controller {
             $this->pagination->initialize($config);
             $data['records'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
-            $html = '<table class="table m-table m-table--head-bg-success"><thead><tr><th>#</th><th>Manufacturer Name</th>'
+            $html = '<table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Manufacturer Name</th>'
                     . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
@@ -47,7 +47,7 @@ class Manufacturer extends CI_Controller {
                 {
                     $html .= '<tr><td>'.$i.'</td><td>' . $value->manufacturer_name . '</td><td>' . $value->manufacturer_email . '</td><td>' . $value->manufacturer_website . '</td>'
                             . '<td>' . $value->manufacturer_address . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-success">Edit </a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
             $html .= '</tbody></table>' . $pagelinks;
