@@ -42,7 +42,7 @@ class Manufacturer extends CI_Controller {
                     . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
-                $i = 1 + $offset;
+                $i = 1 + ($offset*10);
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td>' . $value->manufacturer_name . '</td><td>' . $value->manufacturer_email . '</td><td>' . $value->manufacturer_website . '</td>'
