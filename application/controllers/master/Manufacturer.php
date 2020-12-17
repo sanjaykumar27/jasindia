@@ -38,11 +38,13 @@ class Manufacturer extends CI_Controller {
             $this->pagination->initialize($config);
             $data['records'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
+            
+            $page_count  = ($offset) ? $offset : 1;
+            $i =  (($page_count - 1) * $limit) + 1;
             $html = '<table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Manufacturer Name</th>'
                     . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
-                $i = 1 + ($offset*10);
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td>' . $value->manufacturer_name . '</td><td>' . $value->manufacturer_email . '</td><td>' . $value->manufacturer_website . '</td>'
