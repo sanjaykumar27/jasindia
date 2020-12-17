@@ -83,7 +83,7 @@
                     </div>
                     <div class="form-group">
                         <label>Manufacturer Email</label>
-                        <input type="email" name="manufacturer_email" id="m_manufacturer_email" required class="form-control" required="">
+                        <input type="text" name="manufacturer_email" id="m_manufacturer_email" required class="form-control" required="">
                     </div>
                     <div class="form-group">
                         <label>Manufacturer Website</label>
