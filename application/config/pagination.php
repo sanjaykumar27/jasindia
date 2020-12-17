@@ -1,8 +1,7 @@
 <?php 
-$config['per_page'] = 10;
 
-$config['use_page_numbers'] = TRUE;
-            $config['reuse_query_string'] = TRUE;
+
+            
             
 $config['full_tag_open'] = '<ul class="justify-content-center pagination">';
 $config['full_tag_close'] = '</ul>';
