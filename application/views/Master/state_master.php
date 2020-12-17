@@ -48,7 +48,7 @@
                         </div>
                         <div id="newRow"></div>
                         <div class="form-group">
-                            <button class="btn btn-primary" id="addRow"><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-primary" type="button" id="addRow"><i class="fa fa-plus"></i></button>
                         </div>
                         <div class="form-group float-right">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
@@ -81,6 +81,31 @@
                         </div>
                         <div class="form-group float-right">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
+                        </div>
+                    </form>
+                </div>            
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="ModalNewDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        New District
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="create_district">
+                        <div class="form-group d-flex">
+                            <input type="text" name="state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
+                            <input type="submit" class="btn btn-primary ml-2" id="saveDistrictBtn" value="Save"> 
                         </div>
                     </form>
                 </div>            
@@ -231,5 +256,22 @@
                 }
             });
         }
+        
+        $(document).on("click", "#add_district", function (e) {
+            e.preventDefault();
+            var state_id = $(this).attr("value");
+            $.ajax({
+                url: "<?php echo base_url(); ?>state/getDistricts",
+                type: "post",
+                dataType: "json",
+                data: {
+                    state_id: state_id
+                },
+                success: function (data) {
+                    $("#m_state_id").val(data.records.state_id);
+                }
+            });
+        });
+        
     });
 </script>

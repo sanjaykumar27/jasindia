@@ -49,7 +49,7 @@ class State extends CI_Controller {
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="' . $value->state_id . '"  data-target="#ModalUpdateState" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
-                            . '<button class="ml-2 btn btn-outline-primary btn-sm m-btn m-btn--pill"><i class="fa fa-plus"></i> District</button></td>';
+                            . '<button value="' . $value->state_id . '" id="add_district" class="ml-2 btn btn-outline-primary btn-sm m-btn m-btn--pill" data-target="#ModalNewDistrict" data-toggle="modal"  data-toggle="m-tooltip" data-skin="dark"  title="Show list of districts" data-original-title="Show list of districts"><i class="far fa-list-alt"></i> Districts</button></td>';
                     $i++;
                 }
             }

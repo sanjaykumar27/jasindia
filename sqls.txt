@@ -1,0 +1,12 @@
+CREATE TABLE `m_districts` ( `district_id` int (11) NOT NULL, `state_id` int(11) NOT NULL, `district_name` varchar(100) NOT NULL, `deleted_on` datetime DEFAULT NULL, `created_on` datetime NOT NULL DEFAULT current_timestamp(), `created_by` int(11) NOT NULL, `updated_on` datetime DEFAULT NULL, `updated_by` int(11) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `m_districts` ADD PRIMARY KEY(`district_id`);
+ALTER TABLE `m_districts` CHANGE `district_id` `district_id` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `m_districts` ADD FOREIGN KEY (`state_id`) REFERENCES `m_states`(`state_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+
+ALTER TABLE `m_states` ADD FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `m_states` ADD FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
