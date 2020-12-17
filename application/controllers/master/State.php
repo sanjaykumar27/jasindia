@@ -38,6 +38,7 @@ class State extends CI_Controller {
             $this->pagination->initialize($config);
             $data['records'] = $this->State_model->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
+            $total = $config['total_rows'];
             $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State Name</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
@@ -52,7 +53,7 @@ class State extends CI_Controller {
                     $i++;
                 }
             }
-            $html .= '</tbody></table>' . $pagelinks;
+            $html .= '</tbody></table><h5>Total States: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
             echo $html;
         } else
         {

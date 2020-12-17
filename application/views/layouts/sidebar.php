@@ -13,7 +13,7 @@
                         <ul class="m-menu__nav ">
                             <li class="m-menu__section m-menu__section--first">
                                 <h4 class="m-menu__section-text">
-                                    Departments
+                                    Menu Items
                                 </h4>
                                 <i class="m-menu__section-icon flaticon-more-v3"></i>
                             </li>

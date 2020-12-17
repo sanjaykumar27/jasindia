@@ -36,6 +36,7 @@ class Manufacturer extends CI_Controller {
             $config['uri_segment'] = 4;
             $config['num_links'] = 4;
             $this->pagination->initialize($config);
+            $total = $config['total_rows'];
             $data['records'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
             
@@ -53,7 +54,7 @@ class Manufacturer extends CI_Controller {
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
-            $html .= '</tbody></table>' . $pagelinks;
+            $html .= '</tbody></table><h5>Total Manufacturer: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
             echo $html;
         } else
         {
