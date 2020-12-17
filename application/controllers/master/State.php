@@ -41,8 +41,9 @@ class State extends CI_Controller {
             $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State Name</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
-                $page_count  = ($offset) ? $offset : 1;
-                $i =  (($page_count - 1) * $limit) + 1;
+//                $page_count  = ($offset) ? $offset : 1;
+//                $i =  (($page_count - 1) * $limit) + 1;
+                $i = $offset + 1;
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>'

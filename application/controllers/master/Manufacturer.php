@@ -39,8 +39,9 @@ class Manufacturer extends CI_Controller {
             $data['records'] = $this->ManufacturerMaster->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
             
-            $page_count  = ($offset) ? $offset : 1;
-            $i =  (($page_count - 1) * $limit) + 1;
+            //$page_count  = ($offset) ? $offset : 1;
+            //$i =  (($page_count - 1) * $limit) + 1;
+            $i = $offset + 1;
             $html = '<table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Manufacturer Name</th>'
                     . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))

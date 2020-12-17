@@ -1,7 +1,7 @@
 <?php 
 
 
-            
+          
             
 $config['full_tag_open'] = '<ul class="justify-content-center pagination">';
 $config['full_tag_close'] = '</ul>';
