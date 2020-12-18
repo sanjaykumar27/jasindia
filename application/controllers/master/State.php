@@ -181,7 +181,7 @@ class State extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->district_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton"  value="' . $value->district_id . '" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<a href="javascript:void(0)" id="m_editdistrictbutton" dd-district-name="'.$value->district_name.'"  value="' . $value->district_id . '" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
                             . '</td>';
                     $i++;
                 }
@@ -202,7 +202,7 @@ class State extends CI_Controller {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
             $userid = $this->session->userdata('sess_user_id');
-            $district = $this->input->POST('state_district');
+            $district = $this->input->POST('district_name');
             $state_id = $this->input->POST('state_id');
             $is_exist = $this->State_model->checkDistrictExists(trim($district), '');
             if ($is_exist)
@@ -230,6 +230,40 @@ class State extends CI_Controller {
             echo json_encode($data);
         } 
         else
+        {
+            redirect('/Auth');
+        }
+    }
+    
+    public function updateDistrict()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $userid = $this->session->userdata('sess_user_id');
+            $district = $this->input->POST('district_name');
+            $district_id = $this->input->POST('district_id');
+            $is_exist = $this->State_model->checkDistrictExists(trim($district), $district_id);
+            if ($is_exist)
+            {
+                $data = array('code' => 3, 'response' => 'This district already exist!');
+            } else
+            {
+                $param = array(
+                    'district_name' => ucwords(trim($district)),
+                    'updated_by' => $userid,
+                    'updated_on' => date('Y-m-d H:i:s')
+                );
+                $cid = $this->State_model->updateDistrict($param, $district_id);
+                if ($cid != "")
+                {
+                    $data = array('code' => 1, 'response' => 'District Updated succesfully!');
+                } else
+                {
+                    $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
+                }
+            }
+            echo json_encode($data);
+        } else
         {
             redirect('/Auth');
         }

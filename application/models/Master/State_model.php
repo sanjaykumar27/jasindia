@@ -132,5 +132,13 @@ class State_model extends CI_Model {
             }
         }
     }
+    
+    function updateDistrict($param, $district_id)
+    {
+        $this->db->where('district_id', $district_id);
+        $this->db->update('m_districts', $param);
+        $affected_rows = $this->db->affected_rows();
+        return $affected_rows;
+    }
 
 }

@@ -101,14 +101,21 @@
                         </span>
                     </button>
                 </div>
-                <div class="modal-body" style="max-height: 88vh; overflow-y: auto">
+                <div class="modal-body pt-3" style="max-height: 88vh; overflow-y: auto">
                     <form action="" method="post" id="create_district">
-                        <div class="form-group d-flex">
+                        <div class="form-group d-flex bg-light border d-flex form-group p-2">
                             <input type="hidden" name="state_id" id="d_state_id">
-                            <input type="text" name="state_district" id="d_state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
+                            <input type="text" name="district_name" id="d_state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
                             <input type="submit" class="btn btn-primary ml-2" id="saveDistrictBtn" value="Save">
                         </div>
-                    </form
+                    </form>
+                    <form action="" method="post" id="update_district">
+                        <div class="form-group d-flex bg-light border d-flex form-group p-2">
+                            <input type="hidden" name="district_id" id="d_district_id">
+                            <input type="text" name="district_name" id="d_district_district" class="form-control text-capitalize" required="" autocomplete="off">
+                            <input type="submit" class="btn btn-primary ml-2" id="updateDistrictBtn" value="Update">
+                        </div>
+                    </form>
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
                             <div id="ajaxDistrictList" ></div>
@@ -183,6 +190,13 @@
             });
         });
 
+        $(document).on("click", "#m_editdistrictbutton", function (e) {
+            e.preventDefault();
+            $("#update_district").show();
+            $("#d_district_id").val($(this).attr("value"));
+            $("#d_district_district").val($(this).attr("dd-district-name"));
+        });
+
         $(document).on("click", "#updateBtn", function (e) {
             if ($("#update_state").valid())
             {
@@ -215,6 +229,37 @@
                         } else
                         {
                             $('#ModalUpdateState').unblock();
+                            swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).on("click", "#updateDistrictBtn", function (e) {
+            if ($("#update_district").valid())
+            {
+                e.preventDefault();
+                var edit_district_id = $("#d_district_id").val();
+                var edit_district_name = $("#d_district_district").val();
+                $.ajax({
+                    url: "<?php echo base_url(); ?>district/update",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        district_id: edit_district_id,
+                        district_name: edit_district_name
+                    },
+                    success: function (data) {
+                        if (data.code == 1)
+                        {
+                            swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                                districtList($("#d_state_id").val());
+                                $("#update_district").hide();
+                                e.preventDefault();
+                            });
+                        } else
+                        {
                             swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
                         }
                     }
@@ -276,6 +321,7 @@
             var state_id = $(this).attr("value");
             $("#dd-state-name").text($(this).attr("dd-state-name"));
             $("#d_state_id").val(state_id);
+            $("#update_district").hide();
             districtList(state_id);
         });
 
