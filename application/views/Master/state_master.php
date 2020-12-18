@@ -105,7 +105,7 @@
                     <form action="" method="post" id="create_district">
                         <div class="form-group d-flex">
                             <input type="hidden" name="state_id" id="d_state_id">
-                            <input type="text" name="state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
+                            <input type="text" name="state_district" id="d_state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
                             <input type="submit" class="btn btn-primary ml-2" id="saveDistrictBtn" value="Save">
                         </div>
                     </form
@@ -161,7 +161,7 @@
             e.preventDefault();
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>district/create', '', formData);
-            $("#create_district").trigger("reset");
+            $("#d_state_district").val("");
             districtList($("#d_state_id").val());
             e.preventDefault();
         });
