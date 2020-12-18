@@ -101,7 +101,7 @@
                         </span>
                     </button>
                 </div>
-                <div class="modal-body pt-3" style="max-height: 88vh; overflow-y: auto">
+                <div class="modal-body pt-3" >
                     <form action="" method="post" id="create_district">
                         <div class="form-group d-flex bg-light border d-flex form-group p-2">
                             <input type="hidden" name="state_id" id="d_state_id">
@@ -118,7 +118,7 @@
                     </form>
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
-                            <div id="ajaxDistrictList" ></div>
+                            <div id="ajaxDistrictList" style="max-height: 88vh; overflow-y: auto"></div>
                         </div>
                     </div>
                 </div>            
