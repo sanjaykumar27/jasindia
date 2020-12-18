@@ -87,5 +87,50 @@ class State_model extends CI_Model {
         $affected_rows = $this->db->affected_rows();
         return $affected_rows;
     }
+    
+    function selectAllDistricts($state_id)
+    {
+        $this->db->select('*');
+        $this->db->from('m_districts');
+        $this->db->where('deleted_on', null);
+        $this->db->where('state_id', $state_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
+        
+    function createDistrict($param)
+    {
+        $this->db->insert('m_districts', $param);
+        $id = $this->db->insert_id();
+        return $id;
+    }
+    
+    function checkDistrictExists($district_name, $district_id)
+    {
+        $this->db->select('district_id');
+        $this->db->from('m_districts');
+        $this->db->where('district_name', $district_name);
+        if ($district_id)
+        {
+            $this->db->where('district_id !=', $district_id);
+        }
+        $data = $this->db->get();
+        $num = $data->num_rows();
+        if ($num > 0)
+        {
+            $result = $data->result_array();
+            if (isset($result))
+            {
+                return $result;
+            } else
+            {
+                return '';
+            }
+        }
+    }
 
 }

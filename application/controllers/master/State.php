@@ -53,7 +53,7 @@ class State extends CI_Controller {
                     $i++;
                 }
             }
-            $html .= '</tbody></table><h5>Total States: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
+            $html .= '</tbody></table><h5>Total States: <span class="font-weight-bold">' . $total . '</span></h5>' . $pagelinks;
             echo $html;
         } else
         {
@@ -162,6 +162,73 @@ class State extends CI_Controller {
             }
             echo json_encode($data);
         } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    function getDistricts()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $state_id = $this->input->POST('state_id');
+            $data['records'] = $this->State_model->selectAllDistricts($state_id);
+            $html = '<table class="table m-table m-table--head-bg-info table-striped "><thead><tr><th>#</th><th>District Name</th><th>Action</th></tr></thead><tbody>';
+            if (!empty($data['records']))
+            {
+                $i = 1;
+                foreach ($data['records'] as $value)
+                {
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->district_name . '</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editbutton" value="' . $value->district_id . '" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '</td>';
+                    $i++;
+                }
+            } else
+            {
+                $html .= '<tr><td colspan="3" class="text-center">No District Found!</td></tr></tbody></table>';
+            }
+            $html .= '</tbody></table>';
+            echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    public function createDistrict()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $userid = $this->session->userdata('sess_user_id');
+            $district = $this->input->POST('state_district');
+            $state_id = $this->input->POST('state_id');
+            $is_exist = $this->State_model->checkDistrictExists(trim($district), '');
+            if ($is_exist)
+            {
+                $data = array('code' => 0, 'response' => "This district already exist !");
+            } 
+            else
+            {
+                $param = array(
+                    'state_id' => $state_id,
+                    'district_name' => ucwords(trim($district)),
+                    'created_by' => $userid,
+                );
+                $cid = $this->State_model->createDistrict($param);
+                if($cid)
+                {
+                    $data = array('code' => 1, 'response' => 'District Created succesfully!');
+                }
+                else
+                {
+                    $data = array('code' => 0, 'response' => 'Something wrong happened !');
+                }
+                
+            }
+            echo json_encode($data);
+        } 
+        else
         {
             redirect('/Auth');
         }

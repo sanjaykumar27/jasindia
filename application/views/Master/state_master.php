@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="ModalNewDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -101,20 +101,26 @@
                         </span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="max-height: 88vh; overflow-y: auto">
                     <form action="" method="post" id="create_district">
                         <div class="form-group d-flex">
+                            <input type="hidden" name="state_id" id="d_state_id">
                             <input type="text" name="state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
-                            <input type="submit" class="btn btn-primary ml-2" id="saveDistrictBtn" value="Save"> 
+                            <input type="submit" class="btn btn-primary ml-2" id="saveDistrictBtn" value="Save">
                         </div>
-                    </form>
+                    </form
+                    <div class="d-flex flex-row mt-3">
+                        <div class="col-12 px-0">
+                            <div id="ajaxDistrictList" ></div>
+                        </div>
+                    </div>
                 </div>            
             </div>
         </div>
     </div>
 </div>
 
-
+</div>
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
@@ -148,6 +154,15 @@
             $("#create_state").trigger("reset");
             var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 5;
             ajaxlist(page_url);
+            e.preventDefault();
+        });
+
+        $('#create_district').submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            saveAjax('<?php echo base_url(); ?>district/create', '', formData);
+            $("#create_district").trigger("reset");
+            districtList($("#d_state_id").val());
             e.preventDefault();
         });
 
@@ -191,8 +206,7 @@
                                 var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 10;
                                 if ($("#search_key").val()) {
                                     ajaxlist(page_url = false);
-                                }
-                                else
+                                } else
                                 {
                                     ajaxlist(page_url);
                                 }
@@ -256,22 +270,25 @@
                 }
             });
         }
-        
+
         $(document).on("click", "#add_district", function (e) {
             e.preventDefault();
             var state_id = $(this).attr("value");
+            $("#d_state_id").val(state_id);
+            districtList(state_id);
+        });
+
+        function districtList(state_id)
+        {
             $.ajax({
                 url: "<?php echo base_url(); ?>state/getDistricts",
-                type: "post",
-                dataType: "json",
-                data: {
-                    state_id: state_id
-                },
-                success: function (data) {
-                    $("#m_state_id").val(data.records.state_id);
+                type: "POST",
+                data: {state_id: state_id},
+                success: function (response) {
+                    $("#ajaxDistrictList").html(response);
                 }
             });
-        });
-        
+        }
+
     });
 </script>

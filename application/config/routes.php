@@ -64,3 +64,5 @@ $route['state/getStates'] = 'master/State/getStates';
 $route['state/create'] = 'master/State/Create';
 $route['state/edit'] = 'master/State/edit';
 $route['state/update'] = 'master/State/update';
+$route['state/getDistricts'] = 'master/State/getDistricts';
+$route['district/create'] = 'master/State/CreateDistrict';
