@@ -93,7 +93,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        New District
+                        Districts List (<span id="dd-state-name" class="font-weight-bold"></span>)
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -274,6 +274,7 @@
         $(document).on("click", "#add_district", function (e) {
             e.preventDefault();
             var state_id = $(this).attr("value");
+            $("#dd-state-name").text($(this).attr("dd-state-name"));
             $("#d_state_id").val(state_id);
             districtList(state_id);
         });

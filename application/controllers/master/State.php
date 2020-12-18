@@ -49,7 +49,7 @@ class State extends CI_Controller {
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="' . $value->state_id . '"  data-target="#ModalUpdateState" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
-                            . '<button value="' . $value->state_id . '" id="add_district" class="ml-2 btn btn-outline-primary btn-sm m-btn m-btn--pill" data-target="#ModalNewDistrict" data-toggle="modal"  data-toggle="m-tooltip" data-skin="dark"  title="Show list of districts" data-original-title="Show list of districts"><i class="far fa-list-alt"></i> Districts</button></td>';
+                            . '<button dd-state-name="'.$value->state_name.'" value="' . $value->state_id . '" id="add_district" class="ml-2 btn btn-outline-primary btn-sm m-btn m-btn--pill" data-target="#ModalNewDistrict" data-toggle="modal"  data-toggle="m-tooltip" data-skin="dark"  title="Show list of districts" data-original-title="Show list of districts"><i class="far fa-list-alt"></i> Districts</button></td>';
                     $i++;
                 }
             }
@@ -173,7 +173,7 @@ class State extends CI_Controller {
         {
             $state_id = $this->input->POST('state_id');
             $data['records'] = $this->State_model->selectAllDistricts($state_id);
-            $count = count($data['records']);
+            
             $html = '<table class="table m-table m-table--head-bg-info table-striped "><thead><tr><th>#</th><th>District Name</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
@@ -181,7 +181,7 @@ class State extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->district_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" value="' . $value->district_id . '" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<a href="javascript:void(0)" id="m_editbutton"  value="' . $value->district_id . '" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
                             . '</td>';
                     $i++;
                 }
@@ -189,7 +189,7 @@ class State extends CI_Controller {
             {
                 $html .= '<tr><td colspan="3" class="text-center">No District Found!</td></tr></tbody></table>';
             }
-            $html .= '</tbody></table><h5>Total Districts: <span class="font-weight-bold">' . $count . '</span></h5>';
+            $html .= '</tbody></table>';
             echo $html;
         } else
         {
