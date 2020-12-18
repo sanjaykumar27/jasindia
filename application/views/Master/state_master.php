@@ -118,7 +118,7 @@
                     </form>
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
-                            <div id="ajaxDistrictList" style="max-height: 88vh; overflow-y: auto"></div>
+                            <div id="ajaxDistrictList" style="max-height: 72vh; overflow-y: auto"></div>
                         </div>
                     </div>
                 </div>            
