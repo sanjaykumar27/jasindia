@@ -173,6 +173,7 @@ class State extends CI_Controller {
         {
             $state_id = $this->input->POST('state_id');
             $data['records'] = $this->State_model->selectAllDistricts($state_id);
+            $count = count($data['records']);
             $html = '<table class="table m-table m-table--head-bg-info table-striped "><thead><tr><th>#</th><th>District Name</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
@@ -188,7 +189,7 @@ class State extends CI_Controller {
             {
                 $html .= '<tr><td colspan="3" class="text-center">No District Found!</td></tr></tbody></table>';
             }
-            $html .= '</tbody></table>';
+            $html .= '</tbody></table><h5>Total Districts: <span class="font-weight-bold">' . $count . '</span></h5>';
             echo $html;
         } else
         {
