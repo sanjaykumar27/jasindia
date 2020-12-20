@@ -109,11 +109,12 @@ class State_model extends CI_Model {
         return $id;
     }
     
-    function checkDistrictExists($district_name, $district_id)
+    function checkDistrictExists($district_name, $district_id, $state_id)
     {
         $this->db->select('district_id');
         $this->db->from('m_districts');
         $this->db->where('district_name', $district_name);
+		$this->db->where('state_id', $state_id);
         if ($district_id)
         {
             $this->db->where('district_id !=', $district_id);
