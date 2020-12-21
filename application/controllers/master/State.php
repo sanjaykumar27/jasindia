@@ -242,7 +242,8 @@ class State extends CI_Controller {
             $userid = $this->session->userdata('sess_user_id');
             $district = $this->input->POST('district_name');
             $district_id = $this->input->POST('district_id');
-            $is_exist = $this->State_model->checkDistrictExists(trim($district), $district_id);
+			$state_id = $this->input->POST('state_id');
+            $is_exist = $this->State_model->checkDistrictExists(trim($district), $district_id, $state_id);
             if ($is_exist)
             {
                 $data = array('code' => 3, 'response' => 'This district already exist!');
