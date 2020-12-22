@@ -15,6 +15,7 @@ class City extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
+            
             $this->load->view('Master/city_master');
         } else
         {
@@ -30,6 +31,7 @@ class City extends CI_Controller {
             $cid = '';
             $userid = $this->session->userdata('sess_user_id');
             $cities = $this->input->POST('city_name');
+            $district_id = $this->input->POST('district_id');
             $pincodes = $this->input->POST('pincode');
             $sCount = count($cities);
             foreach ($cities as $key => $val)
@@ -41,6 +43,7 @@ class City extends CI_Controller {
                 } else
                 {
                     $param = array(
+                        'district_id' => $district_id,
                         'city_name' => ucwords(trim($val)),
                         'pincode' => trim($pincodes[$key]),
                         'created_by' => $userid,
@@ -54,7 +57,7 @@ class City extends CI_Controller {
                 if (count($cities_exist) > 1 && count($cities_exist) != $sCount)
                 {
                     $st = implode(', ', $cities_exist);
-                    $data = array('code' => 1, 'response' => "City Created succesfully! These states already exist: $st");
+                    $data = array('code' => 1, 'response' => "City Created succesfully! These cities already exist: $st");
                 } else
                 {
                     $data = array('code' => 1, 'response' => 'City Created succesfully!');
@@ -63,7 +66,7 @@ class City extends CI_Controller {
             {
                 if ($sCount == count($cities_exist))
                 {
-                    $data = array('code' => 3, 'response' => 'No State Inserted! All Exist');
+                    $data = array('code' => 3, 'response' => 'No City Inserted! All Exist');
                 } else
                 {
                     $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');

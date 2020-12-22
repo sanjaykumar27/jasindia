@@ -22,7 +22,7 @@
         </div>
         <div class="d-flex flex-row mt-3">
             <div class="col-12 px-0">
-                <div id="ajaxContent" ></div>
+                <div id="ajaxContent"></div>
             </div>
         </div>
     </div>

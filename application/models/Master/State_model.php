@@ -141,5 +141,32 @@ class State_model extends CI_Model {
         $affected_rows = $this->db->affected_rows();
         return $affected_rows;
     }
+    
+    function listAllDistricts($state_id)
+    {
+        $this->db->select('district_id, district_name');
+        $this->db->from('m_districts');
+        $this->db->where('deleted_on', null);
+        $this->db->where('state_id', $state_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
+    
+    function listAllStates()
+    {
+        $this->db->select('state_id, state_name');
+        $this->db->from('m_states');
+        $this->db->where('deleted_on', null);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
 
 }

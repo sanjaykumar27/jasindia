@@ -242,7 +242,7 @@ class State extends CI_Controller {
             $userid = $this->session->userdata('sess_user_id');
             $district = $this->input->POST('district_name');
             $district_id = $this->input->POST('district_id');
-			$state_id = $this->input->POST('state_id');
+            $state_id = $this->input->POST('state_id');
             $is_exist = $this->State_model->checkDistrictExists(trim($district), $district_id, $state_id);
             if ($is_exist)
             {
@@ -264,6 +264,51 @@ class State extends CI_Controller {
                 }
             }
             echo json_encode($data);
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+    
+    public function allDistricts()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $state_id = $this->input->POST('state_id');
+            $data = $this->State_model->listAllDistricts($state_id);
+            $html = '<option value="">Select District</option>';
+            if (!empty($data))
+            {
+                $i = 1;
+                foreach ($data as $value)
+                {
+                    $html .= '<option value='.$value->district_id.'>'.$value->district_name.'</option>';
+                    $i++;
+                }
+            } 
+            echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+    
+    public function allStates()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $data = $this->State_model->listAllStates();
+            $html = '<option value="">Select State</option>';
+            if (!empty($data))
+            {
+                $i = 1;
+                foreach ($data as $value)
+                {
+                    $html .= '<option value='.$value->state_id.'>'.$value->state_name.'</option>';
+                    $i++;
+                }
+            } 
+            echo $html;
         } else
         {
             redirect('/Auth');
