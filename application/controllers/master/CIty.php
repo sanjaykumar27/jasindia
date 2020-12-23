@@ -10,63 +10,60 @@ class City extends CI_Controller {
         $this->load->model('Master/City_model');
         $this->load->library('pagination');
     }
-    
+
     public function index()
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            
+
             $this->load->view('Master/city_master');
         } else
         {
             redirect('/Auth');
         }
     }
-    
+
     public function create()
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $cities_exist = array();
             $cid = '';
             $userid = $this->session->userdata('sess_user_id');
-            $cities = $this->input->POST('city_name');
+            $city = $this->input->POST('city_name');
             $district_id = $this->input->POST('district_id');
-            $pincodes = $this->input->POST('pincode');
-            $sCount = count($cities);
-            foreach ($cities as $key => $val)
-            {
-                $is_exist = $this->City_model->checkCityExists(trim($val), '');
-                if ($is_exist)
-                {
-                    $cities_exist[] = trim($val);
-                } else
-                {
-                    $param = array(
-                        'district_id' => $district_id,
-                        'city_name' => ucwords(trim($val)),
-                        'pincode' => trim($pincodes[$key]),
-                        'created_by' => $userid,
-                    );
-                    $cid = $this->City_model->createCity($param);
-                }
-            }
+            $pincode = $this->input->POST('pincode');
 
-            if ($cid != "")
+            $city_exist = $this->City_model->checkCityExists(trim($city), '', $district_id);
+            $pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), '');
+            if ($city_exist)
             {
-                if (count($cities_exist) > 1 && count($cities_exist) != $sCount)
+                if ($pincode_exist)
                 {
-                    $st = implode(', ', $cities_exist);
-                    $data = array('code' => 1, 'response' => "City Created succesfully! These cities already exist: $st");
+                    $data = array('code' => 0, 'response' => "This pincode already exist");
                 } else
                 {
-                    $data = array('code' => 1, 'response' => 'City Created succesfully!');
+                    $data = array('code' => 0, 'response' => "This city already exist in this discrict");
                 }
             } else
             {
-                if ($sCount == count($cities_exist))
+                $param = array(
+                    'district_id' => $district_id,
+                    'city_name' => ucwords(trim($city)),
+                    'created_by' => $userid,
+                );
+                $cid = $this->City_model->createCity($param);
+
+                $params = array(
+                    'city_id' => $cid,
+                    'pincode' => trim($pincode),
+                    'created_by' => $userid,
+                );
+
+                $pid = $this->City_model->createPincode($params);
+
+                if ($pid != "" && $cid != '')
                 {
-                    $data = array('code' => 3, 'response' => 'No City Inserted! All Exist');
+                    $data = array('code' => 1, 'response' => 'City Created succesfully!');
                 } else
                 {
                     $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
@@ -78,13 +75,15 @@ class City extends CI_Controller {
             redirect('/Auth');
         }
     }
-    
+
     public function getCities()
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
             $search = array(
                 'keyword' => trim($this->input->post('search_key')),
+                'district_id' => trim($this->input->post('district_id')),
+                'state_id' => trim($this->input->post('state_id')),
             );
             $limit = 10;
             $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
@@ -96,13 +95,13 @@ class City extends CI_Controller {
             $data['records'] = $this->City_model->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
             $total = $config['total_rows'];
-            $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State Name</th><th>Action</th></tr></thead><tbody>';
+            $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>City Name</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = $offset + 1;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>' . $i . '</td><td>' . $value->city_name . '</td><td>'
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->city_name . '</td><td>' . $value->pincode . '</td><td>'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="' . $value->city_id . '"  data-target="#ModalUpdateCity" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
                             . '</td>';
                     $i++;
@@ -115,4 +114,5 @@ class City extends CI_Controller {
             redirect('/Auth');
         }
     }
+
 }

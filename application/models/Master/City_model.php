@@ -9,17 +9,26 @@ class City_model extends CI_Model {
 
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('*');
+        $this->db->select('m_cities.city_name,m_pincodes.city_id,GROUP_CONCAT(m_pincodes.pincode SEPARATOR ", ") as pincode');
         $this->db->from('m_cities');
-        $this->db->where('deleted_on', null);
+        $this->db->join('m_pincodes','m_pincodes.city_id = m_cities.city_id','left');
+        $this->db->where('m_cities.deleted_on', null);
+        $this->db->where('m_pincodes.deleted_on', null);
+        $this->db->group_by('m_pincodes.city_id');
         if ($search)
         {
             $keyword = $search['keyword'];
+            $district_id = $search['district_id'];
             if ($keyword)
             {
-                $this->db->where("city_name LIKE '%$keyword%'");
-               
+                $this->db->where("m_cities.city_name LIKE '%$keyword%'");
+                $this->db->or_where("m_pincodes.pincode",$keyword);
             }
+            if ($district_id)
+            {
+                $this->db->where("m_cities.district_id",$district_id);
+            }
+            
         }
         if ($count)
         {
@@ -43,15 +52,47 @@ class City_model extends CI_Model {
         $id = $this->db->insert_id();
         return $id;
     }
+    
+    function createPincode($param)
+    {
+        $this->db->insert('m_pincodes', $param);
+        $id = $this->db->insert_id();
+        return $id;
+    }
 
-    function checkCityExists($city_name, $city_id)
+    function checkCityExists($city_name, $city_id, $district_id)
     {
         $this->db->select('city_id');
         $this->db->from('m_cities');
         $this->db->where('city_name', $city_name);
+        $this->db->where('district_id', $district_id);
         if ($city_id)
         {
             $this->db->where('city_id !=', $city_id);
+        }
+        $data = $this->db->get();
+        $num = $data->num_rows();
+        if ($num > 0)
+        {
+            $result = $data->result_array();
+            if (isset($result))
+            {
+                return $result;
+            } else
+            {
+                return '';
+            }
+        }
+    }
+    
+    function checkPincodeExists($pincode, $city_id)
+    {
+        $this->db->select('pincode_id');
+        $this->db->from('m_pincodes');
+        $this->db->where('pincode', $pincode);
+        if ($city_id)
+        {
+            $this->db->where('$pincode !=', $pincode);
         }
         $data = $this->db->get();
         $num = $data->num_rows();

@@ -14,12 +14,12 @@
     <!-- END: Subheader -->
     <div class="m-content pt-0">
         <div class="row">
-            <div class="col-3 form-group">
+            <div class="col-2 form-group">
                 <label>State</label>
                 <select name="state_id" id="search_ajaxStateList" class="form-control">
                 </select>
             </div>
-            <div class="col-3 form-group">
+            <div class="col-2 form-group">
                 <label>District</label>
                 <select name="district_id" id="search_ajaxDistrictList" class="form-control">
                 </select>
@@ -28,7 +28,7 @@
                 <label>&nbsp;</label>
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search" />
             </div>
-            <div class="col-2">
+            <div class="col-2 mt-4">
                 <label>&nbsp;</label>
                 <button type="button" id="searchBtn" class="btn btn-primary m-btn--wide mt-2">Search</button>
                 <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide mt-2">Reset</button>
@@ -59,30 +59,26 @@
                         <div class="row">
                             <div class="col-6 form-group">
                                 <label>State</label>
-                                <select name="state_id"  id="ajaxStateList" class="form-control">
+                                <select name="state_id" required  id="ajaxStateList" class="form-control">
                                 </select>
                             </div>
                             <div class="col-6 form-group">
                                 <label>District</label>
-                                <select name="district_id" id="ajaxDistrictList" class="form-control">
+                                <select name="district_id" required id="ajaxDistrictList" class="form-control">
                                 </select>
                             </div>
                         </div>
                         <div class="row align-items-center d-flex">
                             <div class="col-6 form-group">
                                 <label>Enter City Name</label>
-                                <input type="text" name="city_name[]" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">
+                                <input type="text" name="city_name" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">
                             </div>
-                            <div class="col-4 form-group">
+                            <div class="col-6 form-group">
                                 <label>Pincode</label>
-                                <input type="number" name="pincode[]" id="m_pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">
-                            </div>
-                            <div class="col-2 ">
-                                <button class="btn btn-primary py-4 mt-2" type="button" id="addRow"><i class="fa fa-plus"></i></button>
+                                <input type="number" name="pincode" id="m_pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">
                             </div>
                         </div>
-                        <div id="newRow"></div>
-                        <div class="form-group float-right">
+                        <div class="form-group text-center mt-4">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
                     </form>
@@ -142,9 +138,39 @@
         $("#ajaxStateList").on('change', function () {
             districtList(this.value);
         });
+        
+        $('#search_key').keypress(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                citylist(page_url = false);
+                event.preventDefault();
+            }
+        });
+        /*-- Search keyword--*/
+        $(document).on('click', "#searchBtn", function (event) {
+            citylist(page_url = false);
+            event.preventDefault();
+        });
+
+        /*-- Reset Search--*/
+        $(document).on('click', "#resetBtn", function (event) {
+            $("#search_key").val('');
+            $("#search_ajaxStateList").val('');
+            $("#search_ajaxDistrictList").val('');
+            citylist(page_url = false);
+            event.preventDefault();
+        });
+
+        /*-- Page click --*/
+        $(document).on('click', ".pagination li a", function (event) {
+            var page_url = $(this).attr('href');
+            citylist(page_url);
+            event.preventDefault();
+        });
 
         function districtList(state_id)
         {
+            
             $.ajax({
                 url: "<?php echo base_url(); ?>state/allDistricts",
                 type: "POST",
@@ -206,8 +232,9 @@
 
         function citylist(page_url = false)
         {
+            var state_id = $("#search_ajaxStateList").val();
+            var district_id = $("#search_ajaxDistrictList").val();
             var search_key = $("#search_key").val();
-            var dataString = 'search_key=' + search_key;
             var base_url = '<?php echo site_url('city/getCities') ?>';
             if (page_url == false) {
                 var page_url = base_url;
@@ -215,7 +242,7 @@
             $.ajax({
                 type: "POST",
                 url: page_url,
-                data: dataString,
+                data: {'state_id':state_id, 'district_id': district_id, 'search_key': search_key},
                 success: function (response) {
                     $("#cityContent").html(response);
                 }
@@ -225,7 +252,7 @@
         $('#create_city').submit(function (e) {
             e.preventDefault();
             var formData = new FormData(this);
-            saveAjax('<?php echo base_url(); ?>city/create', 'ModalNewCity', formData);
+            saveAjax('<?php echo base_url(); ?>city/create', '', formData);
             $("#create_city").trigger("reset");
             var page_url = '<?php echo base_url() ?>master/city/getCities/' + ($("#active-page").text() - 1) * 5;
             citylist(page_url);

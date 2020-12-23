@@ -1,7 +1,6 @@
-CREATE TABLE `m_cities` (
+CREATE TABLE `m_pincodes` (
+  `pincode_id` int(11) NOT NULL,
   `city_id` int(11) NOT NULL,
-  `district_id` int(11) NOT NULL,
-  `city_name` varchar(100) NOT NULL,
   `pincode` int(11) NOT NULL,
   `deleted_on` datetime DEFAULT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
@@ -10,14 +9,14 @@ CREATE TABLE `m_cities` (
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `m_cities`
-  ADD PRIMARY KEY (`city_id`),
-  ADD KEY `district_id` (`district_id`);
+ALTER TABLE `m_pincodes`
+  ADD PRIMARY KEY (`pincode_id`),
+  ADD KEY `city_id` (`city_id`);
   
-  ALTER TABLE `m_cities`
-  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  ALTER TABLE `m_pincodes`
+  MODIFY `pincode_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
   
   
-  ALTER TABLE `m_cities`
-  ADD CONSTRAINT `m_cities_ibfk_1` FOREIGN KEY (`district_id`) REFERENCES `m_districts` (`district_id`);
+  ALTER TABLE `m_pincodes`
+  ADD CONSTRAINT `m_pincodes_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `m_cities` (`city_id`);
 COMMIT;
