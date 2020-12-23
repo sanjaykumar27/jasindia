@@ -15,7 +15,6 @@ class City extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-
             $this->load->view('Master/city_master');
         } else
         {
