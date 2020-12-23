@@ -73,3 +73,4 @@ $route['state/allDistricts'] = 'master/State/allDistricts';
 
 $route['city/create'] = 'master/City/Create';
 $route['city/getCities'] = 'master/City/getCities';
+$route['master/city'] = 'master/City/index';
