@@ -71,7 +71,7 @@
                         <div class="row align-items-center d-flex">
                             <div class="col-6 form-group">
                                 <label>Enter City Name</label>
-                                <input type="text" name="city_name" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">
+                                <input type="text" name="city_name" id="new_city_name" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">
                             </div>
                             <div class="col-6 form-group">
                                 <label>Pincode</label>
@@ -253,9 +253,9 @@
             e.preventDefault();
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>city/create', '', formData);
-            $("#create_city").trigger("reset");
-            var page_url = '<?php echo base_url() ?>master/city/getCities/' + ($("#active-page").text() - 1) * 5;
-            citylist(page_url);
+            $("#new_city_name").val("");
+            $("#m_pincode").val("");
+            citylist();
             e.preventDefault();
         });
     });
