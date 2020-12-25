@@ -14,7 +14,7 @@
     <!-- END: Subheader -->
     <div class="m-content pt-0">
         <div class="row">
-            <div class="col-2 form-group">
+            <!--<div class="col-2 form-group">
                 <label>State</label>
                 <select name="state_id" id="search_ajaxStateList" class="form-control">
                 </select>
@@ -23,8 +23,8 @@
                 <label>District</label>
                 <select name="district_id" id="search_ajaxDistrictList" class="form-control">
                 </select>
-            </div>
-            <div class="col-4 px-0">
+            </div> -->
+            <div class="col-6 px-0">
                 <label>&nbsp;</label>
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search" />
             </div>
