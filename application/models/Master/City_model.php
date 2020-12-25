@@ -9,9 +9,11 @@ class City_model extends CI_Model {
 
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('m_cities.city_name,m_pincodes.city_id,GROUP_CONCAT(m_pincodes.pincode SEPARATOR ", ") as pincode');
+        $this->db->select('m_districts.district_name,m_states.state_name,m_cities.city_name,m_pincodes.city_id, GROUP_CONCAT(DISTINCT(`m_pincodes`.`pincode`)) as pincode');
         $this->db->from('m_cities');
         $this->db->join('m_pincodes','m_pincodes.city_id = m_cities.city_id','left');
+		$this->db->join('m_distriscts','m_districts.district_id = m_cities.district_id','left');
+		$this->db->join('m_states','m_states.state_id = m_states.state_id','left');
         $this->db->where('m_cities.deleted_on', null);
         $this->db->where('m_pincodes.deleted_on', null);
         $this->db->group_by('m_pincodes.city_id');
@@ -23,12 +25,13 @@ class City_model extends CI_Model {
             {
                 $this->db->where("m_cities.city_name LIKE '%$keyword%'");
                 $this->db->or_where("m_pincodes.pincode",$keyword);
+				$this->db->or_where("m_districts.district_name LIKE '%$keyword%'");
+				$this->db->or_where("m_states.state_name LIKE '%$keyword%'");
             }
-            if ($district_id)
+            /*if ($district_id)
             {
                 $this->db->where("m_cities.district_id",$district_id);
-            }
-            
+            } */    
         }
         if ($count)
         {

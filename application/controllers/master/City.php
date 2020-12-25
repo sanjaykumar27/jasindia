@@ -94,13 +94,13 @@ class City extends CI_Controller {
             $data['records'] = $this->City_model->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
             $total = $config['total_rows'];
-            $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>City Name</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
+            $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State Name</th><th>District Name</th><th>City Name</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = $offset + 1;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>' . $i . '</td><td>' . $value->city_name . '</td><td>' . $value->pincode . '</td><td>'
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>' . $value->district_name . '</td><td>' . $value->city_name . '</td><td>' . $value->pincode . '</td><td>'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="' . $value->city_id . '"  data-target="#ModalUpdateCity" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
                             . '</td>';
                     $i++;
