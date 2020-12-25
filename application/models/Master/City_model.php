@@ -12,7 +12,7 @@ class City_model extends CI_Model {
         $this->db->select('m_districts.district_name,m_states.state_name,m_cities.city_name,m_pincodes.city_id, GROUP_CONCAT(DISTINCT(`m_pincodes`.`pincode`)) as pincode');
         $this->db->from('m_cities');
         $this->db->join('m_pincodes','m_pincodes.city_id = m_cities.city_id','left');
-		$this->db->join('m_distriscts','m_districts.district_id = m_cities.district_id','left');
+		$this->db->join('m_districts','m_districts.district_id = m_cities.district_id','left');
 		$this->db->join('m_states','m_states.state_id = m_states.state_id','left');
         $this->db->where('m_cities.deleted_on', null);
         $this->db->where('m_pincodes.deleted_on', null);
