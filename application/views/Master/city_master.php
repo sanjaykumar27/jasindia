@@ -102,19 +102,9 @@
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="update_city">
-                        <div class="align-items-center d-flex">
-                            <div class="col form-group">
-                                <input type="hidden" name="district_id" id="m_district_id">
-                                <label>City Name</label>
-                                <input type="text" name="city_name" id="m_city_name" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">
-                            </div>
-                            <div class="col form-group">
-                                <label>Pincode</label>
-                                <input type="number" name="city_name" id="m_pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">
-                            </div>
-                            <div class="form-group float-right">
-                                <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
-                            </div>
+                        <div id="updateform"></div>
+                        <div class="form-group text-center mt-3">
+                            <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
                         </div>
                     </form>
                 </div>            
@@ -127,18 +117,23 @@
 
 <script>
     $(function () {
-
-        stateList();
         citylist();
+
+        $('#update_city').submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            saveAjax('<?php echo base_url(); ?>city/update', '', formData);
+            citylist();
+        });
 
         $("#search_ajaxStateList").on('change', function () {
             searchdistrictList(this.value);
         });
-        
+
         $("#ajaxStateList").on('change', function () {
             districtList(this.value);
         });
-        
+
         $('#search_key').keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13') {
@@ -161,6 +156,21 @@
             event.preventDefault();
         });
 
+        $(document).on('click', "#m_editbutton", function (event) {
+            event.preventDefault();
+            var city_id = $(this).attr("value");
+            $.ajax({
+                url: "<?php echo base_url(); ?>city/edit",
+                type: "post",
+                data: {
+                    city_id: city_id
+                },
+                success: function (response) {
+                    $("#updateform").html(response);
+                }
+            });
+        });
+
         /*-- Page click --*/
         $(document).on('click', ".pagination li a", function (event) {
             var page_url = $(this).attr('href');
@@ -170,7 +180,7 @@
 
         function districtList(state_id)
         {
-            
+
             $.ajax({
                 url: "<?php echo base_url(); ?>state/allDistricts",
                 type: "POST",
@@ -180,7 +190,7 @@
                 }
             });
         }
-        
+
         function searchdistrictList(state_id)
         {
             $.ajax({
@@ -207,20 +217,15 @@
 
         var page_url = '';
 //        Create city add new row
-        $("#addRow").click(function () {
+        $(document).on('click', "#addPincodeRow", function (event) {
             var html = '';
-            html += '<div class="align-items-center d-flex row" id="inputFormRow">';
-            html += '<div class="col-6 form-group">';
-            html += '<label>Enter City Name</label>';
-            html += '<input type="text" name="city_name[]" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">';
-            html += '</div>';
-            html += '<div class="col-4 form-group">';
+            html += '<div class="row" id="inputFormRow">';
+            html += '<div class="col-10 form-group">';
             html += '<label>Pincode</label>';
             html += '<input type="number" name="pincode[]" id="m_pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
             html += '</div>';
-            html += '<div class="col-2 ">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger mt-2 py-4"><i class="fa fa-minus"></i></button>';
-            html += '</div>';
+            html += '<div class="align-items-center col-2 d-flex">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-minus"></i></button>';
             html += '</div>';
             $('#newRow').append(html);
         });
@@ -242,7 +247,7 @@
             $.ajax({
                 type: "POST",
                 url: page_url,
-                data: {'state_id':state_id, 'district_id': district_id, 'search_key': search_key},
+                data: {'state_id': state_id, 'district_id': district_id, 'search_key': search_key},
                 success: function (response) {
                     $("#cityContent").html(response);
                 }

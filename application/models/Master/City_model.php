@@ -7,31 +7,49 @@ class City_model extends CI_Model {
         parent::__construct();
     }
 
+    function GetPincodes($city_id)
+    {
+        $this->db->select('m_cities.city_name,m_pincodes.city_id,m_pincodes.pincode');
+        $this->db->from('m_cities');
+        $this->db->join('m_pincodes', 'm_pincodes.city_id = m_cities.city_id', 'left');
+        $this->db->where('m_pincodes.deleted_on', null);
+        $this->db->where('m_pincodes.city_id', $city_id);
+        $data = $this->db->get();
+         $num = $data->num_rows();
+        if ($num > 0)
+        {
+            $result = $data->result_array();
+            if (isset($result))
+            {
+                return $result;
+            } else
+            {
+                return '';
+            }
+        }
+    }
+
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('m_districts.district_name,m_states.state_name,m_cities.city_name,m_pincodes.city_id, GROUP_CONCAT(DISTINCT(`m_pincodes`.`pincode`)) as pincode');
+        $this->db->select('m_districts.district_name,m_states.state_name,m_cities.city_name,m_pincodes.city_id,'
+                . ' GROUP_CONCAT(DISTINCT(`m_pincodes`.`pincode`)) as pincode');
         $this->db->from('m_cities');
-        $this->db->join('m_pincodes','m_pincodes.city_id = m_cities.city_id','left');
-		$this->db->join('m_districts','m_districts.district_id = m_cities.district_id','left');
-		$this->db->join('m_states','m_states.state_id = m_districts.state_id','left');
+        $this->db->join('m_pincodes', 'm_pincodes.city_id = m_cities.city_id', 'left');
+        $this->db->join('m_districts', 'm_districts.district_id = m_cities.district_id', 'left');
+        $this->db->join('m_states', 'm_states.state_id = m_districts.state_id', 'left');
         $this->db->where('m_cities.deleted_on', null);
         $this->db->where('m_pincodes.deleted_on', null);
         $this->db->group_by('m_pincodes.city_id');
         if ($search)
         {
             $keyword = $search['keyword'];
-            $district_id = $search['district_id'];
             if ($keyword)
             {
                 $this->db->where("m_cities.city_name LIKE '%$keyword%'");
-                $this->db->or_where("m_pincodes.pincode",$keyword);
-				$this->db->or_where("m_districts.district_name LIKE '%$keyword%'");
-				$this->db->or_where("m_states.state_name LIKE '%$keyword%'");
+                $this->db->or_where("m_pincodes.pincode", $keyword);
+                $this->db->or_where("m_districts.district_name LIKE '%$keyword%'");
+                $this->db->or_where("m_states.state_name LIKE '%$keyword%'");
             }
-            /*if ($district_id)
-            {
-                $this->db->where("m_cities.district_id",$district_id);
-            } */    
         }
         if ($count)
         {
@@ -55,7 +73,7 @@ class City_model extends CI_Model {
         $id = $this->db->insert_id();
         return $id;
     }
-    
+
     function createPincode($param)
     {
         $this->db->insert('m_pincodes', $param);
@@ -87,7 +105,7 @@ class City_model extends CI_Model {
             }
         }
     }
-    
+
     function checkPincodeExists($pincode, $city_id)
     {
         $this->db->select('pincode_id');
@@ -119,4 +137,5 @@ class City_model extends CI_Model {
         $affected_rows = $this->db->affected_rows();
         return $affected_rows;
     }
+
 }
