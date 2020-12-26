@@ -43,7 +43,7 @@ class Manufacturer extends CI_Controller {
             //$page_count  = ($offset) ? $offset : 1;
             //$i =  (($page_count - 1) * $limit) + 1;
             $i = $offset + 1;
-            $html = '<table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Manufacturer Name</th>'
+            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Manufacturer Name</th>'
                     . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
@@ -54,7 +54,7 @@ class Manufacturer extends CI_Controller {
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
-            $html .= '</tbody></table><h5>Total Manufacturer: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
+            $html .= '</tbody></table></div><h5>Total Manufacturer: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
             echo $html;
         } else
         {

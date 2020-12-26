@@ -27,6 +27,7 @@
         <!--end::Base Styles -->
         <link href="<?php echo base_url();?>assets/custom.css" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="<?php echo base_url();?>assets/demo/default/media/img/logo/favicon.ico" />
+        <link rel="manifest" href="<?php echo base_url();?>_manifest.json">
     </head>
     <!-- end::Head -->
     <!-- end::Body -->

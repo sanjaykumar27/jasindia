@@ -22,14 +22,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="m-portlet__body">
+                    <div class="m-portlet__body text-center">
                         <div class="m-widget11">
                             <div class="m-widget11__action">
-                                <a href="<?php echo base_url() ?>master/manufacturer" class="btn m-btn--pill btn-outline-brand m-btn btn-sm mr-1">
+                                <a href="<?php echo base_url() ?>master/manufacturer" class="btn m-btn--pill btn-outline-brand  btn-sm mr-1 mt-2">
                                     Vehicle Manufacturer Master
                                 </a>
-                                <a href="<?php echo base_url() ?>master/state" class="btn m-btn--pill btn-outline-brand m-btn btn-sm">
+                                <a href="<?php echo base_url() ?>master/state" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
                                     States Master
+                                </a>
+                                <a href="<?php echo base_url() ?>master/city" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
+                                    City Master
                                 </a>
                             </div>
                         </div>
@@ -42,3 +45,15 @@
 </div>
 
  <?php $this->load->view('./layouts/footer'); ?>
+
+ <script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('<?php echo base_url() ?>service-worker.js').then(function (registration) {
+        // registration succeess
+        console.log('Registration succeeded.');
+    }).catch(function (error) {
+        // registration failed
+        console.log('Registration failed with ' + error);
+    });
+}
+ </script>

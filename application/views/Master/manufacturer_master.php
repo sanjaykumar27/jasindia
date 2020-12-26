@@ -34,7 +34,6 @@
                 <h5 class="modal-title" id="exampleModalLabel">
                     New Manufacturer
                 </h5>
-
             </div>
             <div class="modal-body">
                 <form action="" method="post" id="create_company">
