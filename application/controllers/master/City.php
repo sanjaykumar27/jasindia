@@ -86,7 +86,7 @@ class City extends CI_Controller {
             if (!empty($records))
             {
                 $html .= '<div class="row"><div class="col form-group"><label>City Name</label>'
-                        . '<input type="hidden" id="c_city_id" name="city_id" value="' . $records[0]['city_id'] . '" class="form-control text-capitalize">'
+                        . '<input type="hidden" id="c_district_id" name="district_id" value="' . $records[0]['district_id'] . '"><input type="hidden" id="c_city_id" name="city_id" value="' . $records[0]['city_id'] . '">'
                         . '<input type="text" id="c_city_name" name="city_name" value="' . $records[0]['city_name'] . '" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">'
                         . '</div></div>';
                 foreach ($records as $value)
@@ -95,7 +95,7 @@ class City extends CI_Controller {
                     $html .= '<input type="number" id="c_pincode" name="pincode[]" value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
                     $html .= '</div>';
                     $html .= '<div class="align-items-center col-2 d-flex">';
-                    $html .= '<button id="removeRow" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-minus"></i></button>';
+                    $html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-minus"></i></button>';
                     $html .= '</div></div>';
                 }
 
@@ -116,8 +116,9 @@ class City extends CI_Controller {
             $userid = $this->session->userdata('sess_user_id');
             $city = $this->input->POST('city_name');
             $city_id = $this->input->POST('city_id');
+            $district_id = $this->input->POST('district_id');
             $city_exist = $this->City_model->checkCityExists(trim($city), $city_id, $district_id);
-            if ($is_exist)
+            if ($city_exist)
             {
                 $data = array('code' => 3, 'response' => 'This city already exist!');
             } else
@@ -127,10 +128,10 @@ class City extends CI_Controller {
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );
-                $cid = $this->State_model->updateState($param, $state_id);
+                $cid = $this->City_model->updateCity($param, $city_id);
                 if ($cid != "")
                 {
-                    $data = array('code' => 1, 'response' => 'State Updated succesfully!');
+                    $data = array('code' => 1, 'response' => 'City Updated succesfully!');
                 } else
                 {
                     $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');

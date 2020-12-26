@@ -122,7 +122,7 @@
         $('#update_city').submit(function (e) {
             e.preventDefault();
             var formData = new FormData(this);
-            saveAjax('<?php echo base_url(); ?>city/update', '', formData);
+            saveAjax('<?php echo base_url(); ?>city/update', 'ModalUpdateCity', formData);
             citylist();
         });
 
@@ -232,6 +232,14 @@
 
 // create city remove row
         $(document).on('click', '#removeRow', function () {
+            $.ajax({
+                url: "<?php echo base_url(); ?>city/delete",
+                type: "POST",
+                data: {state_id: state_id},
+                success: function (response) {
+                    $("#search_ajaxDistrictList").html(response);
+                }
+            });
             $(this).closest('#inputFormRow').remove();
         });
 
