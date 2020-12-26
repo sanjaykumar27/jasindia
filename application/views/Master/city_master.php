@@ -175,7 +175,9 @@
             e.preventDefault();
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>city/update', 'ModalUpdateCity', formData);
+			setTimeout(function(){ 
             citylist();
+			}, 500);
         });
 		
 		$('#formNewPincode').submit(function (e) {

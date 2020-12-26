@@ -110,7 +110,7 @@ class City extends CI_Controller {
                     $html .= '<div class="align-items-center col-2 d-flex">';
 					$html .= '<button id="m_editpincodebutton" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-primary  mt-2 py-4 mr-2"><i class="fa fa-pencil-alt"></i></button>';
 					if($pcount > 1) {
-						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-minus"></i></button>';
+						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-trash"></i></button>';
 					}
                     $html .= '</div></div>';
                 }
