@@ -92,7 +92,7 @@ class City extends CI_Controller {
                 foreach ($records as $value)
                 {
                     $html .= '<div class="row" id="inputFormRow"><div class="col-10 form-group"><label>Pincode</label>';
-                    $html .= '<input type="number" id="c_pincode" name="pincode[]" value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
+                    $html .= '<input type="hidden"  name="pincode_id[]" value="' . $value['pincode_id'] . '"><input type="number" id="c_pincode" name="pincode[]" value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
                     $html .= '</div>';
                     $html .= '<div class="align-items-center col-2 d-flex">';
                     $html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-minus"></i></button>';
@@ -115,9 +115,13 @@ class City extends CI_Controller {
         {
             $userid = $this->session->userdata('sess_user_id');
             $city = $this->input->POST('city_name');
+			$pincode = $this->input->POST('pincode');
+			$pincode_id = $this->input->POST('pincode_id');
             $city_id = $this->input->POST('city_id');
             $district_id = $this->input->POST('district_id');
             $city_exist = $this->City_model->checkCityExists(trim($city), $city_id, $district_id);
+					
+			//$pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), $pincode);
             if ($city_exist)
             {
                 $data = array('code' => 3, 'response' => 'This city already exist!');
@@ -180,5 +184,21 @@ class City extends CI_Controller {
             redirect('/Auth');
         }
     }
+	
+	public function deletePincode()
+	{
+		if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+			$userid = $this->session->userdata('sess_user_id');
+			$pincode_id = $this->input->POST('pincode_id');
+			$id = $this->City_model->removePincode($pincode_id);
+			$data = array('code' => 1, 'response' => 'City Deleted Succesfully!');
+			
+			echo json_encode($data);
+		} else
+		{
+            redirect('/Auth');
+        }
+	}
 
 }

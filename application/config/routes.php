@@ -76,3 +76,4 @@ $route['city/getCities'] = 'master/City/getCities';
 $route['master/city'] = 'master/City/index';
 $route['city/edit'] = 'master/City/edit';
 $route['city/update'] = 'master/City/update';
+$route['city/delete'] = 'master/City/deletePincode';

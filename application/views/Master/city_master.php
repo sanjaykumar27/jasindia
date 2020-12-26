@@ -118,7 +118,7 @@
 <script>
     $(function () {
         citylist();
-
+		stateList();
         $('#update_city').submit(function (e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -180,7 +180,6 @@
 
         function districtList(state_id)
         {
-
             $.ajax({
                 url: "<?php echo base_url(); ?>state/allDistricts",
                 type: "POST",
@@ -231,13 +230,25 @@
         });
 
 // create city remove row
-        $(document).on('click', '#removeRow', function () {
+        $(document).on('click', '#removePincode', function () {
+			var pincode_id = $(this).attr("value");
+			var city_id = $("#c_city_id").val();
+			
             $.ajax({
                 url: "<?php echo base_url(); ?>city/delete",
                 type: "POST",
-                data: {state_id: state_id},
-                success: function (response) {
-                    $("#search_ajaxDistrictList").html(response);
+                data: {pincode_id: pincode_id},
+                success: function (response) {             
+					$.ajax({
+						url: "<?php echo base_url(); ?>city/edit",
+						type: "post",
+						data: {
+							city_id: city_id
+						},
+						success: function (response) {
+							$("#updateform").html(response);
+						}
+					});
                 }
             });
             $(this).closest('#inputFormRow').remove();

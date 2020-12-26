@@ -107,14 +107,14 @@ class City_model extends CI_Model {
         }
     }
 
-    function checkPincodeExists($pincode, $city_id)
+    function checkPincodeExists($pincode, $pincode_id)
     {
         $this->db->select('pincode_id');
         $this->db->from('m_pincodes');
         $this->db->where('pincode', $pincode);
-        if ($city_id)
+        if ($pincode_id)
         {
-            $this->db->where('$pincode !=', $pincode);
+            $this->db->where('pincode_id !=', $pincode_id);
         }
         $data = $this->db->get();
         $num = $data->num_rows();
@@ -138,5 +138,11 @@ class City_model extends CI_Model {
         $affected_rows = $this->db->affected_rows();
         return $affected_rows;
     }
+	
+	function removePincode($pincode_id)
+	{
+		$this->db->where('pincode_id', $pincode_id);
+		$this->db->delete('m_pincodes');
+	}
 
 }
