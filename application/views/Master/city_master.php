@@ -176,7 +176,13 @@
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>city/update', 'ModalUpdateCity', formData);
 			setTimeout(function(){ 
-            citylist();
+            	var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
+				if ($("#search_key").val()) {
+					citylist(page_url = false);
+				} else
+				{
+					citylist(page_url);
+				}
 			}, 500);
         });
 		
