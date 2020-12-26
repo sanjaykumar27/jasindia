@@ -176,7 +176,7 @@
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>city/update', 'ModalUpdateCity', formData);
 			setTimeout(function(){ 
-            	var page_url = '<?php echo base_url() ?>city/getCities/' + ($("#active-page").text() - 1) * 10;
+            	var page_url = '<?php echo base_url() ?>/master/city/getCities/' + ($("#active-page").text() - 1) * 10;
 				if ($("#search_key").val()) {
 					citylist(page_url = false);
 				} else
