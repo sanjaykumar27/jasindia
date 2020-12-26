@@ -94,7 +94,7 @@ class City extends CI_Controller {
 							</div>
 							<div class="col mt-3">
 								<label>&nbsp;</label>
-								<input type="submit" class="btn btn-primary" id="newpincode_Btn" value="Add">
+								<input type="submit" class="btn btn-primary btn-sm" id="newpincode_Btn" value="Add">
 							</div>
 						</div>';
 					
@@ -104,13 +104,13 @@ class City extends CI_Controller {
                         . '</div></div>';
                 foreach ($records as $value)
                 {
-                    $html .= '<div class="row" id="inputFormRow"><div class="col-9 form-group"><label>Pincode</label>';
+                    $html .= '<div class="row" id="inputFormRow"><div class="col-8 form-group"><label>Pincode</label>';
                     $html .= '<input type="hidden"  name="pincode_id[]" value="' . $value['pincode_id'] . '"><input type="number" id="c_pincode" name="pincode[]" readonly value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
                     $html .= '</div>';
-                    $html .= '<div class="align-items-center col-2 d-flex">';
-					$html .= '<button id="m_editpincodebutton" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-primary  mt-2 py-4 mr-2"><i class="fa fa-pencil-alt"></i></button>';
+                    $html .= '<div class="align-items-center d-flex mt-3">';
+					$html .= '<button id="m_editpincodebutton" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-primary m-btn m-btn--icon m-btn--icon-only mr-2"><i class="fa fa-pencil-alt"></i></button>';
 					if($pcount > 1) {
-						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-trash"></i></button>';
+						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only"><i class="fa fa-trash"></i></button>';
 					}
                     $html .= '</div></div>';
                 }
@@ -187,7 +187,7 @@ class City extends CI_Controller {
             $data['records'] = $this->City_model->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
             $total = $config['total_rows'];
-            $html = '<table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State Name</th><th>District Name</th><th>City Name</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
+            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State</th><th>District</th><th>City</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = $offset + 1;
@@ -199,7 +199,7 @@ class City extends CI_Controller {
                     $i++;
                 }
             }
-            $html .= '</tbody></table><h5>Total States: <span class="font-weight-bold">' . $total . '</span></h5>' . $pagelinks;
+            $html .= '</tbody></table></div><h5>Total States: <span class="font-weight-bold">' . $total . '</span></h5>' . $pagelinks;
             echo $html;
         } else
         {

@@ -3,10 +3,10 @@
 <div class="m-grid__item m-grid__item--fluid m-wrapper">
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
-            <span class="font-weight-light h4 w-100">
+            <span class="h4 w-100">
                 City Master
-                <button type="button" class="btn m-btn--pill btn-sm m-btn--air btn-outline-primary float-right" data-toggle="modal" data-target="#ModalNewCity">
-                    <i class="fa fa-plus"></i> New City
+                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-toggle="modal" data-target="#ModalNewCity">
+                    <i class="fa fa-plus"></i> New
                 </button>
             </span>
         </div>
@@ -14,15 +14,14 @@
     <!-- END: Subheader -->
     <div class="m-content pt-0">
         <div class="row">
-            
-            <div class="col-6 px-0">
+            <div class="col-8 px-0">
                 <label>&nbsp;</label>
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search" />
             </div>
-            <div class="col-2 mt-4">
+            <div class="col-4 mt-4">
                 <label>&nbsp;</label>
-                <button type="button" id="searchBtn" class="btn btn-primary m-btn--wide mt-2">Search</button>
-                <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide mt-2">Reset</button>
+                <button type="button" id="searchBtn" class="btn btn-outline-primary m-btn  m-btn--icon m-btn--icon-only m-btn--pill mt-2"><i class="fas fa-search"></i></button>
+                <button type="button" id="resetBtn" class="btn btn-outline-metal m-btn m-btn--icon m-btn--icon-only m-btn--outline-2x mt-2 m-btn--pill "><i class="fas fa-history"></i></button>
             </div>
         </div>
         <div class="d-flex flex-row mt-3">

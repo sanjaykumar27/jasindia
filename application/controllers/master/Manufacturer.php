@@ -43,13 +43,13 @@ class Manufacturer extends CI_Controller {
             //$page_count  = ($offset) ? $offset : 1;
             //$i =  (($page_count - 1) * $limit) + 1;
             $i = $offset + 1;
-            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Manufacturer Name</th>'
+            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Name</th>'
                     . '<th>Email</th><th>Website</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td>' . $value->manufacturer_name . '</td><td>' . $value->manufacturer_email . '</td><td>' . $value->manufacturer_website . '</td>'
+                    $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->manufacturer_name . '</td><td class="text-truncate">' . $value->manufacturer_email . '</td><td class="text-truncate">' . $value->manufacturer_website . '</td>'
                             . '<td>' . $value->manufacturer_address . '</td><td>'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }

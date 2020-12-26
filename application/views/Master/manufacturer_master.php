@@ -5,8 +5,8 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 Manufacturer Master
-                <button type="button" class="btn m-btn--pill btn-sm m-btn--air btn-outline-primary float-right" data-toggle="modal" data-target="#ModalNewCompany">
-                    <i class="fa fa-plus"></i> New Manufacturer
+                <button type="button" class="btn m-btn--pill btn-sm  btn-outline-primary " data-toggle="modal" data-target="#ModalNewCompany">
+                    <i class="fa fa-plus"></i> New
                 </button>
             </span>
         </div>
@@ -14,11 +14,12 @@
     <!-- END: Subheader -->
     <div class="m-content pt-0">
         <div class="d-flex flex-row">
-            <div class="col-6 px-0">
+            <div class="col-8 px-0">
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search by manufacturer name" />
             </div>
-            <div class="col-5"><button type="button" id="searchBtn" class="btn btn-primary m-btn--wide">Search</button>
-                <button type="button" id="resetBtn" class="btn btn-secondary m-btn--wide">Reset</button></div>
+            <div class="col-4">
+            <button type="button" id="searchBtn" class="btn btn-outline-primary m-btn  m-btn--icon m-btn--icon-only m-btn--pill"><i class="fas fa-search"></i></button>
+                <button type="button" id="resetBtn" class="btn btn-outline-metal m-btn m-btn--icon m-btn--icon-only m-btn--outline-2x m-btn--pill "><i class="fas fa-history"></i></button></div>
         </div>
         <div class="d-flex flex-row mt-3">
             <div class="col-12 px-0">
