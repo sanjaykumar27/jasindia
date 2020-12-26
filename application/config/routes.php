@@ -77,3 +77,6 @@ $route['master/city'] = 'master/City/index';
 $route['city/edit'] = 'master/City/edit';
 $route['city/update'] = 'master/City/update';
 $route['city/delete'] = 'master/City/deletePincode';
+$route['city/newPincode'] = 'master/City/newPincode';
+
+$route['city/pincodeUpdate'] = 'master/City/pincodeUpdate';

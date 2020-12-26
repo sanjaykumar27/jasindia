@@ -144,5 +144,21 @@ class City_model extends CI_Model {
 		$this->db->where('pincode_id', $pincode_id);
 		$this->db->delete('m_pincodes');
 	}
+	
+	function NewPincode($params)
+	{
+		$this->db->insert('m_pincodes', $params);
+        $id = $this->db->insert_id();
+        return $id;
+	}
+	
+	function updatePincode($param, $pincode_id)
+    {
+        $this->db->where('pincode_id', $pincode_id);
+        $this->db->update('m_pincodes', $param);
+        $affected_rows = $this->db->affected_rows();
+        return $affected_rows;
+    }
+	
 
 }

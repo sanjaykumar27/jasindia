@@ -14,16 +14,7 @@
     <!-- END: Subheader -->
     <div class="m-content pt-0">
         <div class="row">
-            <!--<div class="col-2 form-group">
-                <label>State</label>
-                <select name="state_id" id="search_ajaxStateList" class="form-control">
-                </select>
-            </div>
-            <div class="col-2 form-group">
-                <label>District</label>
-                <select name="district_id" id="search_ajaxDistrictList" class="form-control">
-                </select>
-            </div> -->
+            
             <div class="col-6 px-0">
                 <label>&nbsp;</label>
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search" />
@@ -88,7 +79,7 @@
     </div>
 
     <div class="modal fade" id="ModalUpdateCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
@@ -100,13 +91,21 @@
                         </span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post" id="update_city">
-                        <div id="updateform"></div>
-                        <div class="form-group text-center mt-3">
-                            <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
+                <div class="modal-body pt-2">
+					<form action="" method="post" id="formNewPincode">
+						<div id="newpincode-form"></div> 
+					</form>
+					<form action="" method="post" id="update_pincode">
+                        <div class="form-group d-flex bg-light border d-flex form-group p-2">
+							<input type="hidden" name="pincode_id" id="dd_pincode_id">
+                            
+                            <input type="number" name="pincode" id="d_pincode_pincode" class="form-control text-capitalize" required="" autocomplete="off">
+                            <input type="submit" class="btn btn-primary ml-2" id="updatePincodeBtn" value="Update">
                         </div>
                     </form>
+					<form action="" method="post" id="update_city">
+						<div id="updateform"></div> 
+					</form>
                 </div>            
             </div>
         </div>
@@ -119,11 +118,84 @@
     $(function () {
         citylist();
 		stateList();
-        $('#update_city').submit(function (e) {
+		
+		$(document).on("click", "#updatePincodeBtn", function (e) {
+            if ($("#update_pincode").valid())
+            {
+                e.preventDefault();
+                var edit_pincode_id = $("#dd_pincode_id").val();
+                var edit_pincode = $("#d_pincode_pincode").val();
+                $.ajax({
+                    url: "<?php echo base_url(); ?>city/pincodeUpdate",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        pincode_id: edit_pincode_id,
+                        pincode: edit_pincode
+                    },
+                    success: function (data) {
+						
+                        if (data.code == 1)
+                        {
+                            swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+								var ncity_id = $("#new_city_id").val();
+								  setTimeout(function(){  
+									$.ajax({
+										url: "<?php echo base_url(); ?>city/edit",
+										type: "post",
+										data: {	city_id: ncity_id },
+										success: function (response) 
+										{
+											data = JSON.parse(response);
+											$("#newpincode-form").html(data.NP);
+											$("#updateform").html(data.UP);
+										}
+									});
+									}, 500);
+                                $("#update_district").hide();
+                                e.preventDefault();
+                            });
+                        } else
+                        {
+                            swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                        }
+                    }
+                });
+            }
+        });
+		
+		$(document).on("click", "#m_editpincodebutton", function (e) {
+            e.preventDefault();
+            $("#update_pincode").show();
+			$("#dd_pincode_id").val($(this).attr("value"));
+            $("#d_pincode_pincode").val($(this).attr("dd-pincode-name"));
+        });
+		
+		$('#update_city').submit(function (e) {
             e.preventDefault();
             var formData = new FormData(this);
             saveAjax('<?php echo base_url(); ?>city/update', 'ModalUpdateCity', formData);
             citylist();
+        });
+		
+		$('#formNewPincode').submit(function (e) {
+			e.preventDefault();
+            var formData = new FormData(this);
+            saveAjax('<?php echo base_url(); ?>city/newPincode', '', formData);
+			var ncity_id = $("#new_city_id").val();
+			setTimeout(function(){  
+            $.ajax({
+				url: "<?php echo base_url(); ?>city/edit",
+				type: "post",
+				data: {	city_id: ncity_id },
+				success: function (response) 
+				{
+					data = JSON.parse(response);
+                    $("#newpincode-form").html(data.NP);
+					$("#updateform").html(data.UP);
+				}
+			});
+			}, 1000);
         });
 
         $("#search_ajaxStateList").on('change', function () {
@@ -166,7 +238,10 @@
                     city_id: city_id
                 },
                 success: function (response) {
-                    $("#updateform").html(response);
+					data = JSON.parse(response);
+                    $("#newpincode-form").html(data.NP);
+					$("#updateform").html(data.UP);
+					$("#update_pincode").hide();
                 }
             });
         });
@@ -214,26 +289,13 @@
             });
         }
 
-        var page_url = '';
-//        Create city add new row
-        $(document).on('click', "#addPincodeRow", function (event) {
-            var html = '';
-            html += '<div class="row" id="inputFormRow">';
-            html += '<div class="col-10 form-group">';
-            html += '<label>Pincode</label>';
-            html += '<input type="number" name="pincode[]" id="m_pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
-            html += '</div>';
-            html += '<div class="align-items-center col-2 d-flex">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger  mt-2 py-4"><i class="fa fa-minus"></i></button>';
-            html += '</div>';
-            $('#newRow').append(html);
-        });
 
-// create city remove row
+        var page_url = '';
+
+		// create city remove row
         $(document).on('click', '#removePincode', function () {
 			var pincode_id = $(this).attr("value");
 			var city_id = $("#c_city_id").val();
-			
             $.ajax({
                 url: "<?php echo base_url(); ?>city/delete",
                 type: "POST",
@@ -246,7 +308,9 @@
 							city_id: city_id
 						},
 						success: function (response) {
-							$("#updateform").html(response);
+							data = JSON.parse(response);
+							$("#newpincode-form").html(data.NP);
+							$("#updateform").html(data.UP);
 						}
 					});
                 }
@@ -282,5 +346,6 @@
             citylist();
             e.preventDefault();
         });
-    });
+		
+});
 </script>
