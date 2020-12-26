@@ -42,7 +42,7 @@
                         <div class="m-stack__item m-brand  m-brand--skin-dark ">
                             <div class="m-stack m-stack--ver m-stack--general">
                                 <div class="m-stack__item m-stack__item--middle m-brand__logo text-center">
-                                    <a href="index.html" class="m-brand__logo-wrapper">
+                                    <a href="<?php echo base_url() ?>dashboard" class="m-brand__logo-wrapper">
                                         <img style="height: 54px; border-radius: 8px;" alt="" src="<?php echo base_url();?>assets/logo/website_logo.jpg"/>
                                     </a>
                                 </div>
@@ -108,7 +108,7 @@
                                                                 <span class="m-card-user__name m--font-weight-500">
                                                                     Mark Andre
                                                                 </span>
-                                                                <a href="" class="m-card-user__email m--font-weight-300 m-link">
+                                                                <a href="javascript:void(0)" class="m-card-user__email m--font-weight-300 m-link">
                                                                     mark.andre@gmail.com
                                                                 </a>
                                                             </div>
@@ -123,7 +123,7 @@
                                                                     </span>
                                                                 </li>
                                                                 <li class="m-nav__item">
-                                                                    <a href="{{ route('profile.show') }}" class="m-nav__link">
+                                                                    <a href="javascript:void(0)" class="m-nav__link">
                                                                         <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                                         <span class="m-nav__link-title">
                                                                             <span class="m-nav__link-wrap">
