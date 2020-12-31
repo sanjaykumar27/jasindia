@@ -72,7 +72,7 @@ $route['district/update'] = 'master/State/updateDistrict';
 $route['state/allDistricts'] = 'master/State/allDistricts';
 
 $route['city/create'] = 'master/City/Create';
-$route['city/getCities'] = 'master/City/getCities';
+
 $route['master/city'] = 'master/City/index';
 $route['city/edit'] = 'master/City/edit';
 $route['city/update'] = 'master/City/update';
@@ -80,3 +80,7 @@ $route['city/delete'] = 'master/City/deletePincode';
 $route['city/newPincode'] = 'master/City/newPincode';
 
 $route['city/pincodeUpdate'] = 'master/City/pincodeUpdate';
+
+$route['engine/getEngines'] = 'master/Engine/getEngine';
+$route['engine/allManufacturer'] = 'master/Engine/allManufacturer';
+$route['engine/create'] = 'master/Engine/CreateEngine';

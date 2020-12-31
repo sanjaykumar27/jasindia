@@ -1,7 +1,7 @@
-CREATE TABLE `m_pincodes` (
-  `pincode_id` int(11) NOT NULL,
-  `city_id` int(11) NOT NULL,
-  `pincode` int(11) NOT NULL,
+CREATE TABLE `m_engines` (
+  `engine_id` int(11) NOT NULL,
+  `manufacturer_id` int(11) NOT NULL,
+  `engine_name` int(11) NOT NULL,
   `deleted_on` datetime DEFAULT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) NOT NULL,
@@ -9,14 +9,14 @@ CREATE TABLE `m_pincodes` (
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `m_pincodes`
-  ADD PRIMARY KEY (`pincode_id`),
-  ADD KEY `city_id` (`city_id`);
+ALTER TABLE `m_engines`
+  ADD PRIMARY KEY (`engine_id`),
+  ADD KEY `manufacturer_id` (`manufacturer_id`);
   
-  ALTER TABLE `m_pincodes`
-  MODIFY `pincode_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  ALTER TABLE `m_engines`
+  MODIFY `engine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
   
   
-  ALTER TABLE `m_pincodes`
-  ADD CONSTRAINT `m_pincodes_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `m_cities` (`city_id`);
+  ALTER TABLE `m_engines`
+  ADD CONSTRAINT `m_engines_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `m_vehicle_manufacturer` (`manufacturer_id`);
 COMMIT;

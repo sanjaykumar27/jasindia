@@ -76,6 +76,16 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        <li class="m-menu__item " aria-haspopup="true"  m-menu-link-redirect="1">
+                                            <a  href="<?php echo base_url();?>master/engine" class="m-menu__link ">
+                                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="m-menu__link-text">
+                                                    Engines
+                                                </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

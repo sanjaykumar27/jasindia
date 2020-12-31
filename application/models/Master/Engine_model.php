@@ -1,26 +1,31 @@
 <?php
 
-class ManufacturerMaster extends CI_Model {
+class Engine_model extends CI_Model {
 
     function __construct()
     {
         parent::__construct();
     }
 
+    function createEngine($param)
+    {
+        $this->db->insert('m_engines', $param);
+        $id = $this->db->insert_id();
+        return $id;
+    }
+    
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('*');
-        $this->db->from('m_vehicle_manufacturer');
-        $this->db->where('deleted_on', null);
+        $this->db->select('m_engines.engine_id,m_engines.engine_name, m_vehicle_manufacturer.manufacturer_name,m_engines.manufacturer_id');
+        $this->db->from('m_engines');
+        $this->db->join('m_vehicle_manufacturer', 'm_vehicle_manufacturer.manufacturer_id = m_engines.manufacturer_id', 'left');
         if ($search)
         {
             $keyword = $search['keyword'];
             if ($keyword)
             {
-                $this->db->where("manufacturer_name LIKE '%$keyword%'");
-                $this->db->or_where("manufacturer_address LIKE '%$keyword%'");
-                $this->db->or_where("manufacturer_website LIKE '%$keyword%'");
-                $this->db->or_where("manufacturer_email LIKE '%$keyword%'");
+                $this->db->where("m_engines.engine_name LIKE '%$keyword%'");
+                $this->db->or_where("m_vehicle_manufacturer.manufacturer_name LIKE '%$keyword%'");
             }
         }
         if ($count)
@@ -90,22 +95,4 @@ class ManufacturerMaster extends CI_Model {
         return $affected_rows;
     }
 
-    function getAllManufacturer()
-    {
-        $this->db->select('manufacturer_id, manufacturer_name');
-        $this->db->from('m_vehicle_manufacturer');
-        $data = $this->db->get();
-        $num = $data->num_rows();
-        if ($num > 0)
-        {
-            $result = $data->result_array();
-            if (isset($result))
-            {
-                return $result;
-            } else
-            {
-                return '';
-            }
-        }
-    }
 }
