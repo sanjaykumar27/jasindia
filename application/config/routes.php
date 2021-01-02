@@ -72,7 +72,7 @@ $route['district/update'] = 'master/State/updateDistrict';
 $route['state/allDistricts'] = 'master/State/allDistricts';
 
 $route['city/create'] = 'master/City/Create';
-
+$route['city/getCities'] = 'master/City/getCities';
 $route['master/city'] = 'master/City/index';
 $route['city/edit'] = 'master/City/edit';
 $route['city/update'] = 'master/City/update';
