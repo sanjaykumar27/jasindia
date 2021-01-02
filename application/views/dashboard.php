@@ -34,6 +34,9 @@
                                 <a href="<?php echo base_url() ?>master/city" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
                                     City Master
                                 </a>
+								<a href="<?php echo base_url() ?>master/engine" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
+                                    Engine Master
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,13 @@ class Engine extends CI_Controller {
             $userid = $this->session->userdata('sess_user_id');
             $engine_name = $this->input->POST('engine_name');
             $manufacturer_id = $this->input->POST('manufacturer_id');
-            $param = array(
+			$is_exist = $this->Engine_model->checkEngineExist(trim($engine_name),'',$manufacturer_id);
+            if ($is_exist)
+            {
+                $data = array('code' => 3, 'response' => 'This engine already exist');
+            } else
+            {
+                $param = array(
                     'engine_name' => ucwords(trim($engine_name)),
                     'manufacturer_id' => trim($manufacturer_id),
                     'created_by' => $userid,
@@ -43,14 +49,7 @@ class Engine extends CI_Controller {
                 {
                     $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
                 }
-//            $is_exist = $this->ManufacturerMaster->checkManufacturerExists(trim($manufacturer),'');
-//            if ($is_exist)
-//            {
-//                $data = array('code' => 3, 'response' => 'This manufacturer already exist');
-//            } else
-//            {
-//                
-//            }
+            }
             echo json_encode($data);
         } else
         {

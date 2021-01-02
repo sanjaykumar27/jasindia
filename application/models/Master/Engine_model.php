@@ -14,6 +14,31 @@ class Engine_model extends CI_Model {
         return $id;
     }
     
+	function checkEngineExist($engine_name, $engine_id, $manufacturer_id)
+	{
+		$this->db->select('engine_id');
+        $this->db->from('m_engines');
+        $this->db->where('engine_name', $engine_name);
+        $this->db->where('manufacturer_id', $manufacturer_id);
+        if ($engine_id)
+        {
+            $this->db->where('engine_id !=', $engine_id);
+        }
+        $data = $this->db->get();
+        $num = $data->num_rows();
+        if ($num > 0)
+        {
+            $result = $data->result_array();
+            if (isset($result))
+            {
+                return $result;
+            } else
+            {
+                return '';
+            }
+        }
+	}
+	
     function selectAll($limit, $offset, $search, $count)
     {
         $this->db->select('m_engines.engine_id,m_engines.engine_name, m_vehicle_manufacturer.manufacturer_name,m_engines.manufacturer_id');

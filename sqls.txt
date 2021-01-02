@@ -1,7 +1,7 @@
 CREATE TABLE `m_engines` (
   `engine_id` int(11) NOT NULL,
   `manufacturer_id` int(11) NOT NULL,
-  `engine_name` int(11) NOT NULL,
+  `engine_name` varchar(255) NOT NULL,
   `deleted_on` datetime DEFAULT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) NOT NULL,

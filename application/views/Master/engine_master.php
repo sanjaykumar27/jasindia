@@ -63,18 +63,37 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
     $(function () {
+		
         enginelist();
         manufacturerList();
     });
 
+	 $('#search_key').keypress(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                enginelist(page_url = false);
+                event.preventDefault();
+            }
+	});
+	/*-- Search keyword--*/
+	$(document).on('click', "#searchBtn", function (event) {
+		enginelist(page_url = false);
+		event.preventDefault();
+	});
+
+	/*-- Reset Search--*/
+	$(document).on('click', "#resetBtn", function (event) {
+		$("#search_key").val('');
+		enginelist(page_url = false);
+		event.preventDefault();
+	});
+		
     function manufacturerList()
     {
         $.ajax({
@@ -88,9 +107,7 @@
 
     function enginelist(page_url = false)
     {
-        // var state_id = $("#search_ajaxStateList").val();
-        // var district_id = $("#search_ajaxDistrictList").val();
-        var search_key = $("#search_key").val();
+                var search_key = $("#search_key").val();
         var base_url = '<?php echo site_url('engine/getEngines') ?>';
         if (page_url == false) {
             var page_url = base_url;
@@ -98,9 +115,10 @@
         $.ajax({
             type: "POST",
             url: page_url,
-            //data: {'state_id': state_id, 'district_id': district_id, 'search_key': search_key},
+            data: {'search_key': search_key},
             success: function (response) {
                 $("#cityContent").html(response);
+				
             }
         });
     }
@@ -110,7 +128,15 @@
         var formData = new FormData(this);
         saveAjax('<?php echo base_url(); ?>engine/create', 'ModalNewEngine', formData);
         $("#create_engine").trigger("reset");
-        var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 5;
+		
+		if($("#active-page").text())
+		{
+			var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 5;
+		}
+        else
+		{
+			var page_url = '<?php echo base_url() ?>master/engine/getEngine';
+		}
         
         enginelist(page_url);
         e.preventDefault();
