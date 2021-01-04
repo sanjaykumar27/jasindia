@@ -37,13 +37,6 @@ class State_model extends CI_Model {
         return array();
     }
 
-    function createState($param)
-    {
-        $this->db->insert('m_states', $param);
-        $id = $this->db->insert_id();
-        return $id;
-    }
-
     function checkStateExists($state_name, $state_id)
     {
         $this->db->select('state_id');

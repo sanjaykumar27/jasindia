@@ -8,6 +8,7 @@ class State extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Master/State_model');
+        $this->load->model('Common_model');
         $this->load->library('pagination');
     }
 
@@ -82,7 +83,7 @@ class State extends CI_Controller {
                         'state_name' => ucwords(trim($val)),
                         'created_by' => $userid,
                     );
-                    $cid = $this->State_model->createState($param);
+                    $cid = $this->Common_model->CommonInsert('m_states',$param);
                 }
             }
 
@@ -216,7 +217,7 @@ class State extends CI_Controller {
                     'district_name' => ucwords(trim($district)),
                     'created_by' => $userid,
                 );
-                $cid = $this->State_model->createDistrict($param);
+                $cid = $this->Common_model->CommonInsert('m_districts',$param);
                 if($cid)
                 {
                     $data = array('code' => 1, 'response' => 'District Created succesfully!');

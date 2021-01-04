@@ -8,7 +8,8 @@ class Engine extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Master/Engine_model');
-        $this->load->model('Master/ManufacturerMaster');
+        $this->load->model('Master/Manufacturer_model');
+        $this->load->model('Common_model');
         $this->load->library('pagination');
     }
     
@@ -41,7 +42,7 @@ class Engine extends CI_Controller {
                     'manufacturer_id' => trim($manufacturer_id),
                     'created_by' => $userid,
                 );
-                $cid = $this->Engine_model->createEngine($param);
+                $cid = $this->Common_model->CommonInsert('m_engines',$param);
                 if ($cid != "")
                 {
                     $data = array('code' => 1, 'response' => 'Engine Created succesfully!');
@@ -98,7 +99,7 @@ class Engine extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $data = $this->ManufacturerMaster->getAllManufacturer();
+            $data = $this->Manufacturer_model->getAllManufacturer();
             //print_r($data);die;
             $html = '<option value="">Select Manufacturer</option>';
             if (!empty($data))

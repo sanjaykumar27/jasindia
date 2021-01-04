@@ -8,6 +8,7 @@ class City extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Master/City_model');
+        $this->load->model('Common_model');
         $this->load->library('pagination');
     }
 
@@ -50,7 +51,7 @@ class City extends CI_Controller {
                     'city_name' => ucwords(trim($city)),
                     'created_by' => $userid,
                 );
-                $cid = $this->City_model->createCity($param);
+                $cid = $this->Common_model->CommonInsert('m_cities',$param);
 
                 $params = array(
                     'city_id' => $cid,
@@ -58,7 +59,7 @@ class City extends CI_Controller {
                     'created_by' => $userid,
                 );
 
-                $pid = $this->City_model->createPincode($params);
+                $pid = $this->Common_model->CommonInsert('m_pincodes',$param);
 
                 if ($pid != "" && $cid != '')
                 {

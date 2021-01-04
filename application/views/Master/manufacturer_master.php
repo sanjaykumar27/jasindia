@@ -40,6 +40,15 @@
                 <form action="" method="post" id="create_company">
                     <div class="form-group">
                         <label>Manufacturer Name</label>
+                        <select name="company_type" required class="form-control">
+                            <option value="" disabled selected>Select</option>
+                            <?php foreach($company_types as $value) { ?>
+                                <option value="<?php echo $value->company_type_id ?>"><?php echo $value->type_name ?></option>
+                            <?php } ?> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Manufacturer Name</label>
                         <input type="text" name="manufacturer_name" class="form-control text-capitalize" required="">
                     </div>
                     <div class="form-group">

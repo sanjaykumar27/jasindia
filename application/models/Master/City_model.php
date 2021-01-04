@@ -68,13 +68,6 @@ class City_model extends CI_Model {
         return array();
     }
 
-    function createCity($param)
-    {
-        $this->db->insert('m_cities', $param);
-        $id = $this->db->insert_id();
-        return $id;
-    }
-
     function createPincode($param)
     {
         $this->db->insert('m_pincodes', $param);

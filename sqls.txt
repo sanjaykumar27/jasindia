@@ -1,22 +1,42 @@
-CREATE TABLE `m_engines` (
-  `engine_id` int(11) NOT NULL,
-  `manufacturer_id` int(11) NOT NULL,
-  `engine_name` varchar(255) NOT NULL,
-  `deleted_on` datetime DEFAULT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) NOT NULL,
-  `updated_on` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL
+
+CREATE TABLE `m_company_type` (
+  `company_type_id` int(11) NOT NULL,
+  `type_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `m_engines`
-  ADD PRIMARY KEY (`engine_id`),
-  ADD KEY `manufacturer_id` (`manufacturer_id`);
-  
-  ALTER TABLE `m_engines`
-  MODIFY `engine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-  
-  
-  ALTER TABLE `m_engines`
-  ADD CONSTRAINT `m_engines_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `m_vehicle_manufacturer` (`manufacturer_id`);
-COMMIT;
+--
+-- Dumping data for table `m_company_type`
+--
+
+INSERT INTO `m_company_type` (`company_type_id`, `type_name`) VALUES
+(1, 'Vehicle Manufacturer'),
+(2, 'Engine Manufacturer');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `m_company_type`
+--
+ALTER TABLE `m_company_type`
+  ADD PRIMARY KEY (`company_type_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `m_company_type`
+--
+ALTER TABLE `m_company_type`
+  MODIFY `company_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT; 
+
+RENAME TABLE `jasindia`.`m_vehicle_manufacturer` TO `jasindia`.`m_manufacturer`;
+
+ALTER TABLE `m_manufacturer` ADD `manufacturer_type` INT NOT NULL AFTER `manufacturer_id`;
+
+UPDATE `m_manufacturer` SET `manufacturer_type` = '1' WHERE `m_manufacturer`.`manufacturer_type` = 1;
+
+ALTER TABLE `m_manufacturer` ADD FOREIGN KEY (`manufacturer_type`) REFERENCES `m_company_type`(`company_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
