@@ -66,7 +66,7 @@ class Manufacturer_model extends CI_Model {
     
     function GetManufacturerName($manufacturer_id)
     {
-        $this->db->select('manufacturer_id, manufacturer_name, manufacturer_address, manufacturer_email, manufacturer_website');
+        $this->db->select('manufacturer_id, manufacturer_type, manufacturer_name, manufacturer_address, manufacturer_email, manufacturer_website');
         $this->db->from('m_manufacturer');
         $this->db->where('manufacturer_id', $manufacturer_id);
         $query = $this->db->get();

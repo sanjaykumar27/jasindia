@@ -132,6 +132,7 @@ class Manufacturer extends CI_Controller {
             $manufacturer_name = $this->input->POST('manufacturer_name');
             $manufacturer_email = $this->input->POST('manufacturer_email');
             $manufacturer_address = $this->input->POST('manufacturer_address');
+            $manufacturer_type = $this->input->POST('manufacturer_type');
             $manufacturer_website = $this->input->POST('manufacturer_website');
             $manufacturer_id = $this->input->POST('manufacturer_id');
             $is_exist = $this->Manufacturer_model->checkManufacturerExists(trim($manufacturer_name),$manufacturer_id);
@@ -143,6 +144,7 @@ class Manufacturer extends CI_Controller {
                 $param = array(
                     'manufacturer_name' => ucwords(trim($manufacturer_name)),
                     'manufacturer_email' => $manufacturer_email,
+                    'manufacturer_type' => $manufacturer_type,
                     'manufacturer_address' => $manufacturer_address,
                     'manufacturer_website' => $manufacturer_website,
                     'updated_by' => $userid,

@@ -85,6 +85,15 @@
             </div>
             <div class="modal-body">
                 <form action="" method="post" id="update_company">
+                     <div class="form-group">
+                        <label>Manufacturer Name</label>
+                        <select name="company_type" id="m_manufacturer_type" required class="form-control">
+                            <option value="" disabled selected>Select</option>
+                            <?php foreach($company_types as $value) { ?>
+                                <option value="<?php echo $value->company_type_id ?>"><?php echo $value->type_name ?></option>
+                            <?php } ?> 
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>Manufacturer Name</label>
                         <input type="hidden" name="manufacturer_name" id="m_manufacturer_id">
@@ -140,6 +149,7 @@
                 edit_id: edit_id
             },
             success: function (data) {
+                $("#m_manufacturer_type").val(data.records.manufacturer_type);
                 $("#m_manufacturer_id").val(data.records.manufacturer_id);
                 $("#m_manufacturer_name").val(data.records.manufacturer_name);
                 $("#m_manufacturer_email").val(data.records.manufacturer_email);
@@ -156,6 +166,7 @@
 //            message: '<p class="h5 mb-0 py-1">Processing</p>',
 //            css: {border: '0px solid #a00'}
 //        });
+            var edit_manufacturer_type = $("#m_manufacturer_type").val();
             var edit_manufacturer_id = $("#m_manufacturer_id").val();
             var edit_manufacturer_name = $("#m_manufacturer_name").val();
             var edit_manufacturer_email = $("#m_manufacturer_email").val();
@@ -166,6 +177,7 @@
                 type: 'POST',
                 dataType: "json",
                 data: {
+                    manufacturer_type: edit_manufacturer_type,
                     manufacturer_id: edit_manufacturer_id,
                     manufacturer_name: edit_manufacturer_name,
                     manufacturer_email: edit_manufacturer_email,
