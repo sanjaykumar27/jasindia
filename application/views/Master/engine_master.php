@@ -63,6 +63,40 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="ModalUpdateEngine" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Update Engine
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="update_engine">
+                        <div class="form-group">
+                            <label>Select Manufacturer</label>
+                            <input type="hidden" name="engine_id" id="edit_engine_id">
+                            <select name="manufacturer_id" required id="edit_ajaxManufacturerList" class="form-control">
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Engine Name</label>
+                            <input type="text" name="engine_name" id="edit_engine_name" class="form-control text-capitalize" required="" placeholder="Enter Engine Name... " autocomplete="off">
+                        </div>
+                        <div class="form-group float-right">
+                            <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
+                        </div>
+                    </form>
+                </div>            
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php $this->load->view('./layouts/footer'); ?>
@@ -101,6 +135,7 @@
             type: "post",
             success: function (response) {
                 $("#ajaxManufacturerList").html(response);
+                $("#edit_ajaxManufacturerList").html(response);
             }
         });
     }
@@ -140,5 +175,61 @@
         
         enginelist(page_url);
         e.preventDefault();
+    });
+
+    $(document).on("click", "#m_editbutton", function (e) {
+        e.preventDefault();
+        var edit_id = $(this).attr("value");
+        $.ajax({
+            url: "<?php echo base_url(); ?>engine/edit",
+            type: "post",
+            dataType: "json",
+            data: {
+                edit_id: edit_id
+            },
+            success: function (data) {
+                $("#edit_engine_id").val(data.records.engine_id);
+                $("#edit_ajaxManufacturerList").val(data.records.manufacturer_id);
+                $("#edit_engine_name").val(data.records.engine_name);
+            }
+        });
+    });
+
+    $(document).on("click", "#updateBtn", function (e) {
+        if ($("#update_engine").valid()) {
+            e.preventDefault();
+            var edit_engine_id = $("#edit_engine_id").val();
+            var edit_manufacturer_id = $("#edit_ajaxManufacturerList").val();
+            var edit_engine_name = $("#edit_engine_name").val();
+            $.ajax({
+                url: "<?php echo base_url(); ?>engine/update",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    engine_id: edit_engine_id,
+                    manufacturer_id: edit_manufacturer_id,
+                    engine_name: edit_engine_name
+                },
+                success: function (data) {
+                    if (data.code == 1)
+                    {
+                        $('#ModalUpdateEngine').modal('hide');
+                        swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                            var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 5;
+                            if ($("#search_key").val()) {
+                                enginelist(page_url = false);
+                            } else
+                            {
+                                enginelist(page_url);
+                            }
+                            e.preventDefault();
+                        });
+                    } else
+                    {
+                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                    }
+                }
+            });
+        }
     });
 </script>

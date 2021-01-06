@@ -84,3 +84,5 @@ $route['city/pincodeUpdate'] = 'master/City/pincodeUpdate';
 $route['engine/getEngines'] = 'master/Engine/getEngine';
 $route['engine/allManufacturer'] = 'master/Engine/allManufacturer';
 $route['engine/create'] = 'master/Engine/CreateEngine';
+$route['engine/update'] = 'master/Engine/update';
+$route['engine/edit'] = 'master/Engine/edit';

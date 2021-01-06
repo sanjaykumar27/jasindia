@@ -61,4 +61,24 @@ class Engine_model extends CI_Model {
         }
         return array();
     }
+
+    function updateEngine($param, $engine_id)
+    {
+        $this->db->where('engine_id', $engine_id);
+        $this->db->update('m_engines', $param);
+        $affected_rows = $this->db->affected_rows();
+        return $affected_rows;
+    }
+
+    function GetEngineDetails($engine_id)
+    {
+        $this->db->select('manufacturer_id, engine_name, engine_id');
+        $this->db->from('m_engines');
+        $this->db->where('engine_id', $engine_id);
+        $query = $this->db->get();
+        if (count($query->result()) > 0)
+        {
+            return $query->row();
+        }
+    }
 }

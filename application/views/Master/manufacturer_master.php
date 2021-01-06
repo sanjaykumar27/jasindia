@@ -79,7 +79,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    New Manufacturer
+                    Update Manufacturer
                 </h5>
 
             </div>

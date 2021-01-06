@@ -84,7 +84,7 @@ class Engine extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->engine_name . '</td><td class="text-truncate">' . $value->manufacturer_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->manufacturer_id.'"  data-target="#ModalUpdateCompany" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->engine_id.'"  data-target="#ModalUpdateEngine" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Engines: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
@@ -112,6 +112,62 @@ class Engine extends CI_Controller {
                 }
             } 
             echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    function update()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $userid = $this->session->userdata('sess_user_id');
+            $engine_id = $this->input->POST('engine_id');
+            $engine_name = $this->input->POST('engine_name');
+            $manufacturer_id = $this->input->POST('manufacturer_id');
+            $is_exist = $this->Engine_model->checkEngineExist(trim($engine_name),$engine_id,$manufacturer_id);
+            if ($is_exist)
+            {
+                $data = array('code' => 3, 'response' => 'This engine already exist!');
+            } else
+            {
+                $param = array(
+                    'engine_name' => ucwords(trim($engine_name)),
+                    'manufacturer_id' => $manufacturer_id,
+                    'updated_by' => $userid,
+                    'updated_on' => date('Y-m-d H:i:s')
+                );
+                $cid = $this->Engine_model->updateEngine($param, $engine_id);
+                if ($cid != "")
+                {
+                    $data = array('code' => 1, 'response' => 'Engine Updated succesfully!');
+                } else
+                {
+                    $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
+                }
+            }
+            echo json_encode($data);
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    function edit()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $engine_id = $this->input->post('edit_id');
+            $records = $this->Engine_model->GetEngineDetails($engine_id);
+            if (empty($records))
+            {
+                $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
+            } else
+            {
+                $data = array('code' => 1, 'response' => 'success', 'records' => $records);
+            }
+            echo json_encode($data);
         } else
         {
             redirect('/Auth');
