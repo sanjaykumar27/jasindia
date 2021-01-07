@@ -142,7 +142,7 @@
 
     function enginelist(page_url = false)
     {
-                var search_key = $("#search_key").val();
+        var search_key = $("#search_key").val();
         var base_url = '<?php echo site_url('engine/getEngines') ?>';
         if (page_url == false) {
             var page_url = base_url;
@@ -153,7 +153,6 @@
             data: {'search_key': search_key},
             success: function (response) {
                 $("#cityContent").html(response);
-				
             }
         });
     }

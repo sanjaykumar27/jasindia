@@ -66,11 +66,13 @@ $route['state/edit'] = 'master/State/edit';
 $route['state/update'] = 'master/State/update';
 $route['state/allStates'] = 'master/State/allStates';
 
+// district
 $route['state/getDistricts'] = 'master/State/getDistricts';
 $route['district/create'] = 'master/State/CreateDistrict';
 $route['district/update'] = 'master/State/updateDistrict';
 $route['state/allDistricts'] = 'master/State/allDistricts';
 
+// city
 $route['city/create'] = 'master/City/Create';
 $route['city/getCities'] = 'master/City/getCities';
 $route['master/city'] = 'master/City/index';
@@ -78,11 +80,17 @@ $route['city/edit'] = 'master/City/edit';
 $route['city/update'] = 'master/City/update';
 $route['city/delete'] = 'master/City/deletePincode';
 $route['city/newPincode'] = 'master/City/newPincode';
-
 $route['city/pincodeUpdate'] = 'master/City/pincodeUpdate';
 
+//engine
 $route['engine/getEngines'] = 'master/Engine/getEngine';
 $route['engine/allManufacturer'] = 'master/Engine/allManufacturer';
 $route['engine/create'] = 'master/Engine/CreateEngine';
 $route['engine/update'] = 'master/Engine/update';
 $route['engine/edit'] = 'master/Engine/edit';
+
+// fuel
+$route['fuel/getFuels'] = 'master/Fuel/getFuel';
+$route['fuel/create'] = 'master/Fuel/CreateFuel';
+$route['fuel/update'] = 'master/Fuel/update';
+$route['fuel/edit'] = 'master/Fuel/edit';
