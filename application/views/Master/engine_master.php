@@ -166,7 +166,7 @@
 		
 		if($("#active-page").text())
 		{
-			var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 5;
+			var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 10;
 		}
         else
 		{
@@ -215,7 +215,15 @@
                     {
                         $('#ModalUpdateEngine').modal('hide');
                         swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
-                            var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 5;
+                            var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 10;
+							if($("#active-page").text())
+							{
+								var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 10;
+							}
+							else
+							{
+								var page_url = '<?php echo base_url() ?>master/engine/getEngine';
+							}
                             if ($("#search_key").val()) {
                                 enginelist(page_url = false);
                             } else
