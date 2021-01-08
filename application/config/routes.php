@@ -90,7 +90,7 @@ $route['engine/update'] = 'master/Engine/update';
 $route['engine/edit'] = 'master/Engine/edit';
 
 // fuel
-$route['fuel/getFuels'] = 'master/Fuel/getFuel';
+$route['fuel/getFuels'] = 'master/Fuel/getFuels';
 $route['fuel/create'] = 'master/Fuel/CreateFuel';
 $route['fuel/update'] = 'master/Fuel/update';
 $route['fuel/edit'] = 'master/Fuel/edit';

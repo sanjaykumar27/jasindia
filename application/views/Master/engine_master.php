@@ -108,6 +108,12 @@
         manufacturerList();
     });
 
+    $(document).on('click', ".pagination li a", function (event) {
+        var page_url = $(this).attr('href');
+        enginelist(page_url);
+        event.preventDefault();
+    });
+
 	 $('#search_key').keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13') {

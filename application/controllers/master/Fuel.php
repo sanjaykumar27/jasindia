@@ -55,7 +55,7 @@ class Fuel extends CI_Controller {
         }
     }
     
-    public function getFuel()
+    public function getFuels()
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
@@ -64,7 +64,7 @@ class Fuel extends CI_Controller {
             );
             $limit = 10;
             $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $config['base_url'] = site_url('master/fuel/getFuel');
+            $config['base_url'] = site_url('master/fuel/getFuels');
             $config['total_rows'] = $this->Fuel_model->selectAll($limit, $offset, $search, $count = true);
             $config['uri_segment'] = 4;
             $config['num_links'] = 4;

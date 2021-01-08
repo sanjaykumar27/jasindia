@@ -93,7 +93,13 @@
 
 <script>
     $(function () {
-        fuellist();
+        fuellist(page_url = false);
+    });
+
+    $(document).on('click', ".pagination li a", function (event) {
+        var page_url = $(this).attr('href');
+        fuellist(page_url);
+        event.preventDefault();
     });
 
 	 $('#search_key').keypress(function (event) {
@@ -119,18 +125,22 @@
     function fuellist(page_url = false)
     {
         var search_key = $("#search_key").val();
+        var dataString = 'search_key=' + search_key;
         var base_url = '<?php echo site_url('fuel/getFuels') ?>';
+        
         if (page_url == false) {
             var page_url = base_url;
         }
+        
         $.ajax({
             type: "POST",
             url: page_url,
+            data: dataString,
             data: {'search_key': search_key},
             success: function (response) {
                 $("#fuelContent").html(response);
             }
-        });
+        }); 
     }
 
     $('#create_fuel').submit(function (e) {
@@ -142,11 +152,11 @@
         setTimeout(function(){  
             if($("#active-page").text())
             {
-                var page_url = '<?php echo base_url() ?>master/fuel/getFuel/' + ($("#active-page").text() - 1) * 10;
+                var page_url = '<?php echo base_url() ?>master/fuel/getFuels/' + ($("#active-page").text() - 1) * 10;
             }
             else
             {
-                var page_url = '<?php echo base_url() ?>master/fuel/getFuel';
+                var page_url = '<?php echo base_url() ?>master/fuel/getFuels';
             }
             
             fuellist(page_url);
@@ -190,14 +200,14 @@
                         $('#ModalUpdateFuel').modal('hide');
                         swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                             setTimeout(function(){  
-                            var page_url = '<?php echo base_url() ?>master/fuel/getFuel/' + ($("#active-page").text() - 1) * 10;
+                            var page_url = '<?php echo base_url() ?>master/fuel/getFuels/' + ($("#active-page").text() - 1) * 10;
 							if($("#active-page").text())
 							{
-								var page_url = '<?php echo base_url() ?>master/fuel/getFuel/' + ($("#active-page").text() - 1) * 10;
+								var page_url = '<?php echo base_url() ?>master/fuel/getFuels/' + ($("#active-page").text() - 1) * 10;
 							}
 							else
 							{
-								var page_url = '<?php echo base_url() ?>master/fuel/getFuel';
+								var page_url = '<?php echo base_url() ?>master/fuel/getFuels';
 							}
                             if ($("#search_key").val()) {
                                 fuellist(page_url = false);
