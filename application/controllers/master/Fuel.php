@@ -9,7 +9,7 @@ class Fuel extends CI_Controller {
         parent::__construct();
         $this->load->model('Common_model');
         $this->load->library('pagination');
-        $this->load->model('master/Fuel_model');
+        $this->load->model('Master/Fuel_model');
     }
     
     public function index()
