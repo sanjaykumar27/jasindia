@@ -22,6 +22,7 @@ class Manufacturer_model extends CI_Model {
                 $this->db->or_where("manufacturer_address LIKE '%$keyword%'");
                 $this->db->or_where("manufacturer_website LIKE '%$keyword%'");
                 $this->db->or_where("manufacturer_email LIKE '%$keyword%'");
+                $this->db->or_where("m_company_type.type_name LIKE '%$keyword%'");
             }
         }
         if ($count)
