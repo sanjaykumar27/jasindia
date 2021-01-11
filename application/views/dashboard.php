@@ -40,6 +40,9 @@
                                 <a href="<?php echo base_url() ?>master/fuel" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
                                     Fuel Master
                                 </a>
+                                <a href="<?php echo base_url() ?>master/engine_cylinder" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
+                                    Engine Cylinder Master
+                                </a>
                             </div>
                         </div>
                     </div>

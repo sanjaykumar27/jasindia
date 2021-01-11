@@ -1,6 +1,6 @@
-CREATE TABLE `m_fuel` (
-  `fuel_id` int(11) NOT NULL,
-  `fuel_name` varchar(100) NOT NULL,
+CREATE TABLE `m_engine_cylinder` (
+  `engine_cylinder_id` int(11) NOT NULL,
+  `engine_cylinder_name` varchar(100) NOT NULL,
   `deleted_on` datetime DEFAULT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) NOT NULL,
@@ -9,15 +9,15 @@ CREATE TABLE `m_fuel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-ALTER TABLE `m_fuel`
-  ADD PRIMARY KEY (`fuel_id`),
+ALTER TABLE `m_engine_cylinder`
+  ADD PRIMARY KEY (`engine_cylinder_id`),
   ADD KEY `created_by` (`created_by`),
   ADD KEY `updated_by` (`updated_by`);
 
-ALTER TABLE `m_fuel`
-  MODIFY `fuel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `m_engine_cylinder`
+  MODIFY `engine_cylinder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
-ALTER TABLE `m_fuel`
-  ADD CONSTRAINT `m_fuel_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `m_fuel_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
+ALTER TABLE `m_engine_cylinder`
+  ADD CONSTRAINT `m_engine_cylinder_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `m_engine_cylinder_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
 COMMIT;

@@ -94,3 +94,10 @@ $route['fuel/getFuels'] = 'master/Fuel/getFuels';
 $route['fuel/create'] = 'master/Fuel/CreateFuel';
 $route['fuel/update'] = 'master/Fuel/update';
 $route['fuel/edit'] = 'master/Fuel/edit';
+
+//engine cylinder
+$route['engine_cylinder/getEngineCylinders'] = 'master/EngineCylinder/getEngineCylinders';
+$route['engine_cylinder/create'] = 'master/EngineCylinder/CreateEngineCylinder';
+$route['engine_cylinder/update'] = 'master/EngineCylinder/update';
+$route['engine_cylinder/edit'] = 'master/EngineCylinder/edit';
+$route['master/engine_cylinder'] = 'master/EngineCylinder/index';
