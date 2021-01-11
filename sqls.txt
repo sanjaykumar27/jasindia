@@ -21,3 +21,36 @@ ALTER TABLE `m_engine_cylinder`
   ADD CONSTRAINT `m_engine_cylinder_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `m_engine_cylinder_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
 COMMIT;
+
+
+CREATE TABLE `audit_log` (
+  `log_id` int(11) NOT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `page` varchar(100) DEFAULT NULL,
+  `record` varchar(255) DEFAULT NULL,
+  `success` varchar(10) DEFAULT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `audit_log`
+--
+ALTER TABLE `audit_log`
+  ADD PRIMARY KEY (`log_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `audit_log`
+--
+ALTER TABLE `audit_log`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;

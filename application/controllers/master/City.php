@@ -63,6 +63,15 @@ class City extends CI_Controller {
 
                 if ($pid != "" && $cid != '')
                 {
+                    $log = array(
+                        'action' => 'create',
+                        'page' => 'City Master',
+                        'record' => 'Create New City & Pincode.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'City Created succesfully!');
                 } else
                 {
@@ -121,6 +130,8 @@ class City extends CI_Controller {
                         </div>
                     ';
             }
+
+            
             $data = array('NP' => $html_newpincode, 'UP' => $html);
 			echo json_encode($data);
         } else
@@ -157,6 +168,15 @@ class City extends CI_Controller {
 				
                 if ($cid != "")
                 {
+                    $log = array(
+                        'action' => 'update',
+                        'page' => 'City Master',
+                        'record' => 'Updated City Name $city.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'City Updated succesfully!');
                 } 
 				else
@@ -175,6 +195,7 @@ class City extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
+            $userid = $this->session->userdata('sess_user_id');
             $search = array(
                 'keyword' => trim($this->input->post('search_key')),
             );
@@ -200,6 +221,17 @@ class City extends CI_Controller {
                     $i++;
                 }
             }
+
+            $log = array(
+                'action' => 'getCities',
+                'page' => 'City Master',
+                'record' => 'Viewed City List.',
+                'success' => 'Y',
+                'ip_address' => $_SERVER['REMOTE_ADDR'],
+                'created_by' => $userid,
+            );
+            $this->Common_model->CommonInsert('audit_log',$log);
+
             $html .= '</tbody></table></div><h5>Total States: <span class="font-weight-bold">' . $total . '</span></h5>' . $pagelinks;
             echo $html;
         } else
@@ -216,7 +248,15 @@ class City extends CI_Controller {
 			$pincode_id = $this->input->POST('pincode_id');
 			$id = $this->City_model->removePincode($pincode_id);
 			$data = array('code' => 1, 'response' => 'City Deleted Succesfully!');
-			
+			$log = array(
+                'action' => 'deletePincode',
+                'page' => 'City Master',
+                'record' => 'Deleted Pincode.',
+                'success' => 'Y',
+                'ip_address' => $_SERVER['REMOTE_ADDR'],
+                'created_by' => $userid,
+            );
+            $this->Common_model->CommonInsert('audit_log',$log);
 			echo json_encode($data);
 		} else
 		{
@@ -246,6 +286,15 @@ class City extends CI_Controller {
 				$cid = $this->City_model->NewPincode($param, $city_id);
 				if ($cid != "")
 				{
+                    $log = array(
+                        'action' => 'newPincode',
+                        'page' => 'City Master',
+                        'record' => 'Created New Pincode.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
 					$data = array('code' => 1, 'response' => 'Pincode Added succesfully!');
 				} else
 				{
@@ -280,6 +329,15 @@ class City extends CI_Controller {
                 $cid = $this->City_model->updatePincode($param, $pincode_id);
                 if ($cid != "")
                 {
+                    $log = array(
+                        'action' => 'pincodeUpdate',
+                        'page' => 'City Master',
+                        'record' => 'Updated Pincode.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'Pincode Updated succesfully!');
                 } else
                 {
