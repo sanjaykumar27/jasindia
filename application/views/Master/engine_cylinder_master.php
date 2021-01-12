@@ -126,7 +126,7 @@
     {
         var search_key = $("#search_key").val();
         var dataString = 'search_key=' + search_key;
-        var base_url = '<?php echo site_url('engine_cylinder/getEngineCylinders') ?>';
+        var base_url = '<?php echo site_url('master/EngineCylinder/getEngineCylinders') ?>';
         
         if (page_url == false) {
             var page_url = base_url;
@@ -152,11 +152,11 @@
         setTimeout(function(){  
             if($("#active-page").text())
             {
-                var page_url = '<?php echo base_url() ?>engine_cylinder/getEngineCylinders/' + ($("#active-page").text() - 1) * 10;
+                var page_url = '<?php echo base_url() ?>master/EngineCylinder/getEngineCylinders/' + ($("#active-page").text() - 1) * 10;
             }
             else
             {
-                var page_url = '<?php echo base_url() ?>engine_cylinder/getEngineCylinders';
+                var page_url = '<?php echo base_url() ?>master/EngineCylinder/getEngineCylinders';
             }
             
             engine_cylinderlist(page_url);
@@ -200,14 +200,14 @@
                         $('#ModalUpdateEngineCylinder').modal('hide');
                         swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                             setTimeout(function(){  
-                            var page_url = '<?php echo base_url() ?>engine_cylinder/getEngineCylinders/' + ($("#active-page").text() - 1) * 10;
+                            var page_url = '<?php echo base_url() ?>EngineCylinder/getEngineCylinders/' + ($("#active-page").text() - 1) * 10;
 							if($("#active-page").text())
 							{
-								var page_url = '<?php echo base_url() ?>engine_cylinder/getEngineCylinders/' + ($("#active-page").text() - 1) * 10;
+								var page_url = '<?php echo base_url() ?>master/EngineCylinder/getEngineCylinders/' + ($("#active-page").text() - 1) * 10;
 							}
 							else
 							{
-								var page_url = '<?php echo base_url() ?>engine_cylinder/getEngineCylinders';
+								var page_url = '<?php echo base_url() ?>master/EngineCylinder/getEngineCylinders';
 							}
                             if ($("#search_key").val()) {
                                 engine_cylinderlist(page_url = false);
