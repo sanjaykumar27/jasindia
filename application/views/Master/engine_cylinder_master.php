@@ -4,7 +4,7 @@
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
-                Engine Cylinder Master
+                Engine Cylinder Arrangement
                 <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-toggle="modal" data-target="#ModalNewEngineCylinder">
                     <i class="fa fa-plus"></i> New
                 </button>

@@ -64,7 +64,7 @@ class EngineCylinder extends CI_Controller {
             );
             $limit = 10;
             $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $config['base_url'] = site_url('master/engine_cylinder/getEngineCylinders');
+            $config['base_url'] = site_url('engine_cylinder/getEngineCylinders');
             $config['total_rows'] = $this->EngineCylinder_model->selectAll($limit, $offset, $search, $count = true);
             $config['uri_segment'] = 4;
             $config['num_links'] = 4;
