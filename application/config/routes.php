@@ -101,3 +101,17 @@ $route['engine_cylinder/create'] = 'master/EngineCylinder/CreateEngineCylinder';
 $route['engine_cylinder/update'] = 'master/EngineCylinder/update';
 $route['engine_cylinder/edit'] = 'master/EngineCylinder/edit';
 $route['master/engine_cylinder'] = 'master/EngineCylinder/index';
+
+//emission standard
+$route['emission_standard/getEmissionStandard'] = 'master/EmissionStandard/getEmissionStandard';
+$route['emission_standard/create'] = 'master/EmissionStandard/CreateEmissionStandard';
+$route['emission_standard/update'] = 'master/EmissionStandard/update';
+$route['emission_standard/edit'] = 'master/EmissionStandard/edit';
+$route['master/emission_standard'] = 'master/EmissionStandard/index';
+
+//vehicle segment
+$route['vehicle_segment/getVehicleSegment'] = 'master/VehicleSegment/getVehicleSegment';
+$route['vehicle_segment/create'] = 'master/VehicleSegment/CreateVehicleSegment';
+$route['vehicle_segment/update'] = 'master/VehicleSegment/update';
+$route['vehicle_segment/edit'] = 'master/VehicleSegment/edit';
+$route['master/vehicle_segment'] = 'master/VehicleSegment/index';

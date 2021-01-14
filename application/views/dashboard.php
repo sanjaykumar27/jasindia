@@ -43,6 +43,12 @@
                                 <a href="<?php echo base_url() ?>master/engine_cylinder" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
                                     Engine Cylinder Master
                                 </a>
+                                <a href="<?php echo base_url() ?>master/emission_standard" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
+                                    Emission Standard Master
+                                </a>
+                                <a href="<?php echo base_url() ?>master/vehicle_segment" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
+                                    Vehicle Segment Master
+                                </a>
                             </div>
                         </div>
                     </div>
