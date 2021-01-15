@@ -20,11 +20,11 @@
 																		foreach($audit_logs as $value) { ?>
 																			<div class="m-list-timeline__item">
 																				<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-																				<a href="javascript:void(0)" class="m-list-timeline__text">
+																				<a href="javascript:void(0)" class="m-list-timeline__text font-weight-bold">
 																					<?php echo $value->record; ?>
 																					<p class="small mb-0 text-warning"><?php echo $value->page. ' | By: '.$value->first_name.' '.$value->last_name ?></p>
 																				</a>
-																				<span class="m-list-timeline__time">
+																				<span class="m-list-timeline__time font-weight-bold font-italics">
 																				<?php echo get_time_ago( strtotime($value->created_on) ); ?>
 																				</span>
 																				
