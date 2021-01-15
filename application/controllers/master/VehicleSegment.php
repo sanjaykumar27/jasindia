@@ -16,7 +16,8 @@ class VehicleSegment extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $this->load->view('Master/vehicle_segment_master');
+            $data['audit_logs'] = $this->Common_model->getLogs();
+            $this->load->view('Master/vehicle_segment_master', $data);
         } else
         {
             redirect('/Auth');
@@ -42,6 +43,15 @@ class VehicleSegment extends CI_Controller {
                 $cid = $this->Common_model->CommonInsert('m_vehicle_segment',$param);
                 if ($cid != "")
                 {
+                    $log = array(
+                        'action' => 'CreateVehicleSegment',
+                        'page' => 'Vehicle Segment Master',
+                        'record' => 'Create New Vehicle Segment.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'Vehicle Segment Created succesfully!');
                 } else
                 {
@@ -59,6 +69,7 @@ class VehicleSegment extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
+            $userid = $this->session->userdata('sess_user_id');
             $search = array(
                 'keyword' => trim($this->input->post('search_key')),
             );
@@ -85,6 +96,15 @@ class VehicleSegment extends CI_Controller {
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Vehicle Segments: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
+            $log = array(
+                'action' => 'getVehicleSegments',
+                'page' => 'Vehicle Segment Master',
+                'record' => 'Get Vehicle Segment List.',
+                'success' => 'Y',
+                'ip_address' => $_SERVER['REMOTE_ADDR'],
+                'created_by' => $userid,
+            );
+            $this->Common_model->CommonInsert('audit_log',$log);
             echo $html;
         } else
         {
@@ -113,6 +133,15 @@ class VehicleSegment extends CI_Controller {
                 $cid = $this->VehicleSegment_model->updateVehicleSegment($param, $vehicle_segment_id);
                 if ($cid != "")
                 {
+                    $log = array(
+                        'action' => 'update',
+                        'page' => 'Vehicle Segment Master',
+                        'record' => 'Vehicle Segment Updated.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'Vehicle Segment Updated succesfully!');
                 } else
                 {

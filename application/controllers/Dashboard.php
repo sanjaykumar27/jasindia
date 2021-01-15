@@ -18,11 +18,19 @@ class Dashboard extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	 function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Common_model');
+	}
+	
 	public function index()
 	{
 		if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $this->load->view('dashboard');
+			$data['audit_logs'] = $this->Common_model->getLogs();
+            $this->load->view('dashboard', $data);
         } 
         else
         {

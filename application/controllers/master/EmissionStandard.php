@@ -16,7 +16,8 @@ class EmissionStandard extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $this->load->view('Master/emission_standard_master');
+            $data['audit_logs'] = $this->Common_model->getLogs();
+            $this->load->view('Master/emission_standard_master', $data);
         } else
         {
             redirect('/Auth');
@@ -46,6 +47,15 @@ class EmissionStandard extends CI_Controller {
                 $cid = $this->Common_model->CommonInsert('m_emission_standard',$param);
                 if ($cid != "")
                 {
+                    $log = array(
+                        'action' => 'CreateEmissionStandard',
+                        'page' => 'Emission Standard Master',
+                        'record' => 'Create New Emission Standard.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'Emission Standard Created succesfully!');
                 } else
                 {
@@ -63,6 +73,7 @@ class EmissionStandard extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
+            $userid = $this->session->userdata('sess_user_id');
             $search = array(
                 'keyword' => trim($this->input->post('search_key')),
             );
@@ -89,6 +100,15 @@ class EmissionStandard extends CI_Controller {
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Emission Standards: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
+            $log = array(
+                'action' => 'getEmissionStandards',
+                'page' => 'Emission Standard Master',
+                'record' => 'Get Emission Standard List.',
+                'success' => 'Y',
+                'ip_address' => $_SERVER['REMOTE_ADDR'],
+                'created_by' => $userid,
+            );
+            $this->Common_model->CommonInsert('audit_log',$log);
             echo $html;
         } else
         {
@@ -122,6 +142,15 @@ class EmissionStandard extends CI_Controller {
                 $cid = $this->EmissionStandard_model->updateEmissionStandard($param, $emission_standard_id);
                 if ($cid != "")
                 {
+                    $log = array(
+                        'action' => 'Update',
+                        'page' => 'Emission Standard Master',
+                        'record' => 'Updated Emission Standard.',
+                        'success' => 'Y',
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'created_by' => $userid,
+                    );
+                    $this->Common_model->CommonInsert('audit_log',$log);
                     $data = array('code' => 1, 'response' => 'Emission Standard Updated succesfully!');
                 } else
                 {

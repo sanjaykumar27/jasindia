@@ -17,7 +17,8 @@ class Engine extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
-            $this->load->view('Master/engine_master');
+            $data['audit_logs'] = $this->Common_model->getLogs();
+            $this->load->view('Master/engine_master',$data);
         } else
         {
             redirect('/Auth');

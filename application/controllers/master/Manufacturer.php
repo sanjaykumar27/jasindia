@@ -16,6 +16,7 @@ class Manufacturer extends CI_Controller {
     {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
+            $data['audit_logs'] = $this->Common_model->getLogs();
             $data['company_types'] = $this->Common_model->SelectAll('m_company_type');
             $this->load->view('Master/manufacturer_master', $data);
         } else

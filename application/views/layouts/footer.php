@@ -1,4 +1,42 @@
 </div>
+<div id="m_quick_sidebar" class="m-quick-sidebar m-quick-sidebar--tabbed m-quick-sidebar--skin-light">
+											<div class="m-quick-sidebar__content m--hide">
+												<span id="m_quick_sidebar_close" class="m-quick-sidebar__close">
+													<i class="la la-close"></i>
+												</span>
+												<ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
+													<li class="nav-item m-tabs__item">
+														<a class="nav-link m-tabs__link font-weight-bold pt-0" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab">
+															Audit Logs
+														</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane active" id="m_quick_sidebar_tabs_logs" role="tabpanel">
+														<div class="m-list-timeline m-scrollable">
+															<div class="m-list-timeline__group">
+																<div class="m-list-timeline__items">
+																	<?php if(!empty($audit_logs)) {
+																		foreach($audit_logs as $value) { ?>
+																			<div class="m-list-timeline__item">
+																				<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
+																				<a href="javascript:void(0)" class="m-list-timeline__text">
+																					<?php echo $value->record; ?>
+																					<p class="small mb-0 text-warning"><?php echo $value->page. ' | By: '.$value->first_name.' '.$value->last_name ?></p>
+																				</a>
+																				<span class="m-list-timeline__time">
+																				<?php echo get_time_ago( strtotime($value->created_on) ); ?>
+																				</span>
+																				
+																			</div>
+																<?php } } ?>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 <footer class="m-grid__item		m-footer ">
                 <div class="m-container m-container--fluid m-container--full-height m-page__container">
                     <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
@@ -40,6 +78,33 @@
             </footer>
             <!-- end::Footer -->
         </div>
+
+		<?php 
+			function get_time_ago( $time )
+			{
+				$time_difference = time() - $time;
+			
+				if( $time_difference < 1 ) { return '1 second ago'; }
+				$condition = array( 12 * 30 * 24 * 60 * 60 =>  'year',
+							30 * 24 * 60 * 60       =>  'month',
+							24 * 60 * 60            =>  'day',
+							60 * 60                 =>  'hour',
+							60                      =>  'minute',
+							1                       =>  'second'
+				);
+			
+				foreach( $condition as $secs => $str )
+				{
+					$d = $time_difference / $secs;
+			
+					if( $d >= 1 )
+					{
+						$t = round( $d );
+						return $t . ' ' . $str . ( $t > 1 ? 's' : '' ) . ' ago';
+					}
+				}
+			}
+		?>
 
         <div id="m_scroll_top" class="m-scroll-top">
             <i class="la la-arrow-up"></i>
