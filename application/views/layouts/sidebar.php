@@ -106,6 +106,26 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        <li class="m-menu__item " aria-haspopup="true"  m-menu-link-redirect="1">
+                                            <a  href="<?php echo base_url();?>master/vehicle_segment" class="m-menu__link ">
+                                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="m-menu__link-text">
+                                                    Vehicle Segment
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="m-menu__item " aria-haspopup="true"  m-menu-link-redirect="1">
+                                            <a  href="<?php echo base_url();?>master/emission_standard" class="m-menu__link ">
+                                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="m-menu__link-text">
+                                                    Emission Standard
+                                                </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
