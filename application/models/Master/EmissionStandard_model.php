@@ -33,7 +33,7 @@ class EmissionStandard_model extends CI_Model {
 	
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('m_emission_standard.emission_id,m_emission_standard.emission_name');
+        $this->db->select('m_emission_standard.emission_id,m_emission_standard.emission_name,m_emission_standard.from_date, m_emission_standard.to_date');
         $this->db->from('m_emission_standard');
         if ($search)
         {
@@ -69,7 +69,7 @@ class EmissionStandard_model extends CI_Model {
 
     function GetEmissionStandardDetails($emission_id)
     {
-        $this->db->select('emission_name, emission_id');
+        $this->db->select('emission_name, emission_id, from_date, to_date');
         $this->db->from('m_emission_standard');
         $this->db->where('emission_id', $emission_id);
         $query = $this->db->get();
