@@ -49,6 +49,9 @@
                                 <a href="<?php echo base_url() ?>master/vehicle_segment" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
                                     Vehicle Segment Master
                                 </a>
+                                <a href="<?php echo base_url() ?>master/body_type" class="btn m-btn--pill btn-outline-brand btn-sm mt-2">
+                                    Body Type Master
+                                </a>
                             </div>
                         </div>
                     </div>

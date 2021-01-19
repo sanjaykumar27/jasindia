@@ -115,3 +115,10 @@ $route['vehicle_segment/create'] = 'master/VehicleSegment/CreateVehicleSegment';
 $route['vehicle_segment/update'] = 'master/VehicleSegment/update';
 $route['vehicle_segment/edit'] = 'master/VehicleSegment/edit';
 $route['master/vehicle_segment'] = 'master/VehicleSegment/index';
+
+//body Type
+$route['body_type/getBodyType'] = 'master/BodyType/getBodyType';
+$route['body_type/create'] = 'master/BodyType/CreateBodyType';
+$route['body_type/update'] = 'master/BodyType/update';
+$route['body_type/edit'] = 'master/BodyType/edit';
+$route['master/body_type'] = 'master/BodyType/index';
