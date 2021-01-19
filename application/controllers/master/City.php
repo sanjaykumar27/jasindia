@@ -60,7 +60,7 @@ class City extends CI_Controller {
                     'created_by' => $userid,
                 );
 
-                $pid = $this->Common_model->CommonInsert('m_pincodes',$param);
+                $pid = $this->Common_model->CommonInsert('m_pincodes',$params);
 
                 if ($pid != "" && $cid != '')
                 {
