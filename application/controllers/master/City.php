@@ -9,6 +9,7 @@ class City extends CI_Controller {
         parent::__construct();
         $this->load->model('Master/City_model');
         $this->load->model('Common_model');
+        $this->load->model('Master/State_model');
         $this->load->library('pagination');
     }
 
@@ -93,7 +94,9 @@ class City extends CI_Controller {
             $html = '';
             $city_id = $this->input->post('city_id');
             $records = $this->City_model->GetPincodes($city_id);
-			$pcount = count($records);
+            $states = $this->State_model->listAllStates();
+            $pcount = count($records);
+            
             //echo '<pre>';print_r($records);die;
             if (!empty($records))
             {	
@@ -109,7 +112,21 @@ class City extends CI_Controller {
 							</div>
 						</div>';
 					
-                $html .= '<div class="row"><div class="col form-group"><label>City Name</label>'
+                $html .= '<div class="row"><div class="col-6 form-group">
+                <label>State</label>
+                <select name="state_id" required class="form-control" value="'.$records[0]['state_id'].'">';
+                    foreach($states as $value)
+                    {
+                        
+                        if($value->state_id == $records[0]['state_id']) { 
+                            $html .= '<option selected value="'.$value->state_id.'">'.$value->state_name.'</option>'; 
+                        }
+                        else{
+                            $html .= '<option value="'.$value->state_id.'">'.$value->state_name.'</option>';
+                        }
+                    }
+                $html .= '</select>
+            </div><div class="col form-group"><label>City Name</label>'
                         . '<input type="hidden" id="c_district_id" name="district_id" value="' . $records[0]['district_id'] . '"><input type="hidden" id="c_city_id" name="city_id" value="' . $records[0]['city_id'] . '">'
                         . '<input type="text" id="c_city_name" name="city_name" value="' . $records[0]['city_name'] . '" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">'
                         . '</div></div>';
@@ -233,7 +250,7 @@ class City extends CI_Controller {
             );
             $this->Common_model->CommonInsert('audit_log',$log);
 
-            $html .= '</tbody></table></div><h5>Total States: <span class="font-weight-bold">' . $total . '</span></h5>' . $pagelinks;
+            $html .= '</tbody></table></div><h5>Total Cities: <span class="font-weight-bold">' . $total . '</span></h5>' . $pagelinks;
             echo $html;
         } else
         {

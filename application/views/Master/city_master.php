@@ -82,7 +82,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        New City
+                        Update City
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -92,6 +92,7 @@
                 </div>
                 <div class="modal-body pt-2">
 					<form action="" method="post" id="formNewPincode">
+                        
 						<div id="newpincode-form"></div> 
 					</form>
 					<form action="" method="post" id="update_pincode">
