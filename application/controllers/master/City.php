@@ -95,6 +95,7 @@ class City extends CI_Controller {
             $city_id = $this->input->post('city_id');
             $records = $this->City_model->GetPincodes($city_id);
             $states = $this->State_model->listAllStates();
+            
             $pcount = count($records);
             
             //echo '<pre>';print_r($records);die;
@@ -149,7 +150,6 @@ class City extends CI_Controller {
                     ';
             }
 
-            
             $data = array('NP' => $html_newpincode, 'UP' => $html);
 			echo json_encode($data);
         } else
@@ -234,7 +234,7 @@ class City extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>' . $value->district_name . '</td><td>' . $value->city_name . '</td><td>' . $value->pincode . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="' . $value->city_id . '"  data-target="#ModalUpdateCity" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->city_id . '"  data-target="#ModalUpdateCity" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
                             . '</td>';
                     $i++;
                 }

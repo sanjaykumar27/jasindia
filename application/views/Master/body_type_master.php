@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 Body Type Description
-                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-toggle="modal" data-target="#ModalNewBodyType">
+                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-bs-toggle="modal" data-target="#ModalNewBodyType">
                     <i class="fa fa-plus"></i> New
                 </button>
             </span>

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 State Master
-                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-toggle="modal" data-target="#ModalNewState">
+                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-bs-toggle="modal" data-target="#ModalNewState">
                     <i class="fa fa-plus"></i> New
                 </button>
             </span>

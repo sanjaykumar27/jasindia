@@ -85,7 +85,7 @@ class Engine extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->engine_name . '</td><td class="text-truncate">' . $value->manufacturer_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->engine_id.'"  data-target="#ModalUpdateEngine" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->engine_id.'"  data-target="#ModalUpdateEngine" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Engines: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;

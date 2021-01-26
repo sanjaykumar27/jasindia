@@ -82,7 +82,7 @@ class EngineCylinder extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->engine_cylinder_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->engine_cylinder_id.'"  data-target="#ModalUpdateEngineCylinder" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->engine_cylinder_id.'"  data-target="#ModalUpdateEngineCylinder" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Engine Cylinders: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 City Master
-                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-toggle="modal" data-target="#ModalNewCity">
+                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-bs-toggle="modal" data-target="#ModalNewCity">
                     <i class="fa fa-plus"></i> New
                 </button>
             </span>

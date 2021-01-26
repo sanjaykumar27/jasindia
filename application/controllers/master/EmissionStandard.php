@@ -96,7 +96,7 @@ class EmissionStandard extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->emission_name . '</td><td>' . $value->from_date . '</td><td>' . $value->to_date . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-toggle="modal" value="'.$value->emission_id.'"  data-target="#ModalUpdateEmissionStandard" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->emission_id.'"  data-target="#ModalUpdateEmissionStandard" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Emission Standards: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;

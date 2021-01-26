@@ -1,28 +1,29 @@
 <?php $this->load->view('./layouts/header'); ?>
 <?php $this->load->view('./layouts/sidebar'); ?>
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
-    <div class="m-subheader ">
+<div class="container-fluid px-3 mt-3">
+    <div class="row">
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 Manufacturer Master
-                <button type="button" class="btn m-btn--pill btn-sm  btn-outline-primary " data-toggle="modal" data-target="#ModalNewCompany">
+                <button type="button" class="btn m-btn--pill btn-sm  btn-outline-primary " data-bs-toggle="modal" data-bs-target="#ModalNewCompany">
                     <i class="fa fa-plus"></i> New
                 </button>
             </span>
         </div>
     </div>
     <!-- END: Subheader -->
-    <div class="m-content pt-0">
-        <div class="d-flex flex-row">
+    <div class="card">
+        <div class="card-body px-4 d-flex align-items-center">
             <div class="col-8 px-0">
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search by manufacturer name" />
             </div>
-            <div class="col-4">
-            <button type="button" id="searchBtn" class="btn btn-outline-primary m-btn  m-btn--icon m-btn--icon-only m-btn--pill"><i class="fas fa-search"></i></button>
-                <button type="button" id="resetBtn" class="btn btn-outline-metal m-btn m-btn--icon m-btn--icon-only m-btn--outline-2x m-btn--pill "><i class="fas fa-history"></i></button></div>
+            <div class="col-4 mx-2">
+            <button type="button" id="searchBtn" class="btn btn-outline-primary "><i class="fas fa-search"></i></button>
+                <button type="button" id="resetBtn" class="btn btn-outline-info  "><i class="fas fa-history"></i></button>
+            </div>
         </div>
-        <div class="d-flex flex-row mt-3">
-            <div class="col-12 px-0">
+        <div class="card-body px-4 d-flex flex-row ">
+            <div class="col-12 ">
                 <div id="ajaxContent" ></div>
             </div>
         </div>

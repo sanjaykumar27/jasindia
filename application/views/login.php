@@ -8,96 +8,98 @@
         <meta name="description" content="Latest updates and statistic charts">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
         <!--begin::Web font -->
-        <script src="<?php echo base_url();?>assets/webfont.js"></script>
-        <script>
-            WebFont.load({
-                google: {"families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]},
-                active: function () {
-                    sessionStorage.fonts = true;
-                }
-            });
-        </script>
-        <!--end::Web font -->
-        <!--begin::Base Styles -->
         <script>var base_url = '<?php echo base_url() ?>';</script>
-        <link href="<?php echo base_url();?>assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url();?>assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
-        <!--end::Base Styles -->
-        <link rel="shortcut icon" href="<?php echo base_url();?>assets/demo/default/media/img/logo/favicon.ico" />
-
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" type="text/css">
     </head>
-    <!-- end::Head -->
-    <!-- end::Body -->
-    <body  class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
-        <!-- begin:: Page -->
-        <div class="m-grid m-grid--hor m-grid--root m-page">
-            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-1" id="m_login" style="background: #3a3a3a">
-                <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
-                    <div class="m-login__container shadow" style="background: #00000038;padding: 18px; border-radius: 10px;">
-                        <div class="m-login__logo">
-                            <a href="#">
-                                <img src="<?php echo base_url();?>assets/app/media/img//logos/logo-1.png">
-                            </a>
-                        </div>
-                        <div class="m-login__signin">
-                            <div class="m-login__head">
-                                <h3 class="m-login__title">
-                                    Sign In To Admin
-                                </h3>
+    <body>
+    <div class="container">
+        <div class="align-items-center h-100 justify-content-center row">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="border-0 card js-auth">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12 ">
+                            <div class="h-100 js-bg-auth text-center">
+                                <p><img class="rounded" width="125px" src="<?php echo base_url();?>assets/img/website_logo.jpg"></p>
+                                <p class="fs-5 text-white mb-0">Jas India Jodhpur Pvt Ltd.</p>
                             </div>
-                            <form class="m-login__form m-form" action="">
-                                <div class="form-group m-form__group">
-                                    <input class="form-control m-input"  placeholder="Enter Email" type="email" name="email" :value="old('email')" required autofocus>
-                                </div>
-                                <div class="form-group m-form__group">
-                                    <input class="form-control m-input m-login__form-input--last" placeholder="Enter Password" type="password" name="password" required autocomplete="current-password">
-                                </div>
-                                <div class="row m-login__form-sub">
-										<div class="col m--align-right">
-											<a href="javascript:;" id="m_login_forget_password" class="m-link">
-												Forgot Password ?
-											</a>
-										</div>
-                                    </div>
-                                    <div class="row m-login__form-sub">
-										<div class="col m--align-left">
-											<label class="m-checkbox m-checkbox--focus">
-												<input type="checkbox" name="remember">
-												Remember me
-												<span></span>
-											</label>
-										</div>
-									</div>
-                                <div class="m-login__form-action">
-                                    <button id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
-                                        Sign In
-                                    </button>
-                                </div>
-                               
-                            </form>
                         </div>
-
-                        <div class="m-login__account">
-                            <span class="m-login__account-msg">
-                                Don't have an account yet ?
-                            </span>
-                            &nbsp;&nbsp;
-                            <a href="#" class="m-link m-link--light m-login__account-link">
-                                Sign Up
-                            </a>
+                        <div class="col-lg-7">
+                            <form action="" id="auth_login" method="post">
+                                <div class="card-body">
+                                    <div class="row my-4">
+                                        <div class="col">
+                                            <p class="fw-bold fs-4 text-center mb-0">Sign In</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group py-2">
+                                            <label for="">Enter Email</label>
+                                            <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group py-2">
+                                            <label for="">Enter Password</label>
+                                            <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group d-table mx-auto">
+                                            <div class="custom-checkbox mb-1">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                            <label class="custom-control-label" for="customCheck2">Remember Me ?</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group py-2 text-center">
+                                            <button class="btn btn-primary" type="submit">Sign In</button>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 mb-2">
+                                        <div class="col">
+                                            <p class="fw-bold"><a href="javascript:void(0)" class="text-decoration-none small">Forgot Password</a></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="fw-bold float-end"><a href="" class="text-decoration-none small">Dont Have an Account ?</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end:: Page -->
-        <!--begin::Base Scripts -->
-        <script src="<?php echo base_url();?>assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-        <script src="<?php echo base_url();?>assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
-        <!--end::Base Scripts -->   
-        <!--begin::Page Snippets -->
-        <script src="<?php echo base_url();?>assets/snippets/custom/pages/user/login.js" type="text/javascript"></script>
-        <!--end::Page Snippets -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/custom.js" type="text/css">
     </body>
+    <script>
+        $(function(){
+            $('#auth_login').submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: base_url + "Auth/login",
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.code == 1) {
+                                window.location = data.home;
+                        } else {
+                            swal({ title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide" });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     <!-- end::Body -->
 </html>
