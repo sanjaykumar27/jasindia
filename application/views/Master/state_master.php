@@ -272,7 +272,6 @@
                 ajaxlist(page_url = false);
                 event.preventDefault();
             }
-            toast.show();
         });
         /*-- Search keyword--*/
         $(document).on('click', "#searchBtn", function (event) {
