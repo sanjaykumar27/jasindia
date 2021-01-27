@@ -38,7 +38,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                     Body Type Description
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -50,7 +50,7 @@
                             <label>Enter Body Type Name</label>
                             <input type="text" name="body_type_name" class="form-control text-capitalize" required="" placeholder="Enter Body Type Name... " autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
                     </form>
@@ -66,7 +66,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         Update Body Type
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -80,7 +80,7 @@
                             <input type="text" name="body_type_name" id="edit_body_type_name" class="form-control text-capitalize" required="" placeholder="Enter Body Type Name... " autocomplete="off">
                         </div>
                         
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
                         </div>
                     </form>

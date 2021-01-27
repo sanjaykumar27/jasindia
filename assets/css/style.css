@@ -39,6 +39,10 @@ label {
     background-color: #fff;
     box-shadow: 0 1px 15px 1px rgba(69,65,78,.1);
 }
+
+.form-group {
+    margin: 10px 0 10px 0;
+}
 /* @media (min-width: 768px) { ... }
 
 // Large devices (desktops, 992px and up)

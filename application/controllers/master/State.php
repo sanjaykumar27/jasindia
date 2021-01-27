@@ -50,8 +50,8 @@ class State extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td class="text-truncate">'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->state_id . '"  data-target="#ModalUpdateState" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
-                            . '<button dd-state-name="'.$value->state_name.'" value="' . $value->state_id . '" id="add_district" class="ml-2 btn btn-outline-primary btn-sm m-btn m-btn--pill" data-target="#ModalNewDistrict" data-bs-toggle="modal"  data-toggle="m-tooltip" data-skin="dark"  title="Show list of districts" data-original-title="Show list of districts"><i class="far fa-list-alt"></i> Districts</button></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->state_id . '"  data-bs-target="#ModalUpdateState" class="btn btn-outline-success btn-sm me-2 px-2"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<button dd-state-name="'.$value->state_name.'" value="' . $value->state_id . '" id="add_district" class="btn btn-outline-primary btn-sm px-2" data-bs-target="#ModalNewDistrict" data-bs-toggle="modal"  data-toggle="m-tooltip" data-skin="dark"  title="Show list of districts" data-original-title="Show list of districts"><i class="far fa-list-alt"></i> Districts</button></td>';
                     $i++;
                 }
             }
@@ -183,7 +183,7 @@ class State extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->district_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editdistrictbutton" dd-district-name="'.$value->district_name.'"  value="' . $value->district_id . '" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<a href="javascript:void(0)" id="m_editdistrictbutton" dd-district-name="'.$value->district_name.'"  value="' . $value->district_id . '" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }

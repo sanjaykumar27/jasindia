@@ -38,7 +38,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                     Vehicle Segment 
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -50,7 +50,7 @@
                             <label>Enter Vehicle Segment Name</label>
                             <input type="text" name="vehicle_segment_name" class="form-control text-capitalize" required="" placeholder="Enter Vehicle Segment Name... " autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
                     </form>
@@ -66,7 +66,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         Update Vehicle Segment
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -79,7 +79,7 @@
                             <input type="hidden" name="segment_id" id="edit_vehicle_segment_id">
                             <input type="text" name="vehicle_segment_name" id="edit_vehicle_segment_name" class="form-control text-capitalize" required="" placeholder="Enter Vehicle Segment Name... " autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
                         </div>
                     </form>

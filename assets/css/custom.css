@@ -486,9 +486,7 @@ pre {
   border-color: #e1e5eb
 }
 
-select.form-control:not([size]):not([multiple]) {
-  height: calc(2.09375rem + 2px)
-}
+
 
 select.form-control:focus::-ms-value {
   color: #495057;

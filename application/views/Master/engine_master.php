@@ -38,7 +38,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         New Engine
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -55,7 +55,7 @@
                             <label>Enter Engine Name</label>
                             <input type="text" name="engine_name" class="form-control text-capitalize" required="" placeholder="Enter Engine Name... " autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
                     </form>
@@ -71,7 +71,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         Update Engine
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -89,7 +89,7 @@
                             <label>Enter Engine Name</label>
                             <input type="text" name="engine_name" id="edit_engine_name" class="form-control text-capitalize" required="" placeholder="Enter Engine Name... " autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
                         </div>
                     </form>

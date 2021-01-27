@@ -52,9 +52,9 @@ class Manufacturer extends CI_Controller {
             {
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->manufacturer_name . '</td><td class="text-truncate">' . $value->manufacturer_email . '</td><td class="text-truncate">' . $value->manufacturer_website . '</td>'
+                    $html .= '<tr><td>'.$i.'</td><td class="">' . $value->manufacturer_name . '</td><td class="">' . $value->manufacturer_email . '</td><td class="">' . $value->manufacturer_website . '</td>'
                             . '<td>' . $value->manufacturer_address . '</td><td>'.$value->type_name.'</td><td class="text-truncate">'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->manufacturer_id.'"  data-bs-target="#ModalUpdateCompany" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->manufacturer_id.'"  data-bs-target="#ModalUpdateCompany" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a></td>';
                 $i++; }
             }
             $html .= '</tbody></table><h5>Total Manufacturer: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks.'</div>';

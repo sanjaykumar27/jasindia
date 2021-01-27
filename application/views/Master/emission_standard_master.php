@@ -38,7 +38,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                     Emission Standard 
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -58,7 +58,7 @@
                             <label>To Date</label>
                             <input type="date" name="to_date" class="form-control" required=""  autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
                     </form>
@@ -74,7 +74,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         Update Emission Standard
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             ×
                         </span>
@@ -95,7 +95,7 @@
                             <label>To Date</label>
                             <input type="date" name="to_date" id="edit_to_date" class="form-control" required=""  autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
                         </div>
                     </form>

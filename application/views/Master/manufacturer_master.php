@@ -32,12 +32,12 @@
 <div class="modal fade" id="ModalNewCompany" nocloseonclick="true"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title text-white" id="exampleModalLabel">
                     New Manufacturer
                 </h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body pt-2">
                 <form action="" method="post" id="create_company">
                     <div class="form-group">
                         <label>Manufacturer Name</label>
@@ -62,12 +62,11 @@
                     </div>
                     <div class="form-group">
                         <label>Manufacturer Address</label>
-                        <textarea class="form-control" name="manufacturer_address" required></textarea>
+                        <textarea class="form-control" name="manufacturer_address" rows="4" required></textarea>
                     </div>					
-                    <div class="float-right">
-                        <input type="button" class="btn" data-dismiss="modal" aria-label="Close" value="Close">
+                    <div class="float-end">
+                        <input type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" value="Close">
                         <input type="submit" class="btn btn-primary" id="saveBtn" value="Save">
-
                     </div>
                 </form>
             </div>            
@@ -78,13 +77,13 @@
 <div class="modal fade" id="ModalUpdateCompany" nocloseonclick="true"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title text-white" id="exampleModalLabel">
                     Update Manufacturer
                 </h5>
 
             </div>
-            <div class="modal-body">
+            <div class="modal-body pt-2">
                 <form action="" method="post" id="update_company">
                      <div class="form-group">
                         <label>Manufacturer Name</label>
@@ -110,12 +109,11 @@
                     </div>
                     <div class="form-group">
                         <label>Manufacturer Address</label>
-                        <textarea class="form-control"  name="manufacturer_address" id="m_manufacturer_address" required></textarea>
+                        <textarea class="form-control"  name="manufacturer_address"  rows="4" id="m_manufacturer_address" required></textarea>
                     </div>					
-                    <div class="float-right">
-                        <input type="button" class="btn" data-dismiss="modal" aria-label="Close" value="Close">
-                        <input type="submit" class="btn btn-primary" id="updateBtn" value="Update">
-
+                    <div class="float-end">
+                        <input type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" value="Close">
+                        <input type="button" class="btn btn-primary" id="updateBtn" value="Update">
                     </div>
                 </form>
             </div>            
@@ -127,11 +125,8 @@
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
+    
     var sdata = {};
-    $(window).on('load', function () {
-        $('body').removeClass('m-page--loading');
-    });
-
     $('#create_company').submit(function (e) {
         e.preventDefault();
         var formData = new FormData(this);
@@ -163,10 +158,6 @@
     $(document).on("click", "#updateBtn", function (e) {
         if ($("#update_company").valid()) {
             e.preventDefault();
-//        $('#ModalUpdateCompany .modal-content').block({
-//            message: '<p class="h5 mb-0 py-1">Processing</p>',
-//            css: {border: '0px solid #a00'}
-//        });
             var edit_manufacturer_type = $("#m_manufacturer_type").val();
             var edit_manufacturer_id = $("#m_manufacturer_id").val();
             var edit_manufacturer_name = $("#m_manufacturer_name").val();
@@ -189,10 +180,16 @@
                     if (data.code == 1)
                     {
                         $('#ModalUpdateCompany').modal('hide');
-//                    $('#ModalUpdateCompany').unblock();
-                        swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
-                            //location.reload();
-                            var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
+                        swal.fire({title: "Success", text: data.response}).then(function () {
+                            setTimeout(function(){  
+							if($("#active-page").text())
+							{
+								var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer/' + ($("#active-page").text() - 1) * 10;
+							}
+							else
+							{
+								var page_url = '<?php echo base_url() ?>master/manufacturer/getManufacturer';
+							}
                             if ($("#search_key").val()) {
                                 ajaxlist(page_url = false);
                             } else
@@ -200,11 +197,12 @@
                                 ajaxlist(page_url);
                             }
                             e.preventDefault();
+                        }, 1000);
                         });
                     } else
                     {
                         $('#ModalUpdateCompany').unblock();
-                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary "});
                     }
                 }
             });
@@ -252,4 +250,5 @@
             }
         });
     }
+
 </script>

@@ -1,45 +1,42 @@
 <?php $this->load->view('./layouts/header'); ?>
 <?php $this->load->view('./layouts/sidebar'); ?>
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
-    <div class="m-subheader ">
+<div class="container-fluid px-3 mt-3">
+    <div class="row">
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 State Master
-                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-bs-toggle="modal" data-target="#ModalNewState">
+                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewState">
                     <i class="fa fa-plus"></i> New
                 </button>
             </span>
         </div>
     </div>
     <!-- END: Subheader -->
-    <div class="m-content pt-0">
-        <div class="d-flex flex-row">
+    <div class="card">
+        <div class="card-body px-4 d-flex align-items-center">
             <div class="col-8 px-0">
                 <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search by state name" />
             </div>
-            <div class="col-4">
-            <button type="button" id="searchBtn" class="btn btn-outline-primary m-btn  m-btn--icon m-btn--icon-only m-btn--pill"><i class="fas fa-search"></i></button>
-                <button type="button" id="resetBtn" class="btn btn-outline-metal m-btn m-btn--icon m-btn--icon-only m-btn--outline-2x m-btn--pill "><i class="fas fa-history"></i></button></div>
+            <div class="col-4 mx-2">
+            <button type="button" id="searchBtn" class="btn btn-outline-primary "><i class="fas fa-search"></i></button>
+                <button type="button" id="resetBtn" class="btn btn-outline-info  "><i class="fas fa-history"></i></button>
+            </div>
         </div>
-        <div class="d-flex flex-row mt-3">
-            <div class="col-12 px-0">
-                <div id="ajaxContent"></div>
+        <div class="card-body px-4 d-flex flex-row ">
+            <div class="col-12 ">
+                <div id="ajaxContent" ></div>
             </div>
         </div>
     </div>
-
+</div>
     <div class="modal fade" id="ModalNewState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
                         New State
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            ×
-                        </span>
-                    </button>
+                   
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="create_state">
@@ -51,7 +48,8 @@
                         <div class="form-group">
                             <button class="btn btn-outline-primary m-btn m-btn--icon m-btn--icon-only" type="button" id="addRow"><i class="fa fa-plus"></i></button>
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
+                            <input type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" value="Close">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
                     </form>
@@ -63,15 +61,11 @@
     <div class="modal fade" id="ModalUpdateState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
                         New State
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            ×
-                        </span>
-                    </button>
+                   
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="update_state">
@@ -80,7 +74,8 @@
                             <label>Enter State Name</label>
                             <input type="text" name="state_name" id="m_state_name" class="form-control text-capitalize" required="" placeholder="Enter State" autocomplete="off">
                         </div>
-                        <div class="form-group float-right">
+                        <div class="form-group float-end">
+                            <input type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" value="Close">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
                         </div>
                     </form>
@@ -92,15 +87,11 @@
     <div class="modal fade" id="ModalNewDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
                         Districts List (<span id="dd-state-name" class="font-weight-bold"></span>)
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            ×
-                        </span>
-                    </button>
+                   
                 </div>
                 <div class="modal-body pt-3" >
                     <form action="" method="post" id="create_district">
@@ -127,9 +118,9 @@
             </div>
         </div>
     </div>
-</div>
 
-</div>
+
+
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
@@ -218,7 +209,7 @@
                         if (data.code == 1)
                         {
                             $('#ModalUpdateState').modal('hide');
-                            swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                            swal.fire({title: "Success", text: data.response}).then(function () {
                                 //location.reload();
                                 var page_url = '<?php echo base_url() ?>master/state/getStates/' + ($("#active-page").text() - 1) * 10;
                                 if ($("#search_key").val()) {
@@ -232,7 +223,7 @@
                         } else
                         {
                             $('#ModalUpdateState').unblock();
-                            swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                            swal.fire({title: "Error", text: data.response});
                         }
                     }
                 });
@@ -257,7 +248,7 @@
 						
                         if (data.code == 1)
                         {
-                            swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                            swal.fire({title: "Success", text: data.response}).then(function () {
 								
                                 districtList($("#d_state_id").val());
                                 $("#update_district").hide();
@@ -265,7 +256,7 @@
                             });
                         } else
                         {
-                            swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                            swal.fire({title: "Error", text: data.response});
                         }
                     }
                 });
@@ -281,6 +272,7 @@
                 ajaxlist(page_url = false);
                 event.preventDefault();
             }
+            toast.show();
         });
         /*-- Search keyword--*/
         $(document).on('click', "#searchBtn", function (event) {
