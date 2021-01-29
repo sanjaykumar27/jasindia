@@ -21,7 +21,7 @@
     <!-- end::Body -->
     <body class="js-body-bg">
           <nav class="navbar navbar-expand-lg navbar-light nav-bg-white p-0 ">
-              <div class="container-fluid">
+              <div class="container-fluid px-lg-4">
                 <a class="navbar-brand" href="#">
                   <img height="50" class="rounded" src="<?php echo base_url();?>assets/img/website_logo.jpg">
                 </a>
@@ -71,8 +71,8 @@
                       </a>
                       <ul class="dropdown-menu signout-dropdown" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Signout</a></li>
+                        
+                        <li><a class="dropdown-item" href="<?php echo base_url() ?>Auth/logout">Signout</a></li>
                       </ul>
                     </li>
                   </ul>
