@@ -9,7 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
         <script>var base_url = '<?php echo base_url() ?>';</script>
         <script src="https://kit.fontawesome.com/b953b3b300.js" crossorigin="anonymous"></script>
         <link rel="manifest" href="<?php echo base_url();?>_manifest.json">
@@ -21,7 +20,7 @@
     <!-- end::Body -->
     <body class="js-body-bg">
           <nav class="navbar navbar-expand-lg navbar-light nav-bg-white p-0 ">
-              <div class="container-fluid px-lg-4">
+              <div class="container-fluid px-lg-5">
                 <a class="navbar-brand" href="#">
                   <img height="50" class="rounded" src="<?php echo base_url();?>assets/img/website_logo.jpg">
                 </a>

@@ -1,9 +1,9 @@
 <?php $this->load->view('./layouts/header'); ?>
 <?php $this->load->view('./layouts/sidebar'); ?>
-<div class="container-fluid px-3 mt-3">
+<div class="container-fluid px-3 mt-3 px-lg-5">
     <div class="row">
         <div class="d-flex align-items-center">
-            <span class="h4 w-100">
+            <span class="h4 w-100 page-heading ">
                 City Master
                 <button type="button" class="btn px-2 btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewCity">
                     <i class="fa fa-plus"></i>

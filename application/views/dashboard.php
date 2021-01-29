@@ -1,7 +1,7 @@
 <?php $this->load->view('./layouts/header'); ?>
 <?php $this->load->view('./layouts/sidebar'); ?>
 
-<div class="container-fluid px-3 mt-3">
+<div class="container-fluid px-3 mt-3 px-lg-5">
     <div class="row">
         
                 <div class="col-lg-4 col-md-6">
