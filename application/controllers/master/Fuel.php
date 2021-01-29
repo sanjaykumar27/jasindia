@@ -82,7 +82,7 @@ class Fuel extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->fuel_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->fuel_id.'"  data-target="#ModalUpdateFuel" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->fuel_id.'"  data-bs-target="#ModalUpdateFuel" class="btn btn-outline-success btn-sm px-2"><i class="fa fa-pencil-alt"></i></a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Fuels: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;

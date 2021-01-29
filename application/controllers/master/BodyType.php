@@ -92,7 +92,7 @@ class BodyType extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->body_type_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->body_type_id.'"  data-target="#ModalUpdateBodyType" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->body_type_id.'"  data-bs-target="#ModalUpdateBodyType" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Body Type Descriptions: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;

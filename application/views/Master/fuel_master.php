@@ -1,35 +1,33 @@
 <?php $this->load->view('./layouts/header'); ?>
 <?php $this->load->view('./layouts/sidebar'); ?>
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
-    <div class="m-subheader ">
+<div class="container-fluid px-3 mt-3">
+    <div class="row">
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 Fuel Master
-                <button type="button" class="btn m-btn--pill btn-sm btn-outline-primary" data-bs-toggle="modal" data-target="#ModalNewFuel">
-                    <i class="fa fa-plus"></i> New
-                </button>
+                <button type="button" class="btn px-2 btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewFuel">
+                    <i class="fa fa-plus"></i>                 </button>
             </span>
         </div>
     </div>
     <!-- END: Subheader -->
-    <div class="m-content pt-0">
-        <div class="row">
+    <div class="card">
+        <div class="card-body px-4 d-flex align-items-center">
             <div class="col-8 px-0">
-                <label>&nbsp;</label>
-                <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search" />
+                <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search..." />
             </div>
-            <div class="col-4 mt-4">
-                <label>&nbsp;</label>
-                <button type="button" id="searchBtn" class="btn btn-outline-primary m-btn  m-btn--icon m-btn--icon-only m-btn--pill mt-2"><i class="fas fa-search"></i></button>
-                <button type="button" id="resetBtn" class="btn btn-outline-metal m-btn m-btn--icon m-btn--icon-only m-btn--outline-2x mt-2 m-btn--pill "><i class="fas fa-history"></i></button>
+            <div class="col-4 mx-2">
+            <button type="button" id="searchBtn" class="btn btn-outline-primary "><i class="fas fa-search"></i></button>
+                <button type="button" id="resetBtn" class="btn btn-outline-info  "><i class="fas fa-history"></i></button>
             </div>
         </div>
-        <div class="d-flex flex-row mt-3">
-            <div class="col-12 px-0">
+        <div class="card-body px-4 d-flex flex-row ">
+            <div class="col-12 ">
                 <div id="fuelContent" ></div>
             </div>
         </div>
     </div>
+</div>
 
     <div class="modal fade" id="ModalNewFuel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
@@ -87,7 +85,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <?php $this->load->view('./layouts/footer'); ?>
 

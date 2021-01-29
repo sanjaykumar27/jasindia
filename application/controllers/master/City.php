@@ -234,7 +234,7 @@ class City extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>' . $value->district_name . '</td><td>' . $value->city_name . '</td><td>' . $value->pincode . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->city_id . '"  data-target="#ModalUpdateCity" class="btn m-btn--pill btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>'
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->city_id . '"  data-bs-target="#ModalUpdateCity" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }

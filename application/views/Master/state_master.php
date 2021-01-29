@@ -5,8 +5,8 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100">
                 State Master
-                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewState">
-                    <i class="fa fa-plus"></i> New
+                <button type="button" class="btn px-2 btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewState">
+                    <i class="fa fa-plus"></i>
                 </button>
             </span>
         </div>
@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-body px-4 d-flex align-items-center">
             <div class="col-8 px-0">
-                <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search by state name" />
+                <input type="text" class="form-control m-input" name="search_key" id="search_key" placeholder="Search..." />
             </div>
             <div class="col-4 mx-2">
             <button type="button" id="searchBtn" class="btn btn-outline-primary "><i class="fas fa-search"></i></button>
