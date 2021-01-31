@@ -176,14 +176,14 @@ class State extends CI_Controller {
             $state_id = $this->input->POST('state_id');
             $data['records'] = $this->State_model->selectAllDistricts($state_id);
             
-            $html = '<table class="table m-table m-table--head-bg-info table-striped "><thead><tr><th>#</th><th>District Name</th><th>Action</th></tr></thead><tbody>';
+            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>District Name</th><th>RTO Code</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = 1;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>' . $i . '</td><td>' . $value->district_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editdistrictbutton" dd-district-name="'.$value->district_name.'"  value="' . $value->district_id . '" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->district_name . '</td><td>'.$value->rto_code.'</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editdistrictbutton" dd-district-rtocode="'.$value->rto_code.'" dd-district-name="'.$value->district_name.'"  value="' . $value->district_id . '" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }
@@ -205,6 +205,7 @@ class State extends CI_Controller {
         {
             $userid = $this->session->userdata('sess_user_id');
             $district = $this->input->POST('district_name');
+            $rto_code = $this->input->POST('rto_code');
             $state_id = $this->input->POST('state_id');
             $is_exist = $this->State_model->checkDistrictExists(trim($district), '', $state_id);
             if ($is_exist)
@@ -215,6 +216,7 @@ class State extends CI_Controller {
             {
                 $param = array(
                     'state_id' => $state_id,
+                    'rto_code' => $rto_code,
                     'district_name' => ucwords(trim($district)),
                     'created_by' => $userid,
                 );
@@ -245,6 +247,7 @@ class State extends CI_Controller {
             $district = $this->input->POST('district_name');
             $district_id = $this->input->POST('district_id');
             $state_id = $this->input->POST('state_id');
+            $rto_code = $this->input->POST('rto_code');
             $is_exist = $this->State_model->checkDistrictExists(trim($district), $district_id, $state_id);
             if ($is_exist)
             {
@@ -253,6 +256,7 @@ class State extends CI_Controller {
             {
                 $param = array(
                     'district_name' => ucwords(trim($district)),
+                    'rto_code' => $rto_code,
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );

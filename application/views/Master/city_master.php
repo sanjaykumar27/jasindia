@@ -96,20 +96,40 @@
                 </button>
             </div>
             <div class="modal-body pt-2">
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-sm btn-info float-end mb-1 px-2 py-1" id="add_new_pincode"
+                            onclick="jsShow('formNewPincode');jsHide('add_new_pincode')">
+                            Add Pincode
+                        </button>
+                    </div>
+                </div>
                 <form action="" method="post" id="formNewPincode">
-                    
                     <div id="newpincode-form"></div>
                 </form>
                 <form action="" method="post" id="update_pincode">
-                    <div class="form-group d-flex bg-light border d-flex form-group p-2">
-                        <input type="hidden" name="pincode_id" id="dd_pincode_id">
-                        <input type="number" name="pincode" id="d_pincode_pincode" class="form-control text-capitalize"
-                            required="" autocomplete="off">
-                        <input type="submit" class="btn btn-primary ml-2" id="updatePincodeBtn" value="Update">
+                    <div class="align-items-center bg-light border d-flex p-1 row">
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <input type="hidden" name="pincode_id" id="dd_pincode_id">
+                                <input type="number" name="pincode" id="d_pincode_pincode"
+                                    class="form-control text-capitalize" required="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 pb-1">
+                            <input placeholder="RTO Code" id="d_district_rto_code" name="rto_code" required type="text"
+                                class="form-control">
+                        </div>
+                        <div class="col-lg-3 d-flex align-items-center">
+                            <input type="submit" class="btn btn-primary ml-2" id="updatePincodeBtn" value="Update">
+                            <button type="button" class="close ms-2" onclick="jsHide('update_pincode')">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
                     </div>
                 </form>
                 <form action="" method="post" id="update_city">
-                <div class="row">
+                    <div class="row">
                         <div class="col-6 form-group">
                             <label>State</label>
                             <select name="state_id" required id="selectUpdateStateID" class="form-control">
@@ -135,7 +155,7 @@
 $(function() {
     citylist();
     stateList();
-
+    $("#formNewPincode").hide();
     $(document).on("click", "#updatePincodeBtn", function(e) {
         if ($("#update_pincode").valid()) {
             e.preventDefault();

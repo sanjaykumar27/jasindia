@@ -25,3 +25,10 @@ function saveAjax(controller_url, modal = '', form_data) {
         }
     });
 }
+
+// show any element
+function jsShow(id){$('#'+id).show();}
+
+// hide any element
+function jsHide(id){$('#'+id).hide();}
+

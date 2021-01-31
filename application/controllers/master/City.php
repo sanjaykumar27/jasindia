@@ -101,15 +101,19 @@ class City extends CI_Controller {
             //echo '<pre>';print_r($records);die;
             if (!empty($records))
             {	
-				$html_newpincode = '<div class="align-items-center bg-light border-bottom d-flex pt-2">
-							<div class="col-8 form-group">
-								<label>New Pincode</label>
+				$html_newpincode = '<div class="align-items-center bg-light border d-flex p-1 row">
+							<div class="col-lg-6 form-group">
 								<input type="hidden" id="new_city_id" name="city_id" value="' . $records[0]['city_id'] . '">
 								<input type="number" id="new_pincode" name="pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">
-							</div>
-							<div class="col mt-3">
-								<label>&nbsp;</label>
-								<input type="submit" class="btn btn-primary btn-sm" id="newpincode_Btn" value="Add">
+                            </div>
+                            <div class="col-lg-3 pb-1">
+                                <input placeholder="RTO Code" name="rto_code" required type="text" class="form-control">
+                            </div>
+							<div class="col-lg-3">
+                                <input type="submit" class="btn btn-primary btn-sm" id="newpincode_Btn" value="Add">
+                                <button type="button" class="close ms-2" onclick="jsHide(\'formNewPincode\');jsShow(\'add_new_pincode\')">
+                                    <i class="fa fa-times"></i>
+                                </button>
 							</div>
                         </div>';
                 $state_id = $records[0]['state_id'];

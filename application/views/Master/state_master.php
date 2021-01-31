@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading ">
                 State Master
-                <button type="button" class="btn px-2 btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewState">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewState">
                     <i class="fa fa-plus"></i>
                 </button>
             </span>
@@ -29,6 +29,7 @@
         </div>
     </div>
 </div>
+
     <div class="modal fade" id="ModalNewState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -36,7 +37,11 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         New State
                     </h5>
-                   
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="create_state">
@@ -65,7 +70,6 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         New State
                     </h5>
-                   
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="update_state">
@@ -85,33 +89,63 @@
     </div>
 
     <div class="modal fade" id="ModalNewDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header ">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Districts List (<span id="dd-state-name" class="font-weight-bold"></span>)
                     </h5>
-                   
                 </div>
                 <div class="modal-body pt-3" >
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-sm btn-info float-end mb-1 px-2 py-1" id="add_new_district"  onclick="jsShow('create_district');jsHide('add_new_district')">
+                                Add District
+                            </button>
+                        </div>
+                    </div>
                     <form action="" method="post" id="create_district">
-                        <div class="form-group d-flex bg-light border d-flex form-group p-2">
-                            <input type="hidden" name="state_id" id="d_state_id">
-                            <input type="text" name="district_name" id="d_state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
-                            <input type="submit" class="btn btn-primary ml-2" id="saveDistrictBtn" value="Save">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <div class="col-lg-6">
+                                <div class="form-group ">
+                                    <input type="hidden" name="state_id" id="d_state_id">
+                                    <input type="text" name="district_name" id="d_state_district" class="form-control text-capitalize" required="" placeholder="Enter New District" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 pb-1">
+                                <input placeholder="RTO Code" name="rto_code" required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-3 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="saveDistrictBtn" value="Save">
+                                <button type="button" class="close ms-2" onclick="jsHide('create_district');jsShow('add_new_district')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                     </form>
                     <form action="" method="post" id="update_district">
-                        <div class="form-group d-flex bg-light border d-flex form-group p-2">
-							<input type="hidden" name="state_id" id="dd_state_id">
-                            <input type="hidden" name="district_id" id="d_district_id">
-                            <input type="text" name="district_name" id="d_district_district" class="form-control text-capitalize" required="" autocomplete="off">
-                            <input type="submit" class="btn btn-primary ml-2" id="updateDistrictBtn" value="Update">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <div class="col-lg-6">
+                                <div class="form-group ">
+                                    <input type="hidden" name="state_id" id="dd_state_id">
+                                    <input type="hidden" name="district_id" id="d_district_id">
+                                    <input type="text" name="district_name" id="d_district_district" class="form-control text-capitalize" required="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 pb-1">
+                                <input placeholder="RTO Code" id="d_district_rto_code" name="rto_code" required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-3 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updateDistrictBtn" value="Update">
+                                <button type="button" class="close ms-2" onclick="jsHide('update_district')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                     </form>
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
-                            <div id="ajaxDistrictList" style="max-height: 72vh; overflow-y: auto"></div>
+                            <div id="ajaxDistrictList" ></div>
                         </div>
                     </div>
                 </div>            
@@ -119,17 +153,11 @@
         </div>
     </div>
 
-
-
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
-
-    $(window).on('load', function () {
-        $('body').removeClass('m-page--loading');
-    });
-
     $(function () {
+        $("#create_district").hide();
         var page_url = '';
         $("#addRow").click(function () {
             var html = '';
@@ -182,13 +210,14 @@
                 }
             });
         });
-
+        
         $(document).on("click", "#m_editdistrictbutton", function (e) {
             e.preventDefault();
             $("#update_district").show();
 			$("#dd_state_id").val($("#d_state_id").val());
             $("#d_district_id").val($(this).attr("value"));
             $("#d_district_district").val($(this).attr("dd-district-name"));
+            $("#d_district_rto_code").val($(this).attr("dd-district-rtocode"));
         });
 
         $(document).on("click", "#updateBtn", function (e) {
@@ -236,13 +265,15 @@
                 e.preventDefault();
                 var edit_district_id = $("#d_district_id").val();
                 var edit_district_name = $("#d_district_district").val();
+                var edit_rto_code = $("#d_district_rto_code").val();
                 $.ajax({
                     url: "<?php echo base_url(); ?>district/update",
                     type: 'POST',
                     dataType: "json",
                     data: {
                         district_id: edit_district_id,
-                        district_name: edit_district_name
+                        district_name: edit_district_name,
+                        rto_code: edit_rto_code
                     },
                     success: function (data) {
 						
