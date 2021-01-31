@@ -3830,11 +3830,15 @@ button.list-group-item-dark.active {
 }
 
 .close {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #8c949d;
-  text-shadow: none;
-  transition: all 250ms cubic-bezier(.27, .01, .38, 1.06)
+  padding: 3px 9px;
+  border-radius: 1.25rem;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fffcfc;
+  border-color: #1360b3;
+  background-color: #919498;
+  box-shadow: none !important;
+  border: 1px solid #53595f;
 }
 
 .close:focus,

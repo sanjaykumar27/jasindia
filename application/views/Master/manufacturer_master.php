@@ -32,8 +32,8 @@
 <div class="modal fade" id="ModalNewCompany" nocloseonclick="true"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-secondary">
-                <h5 class="modal-title text-white" id="exampleModalLabel">
+            <div class="modal-header ">
+                <h5 class="modal-title" id="exampleModalLabel">
                     New Manufacturer
                 </h5>
             </div>
@@ -77,8 +77,8 @@
 <div class="modal fade" id="ModalUpdateCompany" nocloseonclick="true"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-secondary">
-                <h5 class="modal-title text-white" id="exampleModalLabel">
+            <div class="modal-header ">
+                <h5 class="modal-title" id="exampleModalLabel">
                     Update Manufacturer
                 </h5>
 
@@ -202,7 +202,7 @@
                     } else
                     {
                         $('#ModalUpdateCompany').unblock();
-                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary "});
+                        swal.fire({title: "Error", text: data.response, confirmButtonClass: "btn btn-primary "});
                     }
                 }
             });

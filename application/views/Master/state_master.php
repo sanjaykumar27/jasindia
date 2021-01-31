@@ -32,8 +32,8 @@
     <div class="modal fade" id="ModalNewState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-secondary">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalLabel">
                         New State
                     </h5>
                    
@@ -61,8 +61,8 @@
     <div class="modal fade" id="ModalUpdateState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-secondary">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalLabel">
                         New State
                     </h5>
                    
@@ -87,8 +87,8 @@
     <div class="modal fade" id="ModalNewDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-secondary">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalLabel">
                         Districts List (<span id="dd-state-name" class="font-weight-bold"></span>)
                     </h5>
                    

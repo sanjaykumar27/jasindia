@@ -217,7 +217,7 @@
                     if (data.code == 1)
                     {
                         $('#ModalUpdateEngine').modal('hide');
-                        swal({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
+                        swal.fire({title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"}).then(function () {
                             var page_url = '<?php echo base_url() ?>master/engine/getEngine/' + ($("#active-page").text() - 1) * 10;
 							if($("#active-page").text())
 							{
@@ -237,7 +237,7 @@
                         });
                     } else
                     {
-                        swal({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
+                        swal.fire({title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide"});
                     }
                 }
             });

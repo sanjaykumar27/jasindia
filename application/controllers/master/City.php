@@ -111,33 +111,22 @@ class City extends CI_Controller {
 								<label>&nbsp;</label>
 								<input type="submit" class="btn btn-primary btn-sm" id="newpincode_Btn" value="Add">
 							</div>
-						</div>';
-					
-                $html .= '<div class="row"><div class="col-6 form-group">
-                <label>State</label>
-                <select name="state_id" required class="form-control" value="'.$records[0]['state_id'].'">';
-                    foreach($states as $value)
-                    {
-                        
-                        if($value->state_id == $records[0]['state_id']) { 
-                            $html .= '<option selected value="'.$value->state_id.'">'.$value->state_name.'</option>'; 
-                        }
-                        else{
-                            $html .= '<option value="'.$value->state_id.'">'.$value->state_name.'</option>';
-                        }
-                    }
-                $html .= '</select>
-            </div><div class="col form-group"><label>City Name</label>'
-                        . '<input type="hidden" id="c_district_id" name="district_id" value="' . $records[0]['district_id'] . '"><input type="hidden" id="c_city_id" name="city_id" value="' . $records[0]['city_id'] . '">'
+                        </div>';
+                $state_id = $records[0]['state_id'];
+                $districts = $this->State_model->listAllDistricts($state_id);
+                $district_id = $records[0]['district_id'];
+
+                $html .='<div class="row"><div class="col form-group"><label>City Name</label>'
+                        . '<input type="hidden" id="c_city_id" name="city_id" value="' . $records[0]['city_id'] . '">'
                         . '<input type="text" id="c_city_name" name="city_name" value="' . $records[0]['city_name'] . '" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">'
                         . '</div></div>';
                 foreach ($records as $value)
                 {
-                    $html .= '<div class="row" id="inputFormRow"><div class="col-8 form-group"><label>Pincode</label>';
+                    $html .= '<div class="d-flex align-items-center " id="inputFormRow"><div class="col-8 form-group me-3"><label>Pincode</label>';
                     $html .= '<input type="hidden"  name="pincode_id[]" value="' . $value['pincode_id'] . '"><input type="number" id="c_pincode" name="pincode[]" readonly value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
                     $html .= '</div>';
-                    $html .= '<div class="align-items-center d-flex mt-3">';
-					$html .= '<button id="m_editpincodebutton" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-primary m-btn m-btn--icon m-btn--icon-only mr-2"><i class="fa fa-pencil-alt"></i></button>';
+                    $html .= '<div class="align-items-center d-flex mt-3 pt-3">';
+					$html .= '<button id="m_editpincodebutton" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-primary  me-2"><i class="fa fa-pencil-alt"></i></button>';
 					if($pcount > 1) {
 						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only"><i class="fa fa-trash"></i></button>';
 					}
@@ -150,7 +139,7 @@ class City extends CI_Controller {
                     ';
             }
 
-            $data = array('NP' => $html_newpincode, 'UP' => $html);
+            $data = array('NP' => $html_newpincode, 'UP' => $html, 'state_id' => $state_id, 'district_id' => $district_id);
 			echo json_encode($data);
         } else
         {
@@ -179,6 +168,7 @@ class City extends CI_Controller {
             {
                 $param = array(
                     'city_name' => ucwords(trim($city)),
+                    'district_id' => $district_id,
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );

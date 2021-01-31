@@ -11,16 +11,16 @@ function saveAjax(controller_url, modal = '', form_data) {
             if (data.code == 1) {
                 if (modal) {
                     $('#' + modal).modal('hide');
-                    $('#' + modal + ' .modal-content').unblock();
+                    // $('#' + modal + ' .modal-content').unblock();
                 }
                 $('#preloader').css("display", "none");
-                swal({ title: "Success", text: data.response, type: "success", confirmButtonClass: "btn btn-primary m-btn m-btn--wide" }).then(function () {
+                swal.fire({ title: "Success", text: data.response, confirmButtonClass: "btn btn-primary m-btn m-btn--wide" }).then(function () {
                 });
             } else {
                 if (modal) {
-                    $('#' + modal + ' .modal-content').unblock();
+                    // $('#' + modal + ' .modal-content').unblock();
                 }
-                swal({ title: "Error", text: data.response, type: "error", confirmButtonClass: "btn btn-primary m-btn m-btn--wide" });
+                swal.fire({ title: "Error", text: data.response, confirmButtonClass: "btn btn-primary m-btn m-btn--wide" });
             }
         }
     });
