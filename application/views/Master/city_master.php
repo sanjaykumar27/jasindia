@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading ">
                 City Master
-                <button type="button" class="btn px-2 btn-sm btn-outline-primary" data-bs-toggle="modal"
+                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
                     data-bs-target="#ModalNewCity">
                     <i class="fa fa-plus"></i>
                 </button>
@@ -161,13 +161,15 @@ $(function() {
             e.preventDefault();
             var edit_pincode_id = $("#dd_pincode_id").val();
             var edit_pincode = $("#d_pincode_pincode").val();
+            var edit_rtocode = $("#d_district_rto_code").val();
             $.ajax({
                 url: "<?php echo base_url(); ?>city/pincodeUpdate",
                 type: 'POST',
                 dataType: "json",
                 data: {
                     pincode_id: edit_pincode_id,
-                    pincode: edit_pincode
+                    pincode: edit_pincode,
+                    rto_code: edit_rtocode
                 },
                 success: function(data) {
 
@@ -195,7 +197,7 @@ $(function() {
                                     }
                                 });
                             }, 500);
-                            $("#update_district").hide();
+                            $("#update_pincode").hide();
                             e.preventDefault();
                         });
                     } else {
@@ -215,6 +217,7 @@ $(function() {
         $("#update_pincode").show();
         $("#dd_pincode_id").val($(this).attr("value"));
         $("#d_pincode_pincode").val($(this).attr("dd-pincode-name"));
+        $("#d_district_rto_code").val($(this).attr("dd-rto-code"));
     });
 
     $('#update_city').submit(function(e) {
@@ -248,6 +251,8 @@ $(function() {
                     data = JSON.parse(response);
                     $("#newpincode-form").html(data.NP);
                     $("#updateform").html(data.UP);
+                    $("#formNewPincode").hide();
+                    $("#add_new_pincode").show();
                 }
             });
         }, 1000);

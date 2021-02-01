@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 pb-1">
-                                <input placeholder="RTO Code" name="rto_code" required type="text" class="form-control">
+                                <input placeholder="RTO Code" name="rto_code"  required type="text" class="form-control">
                             </div>
                             <div class="col-lg-3 d-flex align-items-center">
                                 <input type="submit" class="btn btn-primary ms-2 float-end" id="saveDistrictBtn" value="Save">

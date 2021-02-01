@@ -101,13 +101,18 @@ class City extends CI_Controller {
             //echo '<pre>';print_r($records);die;
             if (!empty($records))
             {	
+                $state_id = $records[0]['state_id'];
+                $districts = $this->State_model->listAllDistricts($state_id);
+                $district_id = $records[0]['district_id'];
+                $drto_code = $records[0]['drto_code'];
+
 				$html_newpincode = '<div class="align-items-center bg-light border d-flex p-1 row">
 							<div class="col-lg-6 form-group">
 								<input type="hidden" id="new_city_id" name="city_id" value="' . $records[0]['city_id'] . '">
 								<input type="number" id="new_pincode" name="pincode" class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">
                             </div>
                             <div class="col-lg-3 pb-1">
-                                <input placeholder="RTO Code" name="rto_code" required type="text" class="form-control">
+                                <input placeholder="RTO Code" name="rto_code" value="'.$drto_code.'" required type="text" class="form-control">
                             </div>
 							<div class="col-lg-3">
                                 <input type="submit" class="btn btn-primary btn-sm" id="newpincode_Btn" value="Add">
@@ -116,23 +121,25 @@ class City extends CI_Controller {
                                 </button>
 							</div>
                         </div>';
-                $state_id = $records[0]['state_id'];
-                $districts = $this->State_model->listAllDistricts($state_id);
-                $district_id = $records[0]['district_id'];
-
+                
                 $html .='<div class="row"><div class="col form-group"><label>City Name</label>'
                         . '<input type="hidden" id="c_city_id" name="city_id" value="' . $records[0]['city_id'] . '">'
                         . '<input type="text" id="c_city_name" name="city_name" value="' . $records[0]['city_name'] . '" class="form-control text-capitalize" required="" placeholder="Enter City" autocomplete="off">'
                         . '</div></div>';
                 foreach ($records as $value)
                 {
-                    $html .= '<div class="d-flex align-items-center " id="inputFormRow"><div class="col-8 form-group me-3"><label>Pincode</label>';
-                    $html .= '<input type="hidden"  name="pincode_id[]" value="' . $value['pincode_id'] . '"><input type="number" id="c_pincode" name="pincode[]" readonly value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">';
-                    $html .= '</div>';
-                    $html .= '<div class="align-items-center d-flex mt-3 pt-3">';
-					$html .= '<button id="m_editpincodebutton" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-primary  me-2"><i class="fa fa-pencil-alt"></i></button>';
+                    $html .= '<div class="align-items-center d-flex row" id="inputFormRow">
+                                <div class="col-lg-6 form-group">
+                                <input type="hidden"  name="pincode_id[]" value="' . $value['pincode_id'] . '">
+                                <input type="number" id="c_pincode" name="pincode[]" readonly value="' . $value['pincode'] . '"  class="form-control text-capitalize" required="" placeholder="Enter Pincode" autocomplete="off">
+                            </div>
+                            <div class="col-lg-3 pb-1">
+                                <input placeholder="RTO Code" value="'.($value['rto_code'] != '' ? $value['rto_code'] : $drto_code).'" readonly id="d_district_rto_code" name="rto_code" required type="text" class="form-control">
+                            </div>
+                             <div class="col-lg-3"> 
+                                <button id="m_editpincodebutton" dd-rto-code="'.($value['rto_code'] != '' ? $value['rto_code'] : $drto_code).'" dd-pincode-name="' . $value['pincode'] . '" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-primary  me-2"><i class="fa fa-pencil-alt"></i></button>';
 					if($pcount > 1) {
-						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only"><i class="fa fa-trash"></i></button>';
+						$html .= '<button id="removePincode" value="' . $value['pincode_id'] . '" type="button" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>';
 					}
                     $html .= '</div></div>';
                 }
@@ -143,7 +150,7 @@ class City extends CI_Controller {
                     ';
             }
 
-            $data = array('NP' => $html_newpincode, 'UP' => $html, 'state_id' => $state_id, 'district_id' => $district_id);
+            $data = array('NP' => $html_newpincode, 'UP' => $html, 'state_id' => $state_id, 'district_id' => $district_id,'drto_code'=>$drto_code);
 			echo json_encode($data);
         } else
         {
@@ -221,14 +228,14 @@ class City extends CI_Controller {
             $data['records'] = $this->City_model->selectAll($limit, $offset, $search, $count = false);
             $pagelinks = $this->pagination->create_links();
             $total = $config['total_rows'];
-            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped "><thead><tr><th>#</th><th>State</th><th>District</th><th>City</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
+            $html = '<div class="table-responsive"><table class="table  table-striped "><thead><tr><th>#</th><th>State</th><th>District</th><th>City</th><th>Pincodes</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = $offset + 1;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>' . $value->district_name . '</td><td>' . $value->city_name . '</td><td>' . $value->pincode . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->city_id . '"  data-bs-target="#ModalUpdateCity" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->state_name . '</td><td>' . $value->district_name . '</td><td>' . $value->city_name . '</td><td class="fw-bold">' . str_replace(',',', ',$value->pincode) . '</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="' . $value->city_id . '"  data-bs-target="#ModalUpdateCity" class="btn btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }
@@ -282,7 +289,8 @@ class City extends CI_Controller {
         {
 			$userid = $this->session->userdata('sess_user_id');
 			$pincode = $this->input->POST('pincode');
-			$city_id = $this->input->POST('city_id');
+            $city_id = $this->input->POST('city_id');
+            $rto_code = $this->input->POST('rto_code');
 			$pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), '');
             if ($pincode_exist)
             {
@@ -292,6 +300,7 @@ class City extends CI_Controller {
 			{
 				$param = array(
                     'pincode' => ucwords(trim($pincode)),
+                    'rto_code' => trim($rto_code),
                     'created_by' => $userid,
                     'city_id' => $city_id
                 );
@@ -328,6 +337,7 @@ class City extends CI_Controller {
             $userid = $this->session->userdata('sess_user_id');
             $pincode = $this->input->POST('pincode');
             $pincode_id = $this->input->POST('pincode_id');
+            $rto_code = $this->input->POST('rto_code');
             $pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), $pincode_id);
             if ($pincode_exist)
             {
@@ -336,6 +346,7 @@ class City extends CI_Controller {
             {
                 $param = array(
                     'pincode' => ucwords(trim($pincode)),
+                    'rto_code' => trim($rto_code),
                     'updated_by' => $userid
                 );
                 $cid = $this->City_model->updatePincode($param, $pincode_id);

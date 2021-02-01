@@ -3176,13 +3176,15 @@ i.material-icons {
 }
 
 .page-link {
-  padding: .5rem .75rem;
-  line-height: 1.25;
-  color: #007bff;
-  background-color: #fff;
-  border: none;
-  margin: 0;
-  transition: all 250ms cubic-bezier(.27, .01, .38, 1.06)
+  padding: 10px 14px;
+    line-height: 1.25;
+    font-size: 16px;
+    font-weight: 600;
+    color: #007bff;
+    background-color: #fff;
+    border: none;
+    margin: 0;
+    transition: all 250ms cubic-bezier(.27, .01, .38, 1.06);
 }
 
 .page-link:focus,

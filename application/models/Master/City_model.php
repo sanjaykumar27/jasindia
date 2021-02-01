@@ -9,7 +9,7 @@ class City_model extends CI_Model {
 
     function GetPincodes($city_id)
     {
-        $this->db->select('m_pincodes.pincode_id,m_cities.city_name,m_districts.state_id,m_pincodes.city_id,m_pincodes.pincode,m_districts.district_id');
+        $this->db->select('m_pincodes.pincode_id,m_pincodes.rto_code,m_districts.rto_code as drto_code,m_cities.city_name,m_districts.state_id,m_pincodes.city_id,m_pincodes.pincode,m_districts.district_id');
         $this->db->from('m_cities');
         $this->db->join('m_pincodes', 'm_pincodes.city_id = m_cities.city_id', 'left');
         $this->db->join('m_districts', 'm_districts.district_id = m_cities.district_id', 'left');
