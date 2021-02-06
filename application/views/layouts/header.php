@@ -62,6 +62,9 @@
                     <li><a href="<?php echo base_url() ?>master/body_type" class="dropdown-item">
                         Body Type Master
                     </a></li>
+                    <li><a href="<?php echo base_url() ?>master/insurer_description" class="dropdown-item">
+                        Insurer Description
+                    </a></li>
                       </ul>
                     </li>
                     <li class="nav-item dropdown">

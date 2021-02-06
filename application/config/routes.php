@@ -122,3 +122,10 @@ $route['body_type/create'] = 'master/BodyType/CreateBodyType';
 $route['body_type/update'] = 'master/BodyType/update';
 $route['body_type/edit'] = 'master/BodyType/edit';
 $route['master/body_type'] = 'master/BodyType/index';
+
+//Insurer Description
+$route['insurer_description/getInsurerDescription'] = 'master/InsurerDescription/getInsurerDescription';
+$route['insurer_description/create'] = 'master/InsurerDescription/CreateInsurerDescription';
+$route['insurer_description/update'] = 'master/InsurerDescription/update';
+$route['insurer_description/edit'] = 'master/InsurerDescription/edit';
+$route['master/insurer_description'] = 'master/InsurerDescription/index';

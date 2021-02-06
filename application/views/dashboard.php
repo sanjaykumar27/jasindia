@@ -34,6 +34,9 @@
                     <a href="<?php echo base_url() ?>master/body_type" class="btn  btn-primary btn-sm mt-2">
                         Body Type Master
                     </a>
+                    <a href="<?php echo base_url() ?>master/insurer_description" class="btn  btn-primary btn-sm mt-2">
+                        Insurer Description
+                    </a>
                 </div>
             </div>
         </div>
