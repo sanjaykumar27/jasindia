@@ -98,7 +98,8 @@ class InsurerDescription extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->insurer_name . '</td><td>' . $value->registored_address . '</td><td>' . $value->website . '</td><td>' . $value->email . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->description_id.'"  data-bs-target="#ModalUpdateInsurerDescription" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->description_id.'"  data-bs-target="#ModalUpdateInsurerDescription" class="px-2 btn btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            <button dd-insurer-name="'.$value->insurer_name.'" value="' . $value->description_id . '" id="add_branch" class="btn btn-outline-primary btn-sm px-2" data-bs-target="#ModalNewBranch" data-bs-toggle="modal"  title="Show list of branches" data-original-title="Show list of branches"><i class="far fa-list-alt"></i> Branches</button></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Insurer Description: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
@@ -188,4 +189,129 @@ class InsurerDescription extends CI_Controller {
         }
     }
 
+    public function getBranch()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $insurer_id = $this->input->POST('insurer_id');
+            $data['records'] = $this->InsurerDescription_model->selectAllBranches($insurer_id);
+            
+            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Branch Code</th><th>City</th><th>email</th><th>Address</th><th>Action</th></tr></thead><tbody>';
+            if (!empty($data['records']))
+            {
+                $i = 1;
+                foreach ($data['records'] as $value)
+                {
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->branch_code . '</td><td>'.$value->city_name.'</td><td>'.$value->email.'</td><td>'.$value->address.'</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editbranchbutton" dd-branch-rtocode="'.$value->email.'" dd-branch-name="'.$value->branch_code.'"  value="' . $value->branch_id . '" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
+                            . '</td>';
+                    $i++;
+                }
+            } else
+            {
+                $html .= '<tr><td colspan="3" class="text-center">No Branch Found!</td></tr></tbody></table>';
+            }
+            $html .= '</tbody></table>';
+            echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    public function createBranch()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $userid = $this->session->userdata('sess_user_id');
+            $branch = $this->input->POST('branch_code');
+            $city_id = $this->input->POST('city_id');
+            $insurer_id = $this->input->POST('insurer_id');
+            $email = $this->input->POST('email');
+            $address = $this->input->POST('address');
+            
+            $param = array(
+                'city_id' => $city_id,
+                'insurer_id' => $insurer_id,
+                'address' => ucwords(trim($address)),
+                'email' => ucwords(trim($email)),
+                'branch_code' => ucwords(trim($branch)),
+                'created_by' => $userid,
+            );
+
+            $cid = $this->Common_model->CommonInsert('m_insurer_branch',$param);
+            if($cid)
+            {
+                $data = array('code' => 1, 'response' => 'Branch Created succesfully!');
+            }
+            else
+            {
+                $data = array('code' => 0, 'response' => 'Something wrong happened !');
+            }
+            echo json_encode($data);
+        } 
+        else
+        {
+            redirect('/Auth');
+        }
+    }
+    
+    public function updateBranch()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $userid = $this->session->userdata('sess_user_id');
+            $branch = $this->input->POST('branch_code');
+            $branch_id = $this->input->POST('branch_id');
+            $description = $this->input->POST('description');
+            $email = $this->input->POST('email');
+            $is_exist = $this->InsurerDescription_model->checkBranchExists(trim($branch), $branch_id, $description);
+            if ($is_exist)
+            {
+                $data = array('code' => 3, 'response' => 'This branch already exist!');
+            } else
+            {
+                $param = array(
+                    'branch_code' => ucwords(trim($branch)),
+                    'email' => $email,
+                    'updated_by' => $userid,
+                    'updated_on' => date('Y-m-d H:i:s')
+                );
+                $cid = $this->InsurerDescription_model->updateBranch($param, $branch_id);
+                if ($cid != "")
+                {
+                    $data = array('code' => 1, 'response' => 'Branch Updated succesfully!');
+                } else
+                {
+                    $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
+                }
+            }
+            echo json_encode($data);
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    public function allCities()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $data = $this->InsurerDescription_model->listAllCities();
+            $html = '<option value="">Select City</option>';
+            if (!empty($data))
+            {
+                $i = 1;
+                foreach ($data as $value)
+                {
+                    $html .= '<option value='.$value->city_id.'>'.$value->city_name.'</option>';
+                    $i++;
+                }
+            } 
+            echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
 }

@@ -129,3 +129,9 @@ $route['insurer_description/create'] = 'master/InsurerDescription/CreateInsurerD
 $route['insurer_description/update'] = 'master/InsurerDescription/update';
 $route['insurer_description/edit'] = 'master/InsurerDescription/edit';
 $route['master/insurer_description'] = 'master/InsurerDescription/index';
+
+// Insurer Branches
+$route['insurer/getBranch'] = 'master/InsurerDescription/getBranch';
+$route['branch/create'] = 'master/InsurerDescription/CreateBranch';
+$route['branch/update'] = 'master/InsurerDescription/updateBranch';
+$route['insurer/allCities'] = 'master/InsurerDescription/allCities';

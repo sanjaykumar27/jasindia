@@ -30,7 +30,7 @@
 </div>
 
     <div class="modal fade" id="ModalNewInsurerDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
@@ -70,7 +70,7 @@
     </div>
 
     <div class="modal fade" id="ModalUpdateInsurerDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg big-modal" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
@@ -110,12 +110,178 @@
         </div>
     </div>
 
+    <div class="modal fade" id="ModalNewbranch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable big-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Branches (<span id="dd-insurer-name" class="font-weight-bold"></span>)
+                    </h5>
+                </div>
+                <div class="modal-body pt-3">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-sm btn-info float-end mb-1 px-2 py-1" id="add_new_branch"  onclick="jsShow('create_branch');jsHide('add_new_branch')">
+                                Add branch
+                            </button>
+                        </div>
+                    </div>
+                    <form action="" method="post" id="create_branch">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <input type="hidden" name="insurer_id" id="d_insurer_id">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="form-control" name="city_id" id="ajaxCityList" required>
+                                        <option value="" selected disabled>Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" name="branch_code" id="d_insurer_branch" class="form-control text-capitalize" required="" placeholder="Branch Code" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 pb-1">
+                                <input placeholder="Email" name="email"  required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-6 pb-1">
+                                <textarea placeholder="Address" name="address"  required type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="col-lg-2 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="savebranchBtn" value="Save">
+                                <button type="button" class="close ms-2" onclick="jsHide('create_branch');jsShow('add_new_branch')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="" method="post" id="update_branch">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <div class="col-lg-6">
+                                <div class="form-group ">
+                                    <input type="hidden" name="insurer_id" id="dd_insurer_id">
+                                    <input type="hidden" name="branch_id" id="d_branch_id">
+                                    <input type="text" name="branch_name" id="d_branch_branch" class="form-control text-capitalize" required="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 pb-1">
+                                <input placeholder="RTO Code" id="d_branch_rto_code" name="rto_code" required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-3 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updatebranchBtn" value="Update">
+                                <button type="button" class="close ms-2" onclick="jsHide('update_branch')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-flex flex-row mt-3">
+                        <div class="col-12 px-0">
+                            <div id="ajaxbranchList" ></div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+
 
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
     $(function () {
+        $("#create_branch").hide();
+        $("#update_branch").hide();
         insurer_descriptionlist(page_url = false);
+        allCities();
+    });
+
+    function branchList(insurer_id)
+    {
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurer/getbranches",
+            type: "POST",
+            data: {insurer_id: insurer_id},
+            success: function (response) {
+                $("#ajaxbranchList").html(response);
+            }
+        });
+    }
+
+    function allCities()
+    {
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurer/allCities",
+            type: "POST",
+            success: function (response) {
+                $("#ajaxCityList").html(response);
+            }
+        });
+    }
+
+    $('#create_branch').submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            saveAjax('<?php echo base_url(); ?>branch/create', '', formData);
+            $("#create_branch").trigger("reset");
+            $("#create_branch").hide();
+            setTimeout(function(){  
+                getbranches($("#d_insurer_id").val());
+            }, 1000);
+    });
+
+    $(document).on("click", "#add_branch", function (e) {
+        e.preventDefault();
+        var insurer_id = $(this).attr("value");
+        $("#d_insurer_id").val(insurer_id);
+        $("#dd-insurer-name").text($(this).attr("dd-insurer-name"));
+        getbranches(insurer_id);
+    });
+
+    function getbranches(insurer_id)
+    {   
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurer/getBranch",
+            type: "POST",
+            data: {insurer_id: insurer_id},
+            success: function (response) {
+                $("#ajaxbranchList").html(response);
+            }
+        });
+    }
+
+    $(document).on("click", "#updatebranchBtn", function (e) {
+        if ($("#update_branch").valid())
+        {
+            e.preventDefault();
+            var edit_branch_id = $("#d_branch_id").val();
+            var edit_branch_name = $("#d_branch_branch").val();
+            var edit_rto_code = $("#d_branch_rto_code").val();
+            $.ajax({
+                url: "<?php echo base_url(); ?>branch/update",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    branch_id: edit_branch_id,
+                    branch_name: edit_branch_name,
+                    rto_code: edit_rto_code
+                },
+                success: function (data) {
+                    
+                    if (data.code == 1)
+                    {
+                        swal.fire({title: "Success", text: data.response}).then(function () {
+                            branchList($("#d_insurer_id").val());
+                            $("#update_branch").hide();
+                            e.preventDefault();
+                        });
+                    } else
+                    {
+                        swal.fire({title: "Error", text: data.response});
+                    }
+                }
+            });
+        }
     });
 
     $(document).on('click', ".pagination li a", function (event) {

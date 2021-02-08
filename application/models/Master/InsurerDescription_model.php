@@ -81,4 +81,32 @@ class InsurerDescription_model extends CI_Model {
             return $query->row();
         }
     }
+
+    function selectAllBranches($insurer_id)
+    {
+        $this->db->select('m_cities.city_name, m_cities.city_id, m_insurer_branch.insurer_id, m_insurer_branch.branch_code, m_insurer_branch.address, m_insurer_branch.email, m_insurer_branch.branch_id');
+        $this->db->from('m_insurer_branch');
+        $this->db->join('m_cities', 'm_cities.city_id = m_insurer_branch.city_id', 'left');
+        $this->db->where('insurer_id', $insurer_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
+
+    function listAllCities()
+    {
+        $this->db->select('city_id, city_name');
+        $this->db->from('m_cities');
+        $this->db->where('deleted_on', null);
+        $this->db->order_by('m_cities.city_name');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
 }

@@ -81,6 +81,10 @@ tbody, td, tfoot, th, thead, tr {
     line-height: 2.0;
     border-radius: 10px;
 }
+
+.big-modal {
+    max-width: 80%;
+}
 /* @media (min-width: 768px) { ... }
 
 // Large devices (desktops, 992px and up)
