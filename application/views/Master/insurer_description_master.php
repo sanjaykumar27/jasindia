@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading ">
                 Insurer Description Master
-                <button type="button" class="btn px-2 btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewInsurerDescription">
+                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewInsurerDescription">
                     <i class="fa fa-plus"></i>                 </button>
             </span>
         </div>
@@ -121,7 +121,7 @@
                 <div class="modal-body pt-3">
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-sm btn-info float-end mb-1 px-2 py-1" id="add_new_branch"  onclick="jsShow('create_branch');jsHide('add_new_branch')">
+                            <button class="btn btn-sm btn-info float-end mb-1 py-1" id="add_new_branch"  onclick="jsShow('create_branch');jsHide('add_new_branch')">
                                 Add branch
                             </button>
                         </div>

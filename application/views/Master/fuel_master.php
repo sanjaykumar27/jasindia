@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading ">
                 Fuel Master
-                <button type="button" class="btn px-2 btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewFuel">
+                <button type="button" class="btn  btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewFuel">
                     <i class="fa fa-plus"></i>                 </button>
             </span>
         </div>

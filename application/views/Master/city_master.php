@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading ">
                 City Master
-                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                <button type="button" class="btn btn-sm btn-outline-primary " data-bs-toggle="modal"
                     data-bs-target="#ModalNewCity">
                     <i class="fa fa-plus"></i>
                 </button>
@@ -20,7 +20,7 @@
                     placeholder="Search..." />
             </div>
             <div class="col-4 mx-2">
-                <button type="button" id="searchBtn" class="btn btn-outline-primary "><i
+                <button type="button" id="searchBtn" class="btn btn-outline-primary  "><i
                         class="fas fa-search"></i></button>
                 <button type="button" id="resetBtn" class="btn btn-outline-info  "><i
                         class="fas fa-history"></i></button>
@@ -98,7 +98,7 @@
             <div class="modal-body pt-2">
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-sm btn-info float-end mb-1 px-2 py-1" id="add_new_pincode"
+                        <button class="btn btn-sm btn-info float-end mb-1 py-1" id="add_new_pincode"
                             onclick="jsShow('formNewPincode');jsHide('add_new_pincode')">
                             Add Pincode
                         </button>

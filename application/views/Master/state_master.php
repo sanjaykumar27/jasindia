@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading ">
                 State Master
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewState">
+                <button type="button" class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#ModalNewState">
                     <i class="fa fa-plus"></i>
                 </button>
             </span>
@@ -99,7 +99,7 @@
                 <div class="modal-body pt-3" >
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-sm btn-info float-end mb-1 px-2 py-1" id="add_new_district"  onclick="jsShow('create_district');jsHide('add_new_district')">
+                            <button class="btn btn-sm btn-info float-end mb-1  py-1" id="add_new_district"  onclick="jsShow('create_district');jsHide('add_new_district')">
                                 Add District
                             </button>
                         </div>

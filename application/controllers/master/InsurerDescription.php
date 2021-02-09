@@ -98,8 +98,8 @@ class InsurerDescription extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->insurer_name . '</td><td>' . $value->registored_address . '</td><td>' . $value->website . '</td><td>' . $value->email . '</td><td class="text-truncate">'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->description_id.'"  data-bs-target="#ModalUpdateInsurerDescription" class="px-2 btn btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>
-                            <button dd-insurer-name="'.$value->insurer_name.'" value="' . $value->description_id . '" id="add_branch" class="btn btn-outline-primary btn-sm px-2" data-bs-target="#ModalNewBranch" data-bs-toggle="modal"  title="Show list of branches" data-original-title="Show list of branches"><i class="far fa-list-alt"></i> Branches</button></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->description_id.'"  data-bs-target="#ModalUpdateInsurerDescription" class=" btn btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            <button dd-insurer-name="'.$value->insurer_name.'" value="' . $value->description_id . '" id="add_branch" class="btn btn-outline-primary btn-sm " data-bs-target="#ModalNewBranch" data-bs-toggle="modal"  title="Show list of branches" data-original-title="Show list of branches"><i class="far fa-list-alt"></i> Branches</button></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Insurer Description: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
@@ -203,7 +203,7 @@ class InsurerDescription extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->branch_code . '</td><td>'.$value->city_name.'</td><td>'.$value->email.'</td><td>'.$value->address.'</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbranchbutton" dd-branch-rtocode="'.$value->email.'" dd-branch-name="'.$value->branch_code.'"  value="' . $value->branch_id . '" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
+                            . '<a href="javascript:void(0)" id="m_editbranchbutton" dd-branch-rtocode="'.$value->email.'" dd-branch-name="'.$value->branch_code.'"  value="' . $value->branch_id . '" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }

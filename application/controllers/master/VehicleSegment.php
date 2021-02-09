@@ -92,7 +92,7 @@ class VehicleSegment extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->segment_name . '</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->segment_id.'"  data-bs-target="#ModalUpdateVehicleSegment" class="btn px-2 btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a></td>';
+                            . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->segment_id.'"  data-bs-target="#ModalUpdateVehicleSegment" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a></td>';
                 $i++; }
             }
             $html .= '</tbody></table></div><h5>Total Vehicle Segments: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
