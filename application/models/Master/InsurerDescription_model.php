@@ -109,4 +109,25 @@ class InsurerDescription_model extends CI_Model {
         }
         return array();
     }
+
+    function getBranchDetails($branch_id)
+    {
+        $this->db->select('*');
+        $this->db->from('m_insurer_branch');
+        $this->db->where('branch_id', $branch_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
+
+    function updateBranch($param, $branch_id)
+    {
+        $this->db->where('branch_id', $branch_id);
+        $this->db->update('m_insurer_branch', $param);
+        $affected_rows = $this->db->affected_rows();
+        return $affected_rows;
+    }
 }

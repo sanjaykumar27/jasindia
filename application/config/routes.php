@@ -134,4 +134,5 @@ $route['master/insurer_description'] = 'master/InsurerDescription/index';
 $route['insurer/getBranch'] = 'master/InsurerDescription/getBranch';
 $route['branch/create'] = 'master/InsurerDescription/CreateBranch';
 $route['branch/update'] = 'master/InsurerDescription/updateBranch';
+$route['insurer/getBranchDetails'] = 'master/InsurerDescription/getBranchDetails';
 $route['insurer/allCities'] = 'master/InsurerDescription/allCities';

@@ -157,15 +157,25 @@
                     </form>
                     <form action="" method="post" id="update_branch">
                         <div class="align-items-center bg-light border d-flex p-1 row">
-                            <div class="col-lg-6">
-                                <div class="form-group ">
-                                    <input type="hidden" name="insurer_id" id="dd_insurer_id">
-                                    <input type="hidden" name="branch_id" id="d_branch_id">
-                                    <input type="text" name="branch_name" id="d_branch_branch" class="form-control text-capitalize" required="" autocomplete="off">
+                            <input type="hidden" name="insurer_id" id="dd_insurer_id">
+                            <input type="hidden" name="branch_id" id="d_branch_id">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="form-control" name="city_id" id="ajaxCityListUpdate" required>
+                                        <option value="" selected disabled>Select City</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-3 pb-1">
-                                <input placeholder="RTO Code" id="d_branch_rto_code" name="rto_code" required type="text" class="form-control">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" name="branch_code" id="d_insurer_branch_code" class="form-control text-capitalize" required="" placeholder="Branch Code" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 pb-1">
+                                <input placeholder="Email" name="email" id="d_insurer_email"  required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-6 pb-1">
+                                <textarea placeholder="Address" name="address" id="d_insurer_address"  required type="text" class="form-control"></textarea>
                             </div>
                             <div class="col-lg-3 d-flex align-items-center">
                                 <input type="submit" class="btn btn-primary ms-2 float-end" id="updatebranchBtn" value="Update">
@@ -215,6 +225,7 @@
             type: "POST",
             success: function (response) {
                 $("#ajaxCityList").html(response);
+                $("#ajaxCityListUpdate").html(response);
             }
         });
     }
@@ -227,7 +238,7 @@
             $("#create_branch").hide();
             setTimeout(function(){  
                 getbranches($("#d_insurer_id").val());
-            }, 1000);
+            }, 500);
     });
 
     $(document).on("click", "#add_branch", function (e) {
@@ -250,28 +261,50 @@
         });
     }
 
+    $(document).on("click", "#m_editbranchbutton", function (e) {
+        e.preventDefault();
+        $("#dd_insurer_id").val($("#d_insurer_id").val());
+       
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurer/getBranchDetails",
+            type: "POST",
+            data: {branch_id: $(this).attr("value")},
+            success: function (response) {
+                response  = JSON.parse(response)[0];
+                     $("#d_branch_id").val(response.branch_id);
+                    $("#d_insurer_branch_code").val(response.branch_code);
+                    $("#d_insurer_email").val(response.email);
+                    $("#d_insurer_address").val(response.address);
+                    $("#ajaxCityListUpdate").val(response.city_id);
+            }
+        });
+        $("#update_branch").show();
+    });
+
     $(document).on("click", "#updatebranchBtn", function (e) {
         if ($("#update_branch").valid())
-        {
+        {   
+            var insurer_id = $("#d_insurer_id").val();
             e.preventDefault();
-            var edit_branch_id = $("#d_branch_id").val();
-            var edit_branch_name = $("#d_branch_branch").val();
-            var edit_rto_code = $("#d_branch_rto_code").val();
             $.ajax({
                 url: "<?php echo base_url(); ?>branch/update",
                 type: 'POST',
                 dataType: "json",
                 data: {
-                    branch_id: edit_branch_id,
-                    branch_name: edit_branch_name,
-                    rto_code: edit_rto_code
+                    branch_id: $("#d_branch_id").val(),
+                    branch_code: $("#d_insurer_branch_code").val(),
+                    city_id: $("#ajaxCityListUpdate").val(),
+                    email: $("#d_insurer_email").val(),
+                    address: $("#d_insurer_address").val(),
                 },
                 success: function (data) {
                     
                     if (data.code == 1)
                     {
                         swal.fire({title: "Success", text: data.response}).then(function () {
-                            branchList($("#d_insurer_id").val());
+                            setTimeout(function(){  
+                                getbranches(insurer_id);
+                            }, 500);
                             $("#update_branch").hide();
                             e.preventDefault();
                         });
@@ -349,7 +382,7 @@
             
             insurer_descriptionlist(page_url);
             e.preventDefault();
-        }, 1000);
+        }, 500);
     });
 
     $(document).on("click", "#m_editbutton", function (e) {

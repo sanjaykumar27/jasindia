@@ -196,7 +196,7 @@ class InsurerDescription extends CI_Controller {
             $insurer_id = $this->input->POST('insurer_id');
             $data['records'] = $this->InsurerDescription_model->selectAllBranches($insurer_id);
             
-            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Branch Code</th><th>City</th><th>email</th><th>Address</th><th>Action</th></tr></thead><tbody>';
+            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Branch Code</th><th>City</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = 1;
@@ -209,7 +209,7 @@ class InsurerDescription extends CI_Controller {
                 }
             } else
             {
-                $html .= '<tr><td colspan="3" class="text-center">No Branch Found!</td></tr></tbody></table>';
+                $html .= '<tr><td colspan="6" class="text-center">No Branch Found!</td></tr></tbody></table>';
             }
             $html .= '</tbody></table>';
             echo $html;
@@ -261,30 +261,27 @@ class InsurerDescription extends CI_Controller {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
             $userid = $this->session->userdata('sess_user_id');
-            $branch = $this->input->POST('branch_code');
+            $branch_code = $this->input->POST('branch_code');
             $branch_id = $this->input->POST('branch_id');
-            $description = $this->input->POST('description');
+            $city_id = $this->input->POST('city_id');
             $email = $this->input->POST('email');
-            $is_exist = $this->InsurerDescription_model->checkBranchExists(trim($branch), $branch_id, $description);
-            if ($is_exist)
+            $address = $this->input->POST('address');
+            
+            $param = array(
+                'branch_code' => ucwords(trim($branch_code)),
+                'email' => $email,
+                'address' => $address,
+                'city_id' => $city_id,
+                'updated_by' => $userid,
+                'updated_on' => date('Y-m-d H:i:s')
+            );
+            $cid = $this->InsurerDescription_model->updateBranch($param, $branch_id);
+            if ($cid != "")
             {
-                $data = array('code' => 3, 'response' => 'This branch already exist!');
+                $data = array('code' => 1, 'response' => 'Branch Updated succesfully!');
             } else
             {
-                $param = array(
-                    'branch_code' => ucwords(trim($branch)),
-                    'email' => $email,
-                    'updated_by' => $userid,
-                    'updated_on' => date('Y-m-d H:i:s')
-                );
-                $cid = $this->InsurerDescription_model->updateBranch($param, $branch_id);
-                if ($cid != "")
-                {
-                    $data = array('code' => 1, 'response' => 'Branch Updated succesfully!');
-                } else
-                {
-                    $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
-                }
+                $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
             }
             echo json_encode($data);
         } else
@@ -309,6 +306,20 @@ class InsurerDescription extends CI_Controller {
                 }
             } 
             echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    public function getBranchDetails()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $branch_id = $this->input->POST('branch_id');
+            $record = $this->InsurerDescription_model->getBranchDetails($branch_id);
+            $data = array($record[0]);
+            echo json_encode($data);
         } else
         {
             redirect('/Auth');

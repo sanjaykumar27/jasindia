@@ -356,6 +356,7 @@
         {
             $.ajax({
                 url: "<?php echo base_url(); ?>state/getDistricts",
+                type: "POST",
                 data: {state_id: state_id},
                 success: function (response) {
                     $("#ajaxDistrictList").html(response);
