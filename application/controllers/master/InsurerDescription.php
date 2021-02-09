@@ -97,7 +97,7 @@ class InsurerDescription extends CI_Controller {
             {
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->insurer_name . '</td><td>' . $value->registored_address . '</td><td>' . $value->website . '</td><td>' . $value->email . '</td><td>'
+                    $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->insurer_name . '</td><td>' . $value->registored_address . '</td><td>' . $value->website . '</td><td>' . $value->email . '</td><td class="text-truncate">'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->description_id.'"  data-bs-target="#ModalUpdateInsurerDescription" class="px-2 btn btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>
                             <button dd-insurer-name="'.$value->insurer_name.'" value="' . $value->description_id . '" id="add_branch" class="btn btn-outline-primary btn-sm px-2" data-bs-target="#ModalNewBranch" data-bs-toggle="modal"  title="Show list of branches" data-original-title="Show list of branches"><i class="far fa-list-alt"></i> Branches</button></td>';
                 $i++; }
