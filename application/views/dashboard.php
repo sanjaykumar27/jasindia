@@ -76,7 +76,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>9</td>
+                                <td>8</td>
                                 <td>
                                     <a href="<?php echo base_url() ?>master/vehicle_segment"
                                         class="btn btn-outline-accent  py-2">
@@ -85,7 +85,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>10</td>
+                                <td>9</td>
                                 <td>
                                     <a href="<?php echo base_url() ?>master/body_type"
                                         class="btn btn-outline-accent  py-2">
@@ -94,11 +94,20 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>11</td>
+                                <td>10</td>
                                 <td>
                                     <a href="<?php echo base_url() ?>master/insurer_description"
                                         class="btn btn-outline-accent  py-2">
                                         Insurer Description
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>
+                                    <a href="<?php echo base_url() ?>master/insurance_exclusion"
+                                        class="btn btn-outline-accent  py-2">
+                                        Insurance Exclusion
                                     </a>
                                 </td>
                             </tr>

@@ -21,7 +21,7 @@
     <body class="js-body-bg">
           <nav class="navbar navbar-expand-lg navbar-light nav-bg-white p-0 ">
               <div class="container-fluid px-lg-5">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="<?php echo base_url();?>dashboard">
                   <img height="50" class="rounded" src="<?php echo base_url();?>assets/img/website_logo.jpg">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,9 @@
                     </a></li>
                     <li><a href="<?php echo base_url() ?>master/insurer_description" class="dropdown-item">
                         Insurer Description
+                    </a></li>
+                    <li><a href="<?php echo base_url() ?>master/insurance_exclusion" class="dropdown-item">
+                    Insurance Exclusion
                     </a></li>
                       </ul>
                     </li>

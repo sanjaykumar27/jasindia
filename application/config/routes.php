@@ -136,3 +136,10 @@ $route['branch/create'] = 'master/InsurerDescription/CreateBranch';
 $route['branch/update'] = 'master/InsurerDescription/updateBranch';
 $route['insurer/getBranchDetails'] = 'master/InsurerDescription/getBranchDetails';
 $route['insurer/allCities'] = 'master/InsurerDescription/allCities';
+
+//Insurance Exclusion
+$route['insurance_exclusion/getInsuranceExclusion'] = 'master/InsuranceExclusion/getInsuranceExclusion';
+$route['insurance_exclusion/create'] = 'master/InsuranceExclusion/CreateInsuranceExclusion';
+$route['insurance_exclusion/update'] = 'master/InsuranceExclusion/update';
+$route['insurance_exclusion/edit'] = 'master/InsuranceExclusion/edit';
+$route['master/insurance_exclusion'] = 'master/InsuranceExclusion/index';
