@@ -68,8 +68,13 @@
             <div class="modal-content">
                 <div class="modal-header ">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        New State
+                        Update State
                     </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="update_state">
@@ -91,10 +96,41 @@
     <div class="modal fade" id="ModalNewDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header ">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Districts List (<span id="dd-state-name" class="font-weight-bold"></span>)
-                    </h5>
+                <div class="d-flex flex-column modal-header">
+                    <div class="row w-100">
+                        <div class="col">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Districts List (<span id="dd-state-name" class="font-weight-bold"></span>)
+                            </h5>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <form action="" class="w-100" method="post" id="update_district">
+                        <div class="align-items-center bg-light mt-2 p-1 row">
+                            <div class="col-lg-6">
+                                <div class="form-group ">
+                                    <input type="hidden" name="state_id" id="dd_state_id">
+                                    <input type="hidden" name="district_id" id="d_district_id">
+                                    <input type="text" name="district_name" id="d_district_district" class="form-control text-capitalize" required="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 pb-1">
+                                <input placeholder="RTO Code" id="d_district_rto_code" name="rto_code" required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-3 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updateDistrictBtn" value="Update">
+                                <button type="button" class="close ms-2" onclick="jsHide('update_district')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-body pt-3" >
                     <div class="row">
@@ -123,26 +159,7 @@
                             </div>
                         </div>
                     </form>
-                    <form action="" method="post" id="update_district">
-                        <div class="align-items-center bg-light border d-flex p-1 row">
-                            <div class="col-lg-6">
-                                <div class="form-group ">
-                                    <input type="hidden" name="state_id" id="dd_state_id">
-                                    <input type="hidden" name="district_id" id="d_district_id">
-                                    <input type="text" name="district_name" id="d_district_district" class="form-control text-capitalize" required="" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-lg-3 pb-1">
-                                <input placeholder="RTO Code" id="d_district_rto_code" name="rto_code" required type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-3 d-flex align-items-center">
-                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updateDistrictBtn" value="Update">
-                                <button type="button" class="close ms-2" onclick="jsHide('update_district')">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                   
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
                             <div id="ajaxDistrictList" ></div>

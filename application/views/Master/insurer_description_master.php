@@ -72,15 +72,21 @@
     <div class="modal fade" id="ModalUpdateInsurerDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg big-modal" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Update Insurer Description
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            ×
-                        </span>
-                    </button>
+                <div class="d-flex flex-column modal-header">
+                    <div class="row w-100">
+                        <div class="col">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Update Insurer Description
+                            </h5>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="update_insurer_description">
@@ -113,10 +119,51 @@
     <div class="modal fade" id="ModalNewbranch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog modal-lg modal-dialog-scrollable big-modal" role="document">
             <div class="modal-content">
-                <div class="modal-header ">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Branches (<span id="dd-insurer-name" class="font-weight-bold"></span>)
-                    </h5>
+                <div class="d-flex flex-column modal-header">
+                    <div class="row w-100">
+                        <div class="col">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Branches (<span id="dd-insurer-name" class="font-weight-bold"></span>)
+                            </h5>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <form action="" class="w-100" method="post" id="update_branch">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <input type="hidden" name="insurer_id" id="dd_insurer_id">
+                            <input type="hidden" name="branch_id" id="d_branch_id">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="form-control" name="city_id" id="ajaxCityListUpdate" required>
+                                        <option value="" selected disabled>Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" name="branch_code" id="d_insurer_branch_code" class="form-control text-capitalize" required="" placeholder="Branch Code" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 pb-1">
+                                <input placeholder="Email" name="email" id="d_insurer_email"  required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-6 pb-1">
+                                <textarea placeholder="Address" name="address" id="d_insurer_address"  required type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="col-lg-3 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updatebranchBtn" value="Update">
+                                <button type="button" class="close ms-2" onclick="jsHide('update_branch')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-body pt-3">
                     <div class="row">
@@ -155,36 +202,7 @@
                             </div>
                         </div>
                     </form>
-                    <form action="" method="post" id="update_branch">
-                        <div class="align-items-center bg-light border d-flex p-1 row">
-                            <input type="hidden" name="insurer_id" id="dd_insurer_id">
-                            <input type="hidden" name="branch_id" id="d_branch_id">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <select class="form-control" name="city_id" id="ajaxCityListUpdate" required>
-                                        <option value="" selected disabled>Select City</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <input type="text" name="branch_code" id="d_insurer_branch_code" class="form-control text-capitalize" required="" placeholder="Branch Code" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-lg-4 pb-1">
-                                <input placeholder="Email" name="email" id="d_insurer_email"  required type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-6 pb-1">
-                                <textarea placeholder="Address" name="address" id="d_insurer_address"  required type="text" class="form-control"></textarea>
-                            </div>
-                            <div class="col-lg-3 d-flex align-items-center">
-                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updatebranchBtn" value="Update">
-                                <button type="button" class="close ms-2" onclick="jsHide('update_branch')">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
                             <div id="ajaxbranchList" ></div>

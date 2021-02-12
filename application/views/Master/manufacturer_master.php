@@ -36,6 +36,11 @@
                 <h5 class="modal-title" id="exampleModalLabel">
                     New Manufacturer
                 </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        ×
+                    </span>
+                </button>
             </div>
             <div class="modal-body pt-2">
                 <form action="" method="post" id="create_company">
@@ -81,7 +86,11 @@
                 <h5 class="modal-title" id="exampleModalLabel">
                     Update Manufacturer
                 </h5>
-
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>              
             </div>
             <div class="modal-body pt-2">
                 <form action="" method="post" id="update_company">
