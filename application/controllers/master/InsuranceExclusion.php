@@ -37,7 +37,7 @@ class InsuranceExclusion extends CI_Controller {
             } else
             {
                 $param = array(
-                    'exclusion_name' => ucwords(trim($exclusion_name)),
+                    'exclusion_name' => trim($exclusion_name),
                     'created_by' => $userid,
                 );
                 $cid = $this->Common_model->CommonInsert('m_insurance_exclusion',$param);
@@ -127,7 +127,7 @@ class InsuranceExclusion extends CI_Controller {
             } else
             {
                 $param = array(
-                    'exclusion_name' => ucwords(trim($exclusion_name)),
+                    'exclusion_name' => trim($exclusion_name),
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );
