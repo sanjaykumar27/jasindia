@@ -47,7 +47,7 @@
                     <form action="" method="post" id="create_insurance_exclusion">
                         <div class="form-group">
                             <label>Enter Insurance Exclusion Name</label>
-                            <input type="text" name="exclusion_name" class="form-control text-capitalize" required="" placeholder="Enter Insurance Exclusion Name... " autocomplete="off">
+                            <textarea rows="4" type="text" name="exclusion_name" class="form-control text-capitalize" required="" placeholder="Enter Insurance Exclusion Name... "></textarea>
                         </div>
                         <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label>Enter Insurance Exclusion Name</label>
                             <input type="hidden" name="exclusion_id" id="edit_exclusion_id">
-                            <input type="text" name="exclusion_name" id="edit_exclusion_name" class="form-control text-capitalize" required="" placeholder="Enter Insurance Exclusion Name... " autocomplete="off">
+                            <textarea type="text" name="exclusion_name" id="edit_exclusion_name" class="form-control text-capitalize" required="" placeholder="Enter Insurance Exclusion Name... " rows="4"></textarea>
                         </div>
                         
                         <div class="form-group float-end">
