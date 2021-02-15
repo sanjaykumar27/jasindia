@@ -175,4 +175,20 @@ class VehicleSegment extends CI_Controller {
         }
     }
 
+    function allVehicleSegment()
+    {
+        $data = $this->VehicleSegment_model->listAllData();
+            $html = '<option value="">Select Vehicle Segment</option>';
+            if (!empty($data))
+            {
+                $i = 1;
+                foreach ($data as $value)
+                {
+                    $html .= '<option value='.$value->segment_id.'>'.$value->segment_name.'</option>';
+                    $i++;
+                }
+            } 
+            echo $html;
+    }
+
 }

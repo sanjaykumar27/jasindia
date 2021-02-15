@@ -130,4 +130,17 @@ class InsurerDescription_model extends CI_Model {
         $affected_rows = $this->db->affected_rows();
         return $affected_rows;
     }
+
+    function listAllData()
+    {
+        $this->db->select('description_id,insurer_name');
+        $this->db->from('m_insurer_description');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
+    
 }

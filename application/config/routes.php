@@ -115,6 +115,8 @@ $route['vehicle_segment/create'] = 'master/VehicleSegment/CreateVehicleSegment';
 $route['vehicle_segment/update'] = 'master/VehicleSegment/update';
 $route['vehicle_segment/edit'] = 'master/VehicleSegment/edit';
 $route['master/vehicle_segment'] = 'master/VehicleSegment/index';
+$route['vehicle_segment/allVehicleSegment'] = 'master/VehicleSegment/allVehicleSegment';
+
 
 //body Type
 $route['body_type/getBodyType'] = 'master/BodyType/getBodyType';
@@ -136,6 +138,8 @@ $route['branch/create'] = 'master/InsurerDescription/CreateBranch';
 $route['branch/update'] = 'master/InsurerDescription/updateBranch';
 $route['insurer/getBranchDetails'] = 'master/InsurerDescription/getBranchDetails';
 $route['insurer/allCities'] = 'master/InsurerDescription/allCities';
+$route['insurer/allInsurer'] = 'master/InsurerDescription/allInsurer';
+
 
 //Insurance Exclusion
 $route['insurance_exclusion/getInsuranceExclusion'] = 'master/InsuranceExclusion/getInsuranceExclusion';
@@ -143,3 +147,5 @@ $route['insurance_exclusion/create'] = 'master/InsuranceExclusion/CreateInsuranc
 $route['insurance_exclusion/update'] = 'master/InsuranceExclusion/update';
 $route['insurance_exclusion/edit'] = 'master/InsuranceExclusion/edit';
 $route['master/insurance_exclusion'] = 'master/InsuranceExclusion/index';
+$route['insurance_exclusion/AllDescriptions'] = 'master/InsuranceExclusion/AllDescriptions';
+$route['exclusion_description/create'] = 'master/InsuranceExclusion/CreateInsuranceDescription';

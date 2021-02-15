@@ -78,4 +78,16 @@ class VehicleSegment_model extends CI_Model {
             return $query->row();
         }
     }
+
+    function listAllData()
+    {
+        $this->db->select('segment_id,segment_name');
+        $this->db->from('m_vehicle_segment');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
 }

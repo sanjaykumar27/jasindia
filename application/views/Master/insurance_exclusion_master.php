@@ -88,14 +88,168 @@
         </div>
     </div>
 
+    <div class="modal fade" id="ModalNewMapping" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable big-modal" role="document">
+            <div class="modal-content">
+                <div class="d-flex flex-column modal-header">
+                    <div class="row w-100">
+                        <div class="col">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Vehicle Company Mapping
+                            </h5>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <form action="" class="w-100" method="post" id="update_mapping">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <input type="hidden" name="exclusion_id" id="dd_exclusion_id">
+                            <input type="hidden" name="branch_id" id="d_branch_id">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="form-control" name="city_id" id="ajaxCityListUpdate" required>
+                                        <option value="" selected disabled>Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" name="branch_code" id="d_insurer_branch_code" class="form-control text-capitalize" required="" placeholder="Branch Code" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 pb-1">
+                                <input placeholder="Email" name="email" id="d_insurer_email"  required type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-6 pb-1">
+                                <textarea placeholder="Address" name="address" id="d_insurer_address"  required type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="col-lg-3 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="updatebranchBtn" value="Update">
+                                <button type="button" class="close ms-2" onclick="jsHide('update_mapping')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+                </div>
+                <div class="modal-body pt-3">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-sm btn-info float-end mb-1 py-1" id="add_new_mapping"  onclick="jsShow('create_mapping');jsHide('add_new_mapping')">
+                                Add Mapping
+                            </button>
+                        </div>
+                    </div>
+                    <form action="" method="post" id="create_mapping">
+                        <div class="align-items-center bg-light border d-flex p-1 row">
+                            <input type="hidden" name="exclusion_id" id="d_exclusion_id">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <select class="form-control" name="insurer_id" id="ajaxInsurerList" required>
+                                        <option value="" selected disabled>Select Insurer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="vehicle_segment_id" id="ajaxVehicleSegmentList" required>
+                                        <option value="" selected disabled>Select Vehicle Segment</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 pb-1">
+                                <textarea placeholder="Description" name="description"  required type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="col-lg-2 d-flex align-items-center">
+                                <input type="submit" class="btn btn-primary ms-2 float-end" id="savebranchBtn" value="Save">
+                                <button type="button" class="close ms-2" onclick="jsHide('create_mapping');jsShow('add_new_mapping')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="d-flex flex-row mt-3">
+                        <div class="col-12 px-0">
+                            <div id="ajaxDescriptionList" ></div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
 
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
     $(function () {
         insurance_exclusionlist(page_url = false);
+        allInsurer();
+        allVehicleSegment();
+        $("#create_mapping").hide();
+        $("#update_mapping").hide();
     });
 
+    function allInsurer()
+    {
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurer/allInsurer",
+            type: "POST",
+            success: function (response) {
+                $("#ajaxInsurerList").html(response);
+                $("#ajaxInsurerListUpdate").html(response);
+            }
+        });
+    }
+
+    function allVehicleSegment()
+    {
+        $.ajax({
+            url: "<?php echo base_url(); ?>vehicle_segment/allVehicleSegment",
+            type: "POST",
+            success: function (response) {
+                $("#ajaxVehicleSegmentList").html(response);
+                $("#ajaxVehicleSegmentListUpdate").html(response);
+            }
+        });
+    }
+
+    function getDescriptions(exclusion_id)
+    {   
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurance_exclusion/AllDescriptions",
+            type: "POST",
+            data: {exclusion_id: exclusion_id},
+            success: function (response) {
+                $("#ajaxDescriptionList").html(response);
+            }
+        });
+    }
+
+    $('#create_mapping').submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            saveAjax('<?php echo base_url(); ?>exclusion_description/create', '', formData);
+            $("#create_mapping").trigger("reset");
+            $("#create_mapping").hide();
+            $("#add_new_mapping").show();
+            setTimeout(function(){  
+                getDescriptions($("#d_exclusion_id").val());
+            }, 500);
+    });
+
+    $(document).on("click", "#add_description", function (e) {
+        e.preventDefault();
+        var d_exclusion_id = $(this).attr("value");
+        $("#d_exclusion_id").val(d_exclusion_id);
+        getDescriptions(d_exclusion_id);
+    });
+    
     $(document).on('click', ".pagination li a", function (event) {
         var page_url = $(this).attr('href');
         insurance_exclusionlist(page_url);

@@ -325,4 +325,26 @@ class InsurerDescription extends CI_Controller {
             redirect('/Auth');
         }
     }
+
+    function allInsurer()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $data = $this->InsurerDescription_model->listAllData();
+            $html = '<option value="">Select Insurer</option>';
+            if (!empty($data))
+            {
+                $i = 1;
+                foreach ($data as $value)
+                {
+                    $html .= '<option value='.$value->description_id.'>'.$value->insurer_name.'</option>';
+                    $i++;
+                }
+            } 
+            echo $html;
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
 }
