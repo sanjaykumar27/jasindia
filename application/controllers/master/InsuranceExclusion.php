@@ -190,7 +190,7 @@ class InsuranceExclusion extends CI_Controller {
                 foreach ($data['records'] as $value)
                 {
                     $html .= '<tr><td>' . $i . '</td><td>' . $value->insurer_name . '</td><td>'.$value->segment_name.'</td><td>'.$value->exclusion_description.'</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbranchbutton" dd-branch-rtocode="'.$value->insurer_name.'" dd-branch-name="'.$value->exclusion_description.'"  value="' . $value->segment_name . '" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
+                            . '<a href="javascript:void(0)" id="m_editbranchbutton"  value="' . $value->exclusion_mapping_id . '" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }
@@ -234,6 +234,52 @@ class InsuranceExclusion extends CI_Controller {
                 );
                 $this->Common_model->CommonInsert('audit_log',$log);
                 $data = array('code' => 1, 'response' => 'Insurance Exclusion Description Created succesfully!');
+            } else
+            {
+                $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
+            }
+            echo json_encode($data);
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    function getExclusionDetails()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $exclusion_mapping_id = $this->input->POST('exclusion_mapping_id');
+            $record = $this->InsuranceExclusion_model->getExclustionDetails($exclusion_mapping_id);
+            $data = array($record[0]);
+            echo json_encode($data);
+        } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    public function UpdateExclusion()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $userid = $this->session->userdata('sess_user_id');
+            $exclusion_mapping_id = $this->input->POST('exclusion_mapping_id');
+            $exclusion_description = $this->input->POST('exclusion_description');
+            $vehicle_segment_id = $this->input->POST('vehicle_segment_id');
+            $insurer_id = $this->input->POST('insurer_id');
+            
+            $param = array(
+                'exclusion_description' => $exclusion_description,
+                'vehicle_segment_id' => $vehicle_segment_id,
+                'insurer_id' => $insurer_id,
+                'updated_by' => $userid,
+                'updated_on' => date('Y-m-d H:i:s')
+            );
+            $cid = $this->InsuranceExclusion_model->updateExclustionMapping($param, $exclusion_mapping_id);
+            if ($cid != "")
+            {
+                $data = array('code' => 1, 'response' => 'Branch Updated succesfully!');
             } else
             {
                 $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');

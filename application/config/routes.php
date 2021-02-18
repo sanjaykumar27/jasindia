@@ -149,3 +149,5 @@ $route['insurance_exclusion/edit'] = 'master/InsuranceExclusion/edit';
 $route['master/insurance_exclusion'] = 'master/InsuranceExclusion/index';
 $route['insurance_exclusion/AllDescriptions'] = 'master/InsuranceExclusion/AllDescriptions';
 $route['exclusion_description/create'] = 'master/InsuranceExclusion/CreateInsuranceDescription';
+$route['exclusion/getExclusionDetails'] = 'master/InsuranceExclusion/getExclusionDetails';
+$route['exclusion/update'] = 'master/InsuranceExclusion/UpdateExclusion';

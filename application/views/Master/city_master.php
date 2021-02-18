@@ -155,6 +155,7 @@
 $(function() {
     citylist();
     stateList();
+    
     $("#formNewPincode").hide();
     $(document).on("click", "#updatePincodeBtn", function(e) {
         if ($("#update_pincode").valid()) {

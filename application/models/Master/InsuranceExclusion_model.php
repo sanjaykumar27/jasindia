@@ -92,4 +92,28 @@ class InsuranceExclusion_model extends CI_Model {
             return $query->result();
         }
     }
+
+    function getExclustionDetails($exclusion_mapping_id)
+    {
+        $this->db->select('*');
+        $this->db->from('m_company_vehicle_exclusion_mapping');
+        $this->db->join('m_insurer_description', 'm_insurer_description.description_id = m_company_vehicle_exclusion_mapping.insurer_id', 'left');
+        $this->db->join('m_vehicle_segment', 'm_vehicle_segment.segment_id = m_company_vehicle_exclusion_mapping.vehicle_segment_id', 'left');
+        $this->db->where('exclusion_mapping_id', $exclusion_mapping_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
+
+    function updateExclustionMapping($param, $mapping_id)
+    {
+        $this->db->where('exclusion_mapping_id', $mapping_id);
+        $this->db->update('m_company_vehicle_exclusion_mapping', $param);
+        $affected_rows = $this->db->affected_rows();
+        return $affected_rows;
+    }
+
 }

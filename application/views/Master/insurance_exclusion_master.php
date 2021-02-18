@@ -106,27 +106,25 @@
                             </button>
                         </div>
                     </div>
-                    <!-- <form action="" class="w-100" method="post" id="update_mapping">
+                    <form action="" class="w-100" method="post" id="update_mapping">
                         <div class="align-items-center bg-light border d-flex p-1 row">
-                            <input type="hidden" name="exclusion_id" id="dd_exclusion_id">
-                            <input type="hidden" name="branch_id" id="d_branch_id">
-                            <div class="col-lg-4">
+                        <input type="hidden" name="exclusion_mapping_idd" id="exclusion_mapping_idd">
+                        <div class="col-lg-5">
                                 <div class="form-group">
-                                    <select class="form-control" name="city_id" id="ajaxCityListUpdate" required>
-                                        <option value="" selected disabled>Select City</option>
+                                    <select class="form-control" name="insurer_id" id="edit_ajaxInsurerList" required>
+                                        <option value="" selected disabled>Select Insurer</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" name="branch_code" id="d_insurer_branch_code" class="form-control text-capitalize" required="" placeholder="Branch Code" autocomplete="off">
+                                    <select class="form-control" name="vehicle_segment_id" id="edit_ajaxVehicleSegmentList" required>
+                                        <option value="" selected disabled>Select Vehicle Segment</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4 pb-1">
-                                <input placeholder="Email" name="email" id="d_insurer_email"  required type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-6 pb-1">
-                                <textarea placeholder="Address" name="address" id="d_insurer_address"  required type="text" class="form-control"></textarea>
+                            <div class="col-lg-8 pb-1">
+                                <textarea placeholder="Description" name="description" id="edit_description"  required type="text" class="form-control"></textarea>
                             </div>
                             <div class="col-lg-3 d-flex align-items-center">
                                 <input type="submit" class="btn btn-primary ms-2 float-end" id="updatebranchBtn" value="Update">
@@ -135,7 +133,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form> -->
+                    </form>
                 </div>
                 <div class="modal-body pt-3">
                     <div class="row">
@@ -195,6 +193,60 @@
         $("#update_mapping").hide();
     });
 
+    $(document).on("click", "#updatebranchBtn", function (e) {
+        if ($("#update_mapping").valid())
+        {   
+            var exclusion_mapping_idd = $("#exclusion_mapping_idd").val();
+            e.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url(); ?>exclusion/update",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    exclusion_mapping_id: exclusion_mapping_idd,
+                    exclusion_description: $("#edit_description").val(),
+                    vehicle_segment_id: $("#edit_ajaxVehicleSegmentList").val(),
+                    insurer_id: $("#edit_ajaxInsurerList").val(),
+                },
+                success: function (data) {
+                    if (data.code == 1)
+                    {
+                        swal.fire({title: "Success", text: data.response}).then(function () {
+                            setTimeout(function(){  
+                                getDescriptions($("#d_exclusion_id").val());
+                            }, 500);
+                            $("#update_mapping").hide();
+                            e.preventDefault();
+                        });
+                    } else
+                    {
+                        swal.fire({title: "Error", text: data.response});
+                    }
+                }
+            });
+        }
+    });
+
+    $(document).on("click", "#m_editbranchbutton", function (e) {
+        e.preventDefault();
+        $("#update_mapping").show();
+        var exclusion_mapping_idd = $(this).attr("value");
+        $("#dd_exclusion_mapping_id").val($("#d_insurer_id").val());
+        $.ajax({
+            url: "<?php echo base_url(); ?>exclusion/getExclusionDetails",
+            type: "POST",
+            data: {exclusion_mapping_id: exclusion_mapping_idd},
+            success: function (response) {
+                response  = JSON.parse(response)[0];
+                    $("#exclusion_mapping_idd").val(response.exclusion_mapping_id);
+                    $("#edit_ajaxVehicleSegmentList").val(response.vehicle_segment_id);
+                    $("#edit_ajaxInsurerList").val(response.insurer_id);
+                    $("#edit_description").val(response.exclusion_description);
+            }
+        });
+        $("#update_mapping").show();
+    });
+
     function allInsurer()
     {
         $.ajax({
@@ -202,7 +254,7 @@
             type: "POST",
             success: function (response) {
                 $("#ajaxInsurerList").html(response);
-                $("#ajaxInsurerListUpdate").html(response);
+                $("#edit_ajaxInsurerList").html(response);
             }
         });
     }
@@ -214,7 +266,7 @@
             type: "POST",
             success: function (response) {
                 $("#ajaxVehicleSegmentList").html(response);
-                $("#ajaxVehicleSegmentListUpdate").html(response);
+                $("#edit_ajaxVehicleSegmentList").html(response);
             }
         });
     }
