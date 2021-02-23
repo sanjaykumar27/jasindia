@@ -28,3 +28,23 @@ function jsShow(id){$('#'+id).show();}
 // hide any element
 function jsHide(id){$('#'+id).hide();}
 
+// get data on pages 
+
+function getListData(controller_url, div_id, page_url = false, )
+{
+    var search_key = $("#search_key").val();
+    var dataString = 'search_key=' + search_key;
+    if (page_url == false) {
+        var page_url = controller_url;
+    }
+    $.ajax({
+        type: "POST",
+        url: page_url,
+        data: dataString,
+        data: {'search_key': search_key},
+        success: function (response) {
+            console.log("#"+div_id);
+            $("#"+div_id).html(response);
+        }
+    }); 
+}

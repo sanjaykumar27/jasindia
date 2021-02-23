@@ -111,6 +111,15 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>
+                                    <a href="<?php echo base_url() ?>master/emission_standard_description"
+                                        class="btn btn-outline-accent  py-2">
+                                        Emission Standard Description
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

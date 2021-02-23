@@ -78,4 +78,16 @@ class EmissionStandard_model extends CI_Model {
             return $query->row();
         }
     }
+
+    function listAllData()
+    {
+        $this->db->select('emission_id,emission_name');
+        $this->db->from('m_emission_standard');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
+    }
 }

@@ -1,4 +1,4 @@
-<html lang="en" >
+<html lang="en" is="dmx-app">
     <!-- begin::Head -->
     <head>
         <meta charset="utf-8" />
@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css" type="text/css">
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" type="text/css">
+        <script src="<?php echo base_url();?>assets/js/dmxAppConnect.js" ></script>
     </head>
     <!-- end::Head -->
     <!-- end::Body -->
@@ -67,6 +68,9 @@
                     </a></li>
                     <li><a href="<?php echo base_url() ?>master/insurance_exclusion" class="dropdown-item">
                     Insurance Exclusion
+                    </a></li>
+                    <li><a href="<?php echo base_url() ?>master/emission_standard_description" class="dropdown-item">
+                    Emission Standard Description
                     </a></li>
                       </ul>
                     </li>

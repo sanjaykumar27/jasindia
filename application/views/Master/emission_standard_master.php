@@ -162,7 +162,6 @@
         var formData = new FormData(this);
         saveAjax('<?php echo base_url(); ?>emission_standard/create', 'ModalNewEmissionStandard', formData);
         $("#create_emission_standard").trigger("reset");
-        
         setTimeout(function(){  
             if($("#active-page").text())
             {
