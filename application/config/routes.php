@@ -158,3 +158,10 @@ $route['emission_standard_description/create'] = 'master/EmissionStandardDescrip
 $route['emission_standard_description/update'] = 'master/EmissionStandardDescription/update';
 $route['emission_standard_description/edit'] = 'master/EmissionStandardDescription/edit';
 $route['master/emission_standard_description'] = 'master/EmissionStandardDescription/index';
+
+//type manufacturer description
+$route['tire_manfacturer/getTireManufacturer'] = 'master/TireManufacturer/getTireManufacturer';
+$route['tire_manfacturer/create'] = 'master/TireManufacturer/CreateTireManufacturer';
+$route['tire_manfacturer/update'] = 'master/TireManufacturer/update';
+$route['tire_manfacturer/edit'] = 'master/TireManufacturer/edit';
+$route['master/tire_manufacturer'] = 'master/TireManufacturer/index';
