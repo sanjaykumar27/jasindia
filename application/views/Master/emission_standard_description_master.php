@@ -163,9 +163,10 @@
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
+ var main_url = '<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>';
+
 $(function(){
-    getListData('<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>',
-    'emission_standardContent');
+    getListData(main_url,'emission_standardContent');
 });
 
 $('#create_emission_standard_description').submit(function(e) {
@@ -177,10 +178,10 @@ $('#create_emission_standard_description').submit(function(e) {
         $("#create_emission_standard_description").trigger("reset");
         setTimeout(function() {
             if ($("#active-page").text()) {
-                var page_url = '<?php echo base_url() ?>emission_standard_description/getEmissionStandardDescription/' +
+                var page_url = main_url +
                     ($("#active-page").text() - 1) * 10;
             } else {
-                var page_url = '<?php echo base_url() ?>emission_standard_description/getEmissionStandardDescription';
+                var page_url = main_url;
             }
             getListData('<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>',
             'emission_standardContent',page_url);

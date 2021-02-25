@@ -68,9 +68,10 @@
 <?php $this->load->view('./layouts/footer'); ?>
 
 <script>
+var main_url = '<?php echo site_url('master/TireManufacturer/getTireManufacturer') ?>';
+
 $(function(){
-    getListData('<?php echo site_url('tire_manfacturer/getTireManufacturer') ?>',
-    'manufacturer_content');
+    getListData(main_url,'manufacturer_content');
 });
 
 $('#create_tire_manufacturer').submit(function(e) {
@@ -82,15 +83,16 @@ $('#create_tire_manufacturer').submit(function(e) {
         $("#create_tire_manufacturer").trigger("reset");
         setTimeout(function() {
             if ($("#active-page").text()) {
-                var page_url = '<?php echo base_url() ?>tire_manfacturer/getTireManufacturer/' +
+                var page_url = main_url +
                     ($("#active-page").text() - 1) * 10;
             } else {
-                var page_url = '<?php echo base_url() ?>tire_manfacturer/getTireManufacturer';
+                var page_url = main_url;
             }
-            getListData('<?php echo site_url('tire_manfacturer/getTireManufacturer') ?>',
-            'manufacturer_content',page_url);
+            getListData(page_url,'manufacturer_content');
             e.preventDefault();
         }, 1000);
     }
 });
+
+
 </script>

@@ -30,21 +30,41 @@ function jsHide(id){$('#'+id).hide();}
 
 // get data on pages 
 
-function getListData(controller_url, div_id, page_url = false, )
+function getListData(page_url = false, div_id)
 {
     var search_key = $("#search_key").val();
     var dataString = 'search_key=' + search_key;
-    if (page_url == false) {
-        var page_url = controller_url;
-    }
+    // if (page_url == false) {
+    //     var page_url = controller_url;
+    // }
     $.ajax({
         type: "POST",
         url: page_url,
         data: dataString,
         data: {'search_key': search_key},
         success: function (response) {
-            console.log("#"+div_id);
             $("#"+div_id).html(response);
         }
     }); 
 }
+
+/*-- Search keyword--*/
+$(document).on('click', "#searchBtn", function (event) {
+    getListData(main_url,'manufacturer_content');
+    event.preventDefault();
+});
+
+/*-- Reset Search--*/
+$(document).on('click', "#resetBtn", function (event) {
+    $("#search_key").val('');
+    getListData(main_url,'manufacturer_content');
+    event.preventDefault();
+});
+
+/*-- Page click --*/
+$(document).on('click', ".pagination li a", function (event) {
+    var page_url = $(this).attr('href');
+    getListData(page_url,
+    'manufacturer_content');
+    event.preventDefault();
+});
