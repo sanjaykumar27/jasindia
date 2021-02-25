@@ -121,7 +121,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>12</td>
+                                <td>13</td>
                                 <td>
                                     <a href="<?php echo base_url() ?>master/tire_manufacturer"
                                         class="btn btn-outline-accent  py-2">
