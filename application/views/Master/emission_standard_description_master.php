@@ -20,15 +20,15 @@
                     placeholder="Search..." />
             </div>
             <div class="col-4 mx-2">
-                <button type="button" id="searchBtn" class="btn btn-outline-primary "><i
+                <button type="button" id="search_Btn" class="btn btn-outline-primary "><i
                         class="fas fa-search"></i></button>
-                <button type="button" id="resetBtn" class="btn btn-outline-info  "><i
+                <button type="button" id="reset_Btn" class="btn btn-outline-info  "><i
                         class="fas fa-history"></i></button>
             </div>
         </div>
         <div class="card-body px-4 d-flex flex-row ">
             <div class="col-12 ">
-                <div id="emission_standardContent"></div>
+                <div id="ajaxTable"></div>
             </div>
         </div>
     </div>
@@ -166,7 +166,7 @@
  var main_url = '<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>';
 
 $(function(){
-    getListData(main_url,'emission_standardContent');
+    getListData(main_url,'ajaxTable');
 });
 
 $('#create_emission_standard_description').submit(function(e) {
@@ -184,9 +184,18 @@ $('#create_emission_standard_description').submit(function(e) {
                 var page_url = main_url;
             }
             getListData('<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>',
-            'emission_standardContent',page_url);
+            'ajaxTable',page_url);
             e.preventDefault();
         }, 1000);
     }
 });
+
+/*-- Page click --*/
+$(document).on('click', ".pagination li a", function (event) {
+    var page_url = $(this).attr('href');
+    getListData(page_url,
+    'ajaxTable');
+    event.preventDefault();
+});
+
 </script>

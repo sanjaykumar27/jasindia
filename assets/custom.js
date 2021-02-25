@@ -49,22 +49,15 @@ function getListData(page_url = false, div_id)
 }
 
 /*-- Search keyword--*/
-$(document).on('click', "#searchBtn", function (event) {
-    getListData(main_url,'manufacturer_content');
+$(document).on('click', "#search_Btn", function (event) {
+    getListData(main_url,'ajaxTable');
     event.preventDefault();
 });
 
 /*-- Reset Search--*/
-$(document).on('click', "#resetBtn", function (event) {
+$(document).on('click', "#reset_Btn", function (event) {
     $("#search_key").val('');
-    getListData(main_url,'manufacturer_content');
+    getListData(main_url,'ajaxTable');
     event.preventDefault();
 });
 
-/*-- Page click --*/
-$(document).on('click', ".pagination li a", function (event) {
-    var page_url = $(this).attr('href');
-    getListData(page_url,
-    'manufacturer_content');
-    event.preventDefault();
-});
