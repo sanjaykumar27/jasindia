@@ -105,7 +105,7 @@
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control" id="edit_email"   autocomplete="off">
+                            <input type="text" name="email" class="form-control" id="edit_email" autocomplete="off">
                         </div>
                         <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
