@@ -384,23 +384,25 @@
 
     $('#create_insurer_description').submit(function (e) {
         e.preventDefault();
-        var formData = new FormData(this);
-        saveAjax('<?php echo base_url(); ?>insurer_description/create', 'ModalNewInsurerDescription', formData);
-        $("#create_insurer_description").trigger("reset");
-        
-        setTimeout(function(){  
-            if($("#active-page").text())
-            {
-                var page_url = '<?php echo base_url() ?>master/InsurerDescription/getInsurerDescriptions/' + ($("#active-page").text() - 1) * 10;
-            }
-            else
-            {
-                var page_url = '<?php echo base_url() ?>master/InsurerDescription/getInsurerDescriptions';
-            }
+        if ($("#create_insurer_description").valid()) {
+            var formData = new FormData(this);
+            saveAjax('<?php echo base_url(); ?>insurer_description/create', 'ModalNewInsurerDescription', formData);
+            $("#create_insurer_description").trigger("reset");
             
-            insurer_descriptionlist(page_url);
-            e.preventDefault();
-        }, 500);
+            setTimeout(function(){  
+                if($("#active-page").text())
+                {
+                    var page_url = '<?php echo base_url() ?>master/InsurerDescription/getInsurerDescriptions/' + ($("#active-page").text() - 1) * 10;
+                }
+                else
+                {
+                    var page_url = '<?php echo base_url() ?>master/InsurerDescription/getInsurerDescriptions';
+                }
+                
+                insurer_descriptionlist(page_url);
+                e.preventDefault();
+            }, 500);
+        }
     });
 
     $(document).on("click", "#m_editbutton", function (e) {
