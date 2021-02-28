@@ -91,7 +91,7 @@ class InsuranceExclusion extends CI_Controller {
             {
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td>' . $value->exclusion_name . '</td><td>'
+                    $html .= '<tr><td>'.$i.'</td><td>' . $value->exclusion_name . '</td><td class="text-truncate">'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->exclusion_id.'"  data-bs-target="#ModalUpdateInsuranceExclusion" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>
                             <button  value="' . $value->exclusion_id . '" id="add_description" class="btn btn-outline-primary btn-sm " data-bs-target="#ModalNewMapping" data-bs-toggle="modal"  title="Company Vehicle Mappin" data-original-title="Company Vehicle Mapping"><i class="far fa-list-alt"></i> Mappings</button></td>';
                 $i++; }
