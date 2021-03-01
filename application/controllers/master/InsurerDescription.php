@@ -33,6 +33,8 @@ class InsurerDescription extends CI_Controller {
             $registored_address = $this->input->POST('registored_address');
             $website = $this->input->POST('website');
             $email = $this->input->POST('email');
+            $gst = $this->input->POST('gst');
+            $tan = $this->input->POST('tan');
 			$is_exist = $this->InsurerDescription_model->checkInsurerDescriptionExist(trim($insurer_description_name),'');
             if ($is_exist)
             {
@@ -44,6 +46,8 @@ class InsurerDescription extends CI_Controller {
                     'registored_address' => $registored_address,
                     'website' => $website,
                     'email' => $email,
+                    'gst' => $gst,
+                    'tan' => $tan,
                     'created_by' => $userid,
                 );
                 $cid = $this->Common_model->CommonInsert('m_insurer_description',$param);
@@ -92,12 +96,13 @@ class InsurerDescription extends CI_Controller {
             
             $i = $offset + 1;
             $html = '<div class="table-responsive"><table class="table table-striped"><thead><tr><th>#</th><th>Insurer Description</th>'
-                    . '<th>Registored Address</th><th>Website</th><th>Email</th><th>Action</th></tr></thead><tbody>';
+                    . '<th>Registored Address</th><th>Website</th><th>Email</th><th>GST</th><th>TAN</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->insurer_name . '</td><td>' . $value->registored_address . '</td><td>' . $value->website . '</td><td>' . $value->email . '</td><td class="text-truncate">'
+                    $html .= '<tr><td>'.$i.'</td><td class="text-truncate">' . $value->insurer_name . '</td><td>' . $value->registored_address . '</td>
+                    <td>' . $value->website . '</td><td>' . $value->email . '</td><td>'.$value->gst.'</td><td>'.$value->tan.'</td><td class="text-truncate">'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->description_id.'"  data-bs-target="#ModalUpdateInsurerDescription" class=" btn btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i> Edit</a>
                             <button dd-insurer-name="'.$value->insurer_name.'" value="' . $value->description_id . '" id="add_branch" class="btn btn-outline-primary btn-sm " data-bs-target="#ModalNewBranch" data-bs-toggle="modal"  title="Show list of branches" data-original-title="Show list of branches"><i class="far fa-list-alt"></i> Branches</button></td>';
                 $i++; }
@@ -129,7 +134,8 @@ class InsurerDescription extends CI_Controller {
             $registored_address = $this->input->POST('registored_address');
             $website = $this->input->POST('website');
             $email = $this->input->POST('email');
-
+            $gst = $this->input->POST('gst');
+            $tan = $this->input->POST('tan');
             $is_exist = $this->InsurerDescription_model->checkInsurerDescriptionExist(trim($insurer_description_name),$insurer_description_id);
             if ($is_exist)
             {
@@ -141,6 +147,8 @@ class InsurerDescription extends CI_Controller {
                     'registored_address' => $registored_address,
                     'website' => $website,
                     'email' => $email,
+                    'gst' => $gst,
+                    'tan' => $tan,
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );
@@ -196,13 +204,15 @@ class InsurerDescription extends CI_Controller {
             $insurer_id = $this->input->POST('insurer_id');
             $data['records'] = $this->InsurerDescription_model->selectAllBranches($insurer_id);
             
-            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Branch Code</th><th>City</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody>';
+            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Branch Code</th><th>City</th><th>Email</th><th>Address</th>
+            <th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 $i = 1;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>' . $i . '</td><td>' . $value->branch_code . '</td><td>'.$value->city_name.'</td><td>'.$value->email.'</td><td>'.$value->address.'</td><td>'
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->branch_code . '</td><td>'.$value->city_name.'</td><td>'.$value->email.'</td>
+                    <td>'.$value->address.'</td><td>'
                             . '<a href="javascript:void(0)" id="m_editbranchbutton" dd-branch-rtocode="'.$value->email.'" dd-branch-name="'.$value->branch_code.'"  value="' . $value->branch_id . '" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
@@ -266,7 +276,6 @@ class InsurerDescription extends CI_Controller {
             $city_id = $this->input->POST('city_id');
             $email = $this->input->POST('email');
             $address = $this->input->POST('address');
-            
             $param = array(
                 'branch_code' => ucwords(trim($branch_code)),
                 'email' => $email,

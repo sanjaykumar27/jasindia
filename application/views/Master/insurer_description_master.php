@@ -60,6 +60,14 @@
                             <label>Email</label>
                             <input type="email" name="email" class="form-control" required=""  autocomplete="off">
                         </div>
+                        <div class="form-group">
+                            <label>GST</label>
+                            <input type="text" name="gst" class="form-control" required=""  autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label>TAN</label>
+                            <input type="text" name="tan" class="form-control" required=""  autocomplete="off">
+                        </div>
                         <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
                         </div>
@@ -106,6 +114,14 @@
                         <div class="form-group">
                             <label>Email</label>
                             <input type="text" name="email" class="form-control" id="edit_email" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label>GST</label>
+                            <input type="text" name="gst" id="edit_gst" class="form-control" required=""  autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label>TAN</label>
+                            <input type="text" name="tan" id="edit_tan" class="form-control" required=""  autocomplete="off">
                         </div>
                         <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="updateBtn" value="Save"> 
@@ -421,6 +437,8 @@
                 $("#edit_registored_address").val(data.records.registored_address);
                 $("#edit_website").val(data.records.website);
                 $("#edit_email").val(data.records.email);
+                $("#edit_gst").val(data.records.gst);
+                $("#edit_tan").val(data.records.tan);
             }
         });
     });
@@ -433,6 +451,8 @@
             var edit_registored_address = $("#edit_registored_address").val();
             var edit_website = $("#edit_website").val();
             var edit_email = $("#edit_email").val();
+            var edit_gst = $("#edit_gst").val();
+            var edit_tan = $("#edit_tan").val();
             $.ajax({
                 url: "<?php echo base_url(); ?>insurer_description/update",
                 type: 'POST',
@@ -442,7 +462,9 @@
                     insurer_description_name: edit_insurer_description_name,
                     registored_address: edit_registored_address,
                     website: edit_website,
-                    email: edit_email
+                    email: edit_email,
+                    gst: edit_gst,
+                    tan: edit_tan
                 },
                 success: function (data) {
                     if (data.code == 1)

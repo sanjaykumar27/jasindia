@@ -33,7 +33,8 @@ class InsurerDescription_model extends CI_Model {
 	
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('m_insurer_description.description_id,m_insurer_description.insurer_name,m_insurer_description.registored_address, m_insurer_description.website, m_insurer_description.email');
+        $this->db->select('m_insurer_description.description_id,m_insurer_description.insurer_name,m_insurer_description.registored_address, m_insurer_description.website, 
+        m_insurer_description.email,m_insurer_description.gst,m_insurer_description.tan');
         $this->db->from('m_insurer_description');
         if ($search)
         {
@@ -44,6 +45,8 @@ class InsurerDescription_model extends CI_Model {
                 $this->db->or_where("m_insurer_description.registored_address LIKE '%$keyword%'");
                 $this->db->or_where("m_insurer_description.website LIKE '%$keyword%'");
                 $this->db->or_where("m_insurer_description.email LIKE '%$keyword%'");
+                $this->db->or_where("m_insurer_description.gst LIKE '%$keyword%'");
+                $this->db->or_where("m_insurer_description.tan LIKE '%$keyword%'");
             }
         }
         if ($count)
@@ -72,7 +75,7 @@ class InsurerDescription_model extends CI_Model {
 
     function GetInsurerDescriptionDetails($description_id)
     {
-        $this->db->select('insurer_name, description_id, registored_address, website, email');
+        $this->db->select('insurer_name, description_id, registored_address, website, email, gst, tan');
         $this->db->from('m_insurer_description');
         $this->db->where('description_id', $description_id);
         $query = $this->db->get();
