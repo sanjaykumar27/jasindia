@@ -85,6 +85,19 @@ tbody, td, tfoot, th, thead, tr {
 .big-modal {
     max-width: 80%;
 }
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ced4da;
+    height: 32px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    outline: none !important;
+}
 /* @media (min-width: 768px) { ... }
 
 // Large devices (desktops, 992px and up)

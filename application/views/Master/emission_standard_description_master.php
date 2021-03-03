@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalNewEmissionStandard" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="ModalNewEmissionStandard" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,7 +51,7 @@
                 <form action="" method="post" id="create_emission_standard_description">
                     <div class="row my-3">
                         <div class="col">
-                            <label>Emission Standard</label>
+                            <label class="d-block">Emission Standard</label>
                             <select name="emission_standard_id" required class="form-select"
                                 id="edit_emission_standard_id">
                                 <option selected value="">Select</option>
@@ -165,7 +165,8 @@
 <script>
  var main_url = '<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>';
 
-$(function(){
+$(function(){   
+    $("#edit_emission_standard_id").select2();
     getListData(main_url,'ajaxTable');
 });
 
