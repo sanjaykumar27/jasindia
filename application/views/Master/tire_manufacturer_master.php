@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalNewTireManufacturer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="ModalNewTireManufacturer" dmx-on:shown="edit_manufacturer_name.focus()" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

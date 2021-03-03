@@ -39,7 +39,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  mb-2 mb-lg-0 ms-auto">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ms-2">
                         <a class="nav-link dropdown-toggle px-2 " href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Master

@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalNewCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="ModalNewCity" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalUpdateCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="ModalUpdateCity" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -155,7 +155,7 @@
 $(function() {
     citylist();
     stateList();
-    
+    $("#ajaxStateList, #ajaxDistrictList, #selectUpdateStateID, #selectUpdateDistrictID").select2();
     $("#formNewPincode").hide();
     $(document).on("click", "#updatePincodeBtn", function(e) {
         if ($("#update_pincode").valid()) {
@@ -307,9 +307,11 @@ $(function() {
                 $("#newpincode-form").html(data.NP);
                 $("#updateform").html(data.UP);
                 $("#selectUpdateStateID").val(data.state_id);
+                $('#selectUpdateStateID').trigger('change')
                 searchdistrictList(data.state_id);
                 setTimeout(function() {
                     $("#selectUpdateDistrictID").val(data.district_id);
+                    $('#selectUpdateDistrictID').trigger('change')
                 }, 500);
                 $("#update_pincode").hide();
             }
