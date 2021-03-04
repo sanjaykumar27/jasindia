@@ -56,9 +56,9 @@
                             <li><a href="<?php echo base_url() ?>master/city" class="dropdown-item">
                                     City Master
                                 </a></li>
-                            <li><a href="<?php echo base_url() ?>master/engine" class="dropdown-item">
+                            <!-- <li><a href="<?php echo base_url() ?>master/engine" class="dropdown-item">
                                     Engine Master
-                                </a></li>
+                                </a></li> -->
                             <li><a href="<?php echo base_url() ?>master/fuel" class="dropdown-item">
                                     Fuel Master
                                 </a></li>
@@ -84,10 +84,10 @@
                                     class="dropdown-item">
                                     Emission Standard Description
                                 </a></li>
-                                <li><a href="<?php echo base_url() ?>master/tire_manufacturer"
+                                <!-- <li><a href="<?php echo base_url() ?>master/tire_manufacturer"
                                     class="dropdown-item">
                                     Tire Manufacturer
-                                </a></li>
+                                </a></li> -->
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

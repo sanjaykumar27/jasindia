@@ -40,7 +40,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>4</td>
                                 <td>
                                     <a href="<?php echo base_url() ?>master/engine"
@@ -48,7 +48,7 @@
                                         Engine Master
                                     </a>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td>5</td>
                                 <td>
@@ -120,7 +120,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>13</td>
                                 <td>
                                     <a href="<?php echo base_url() ?>master/tire_manufacturer"
@@ -128,7 +128,7 @@
                                         Tire Manufacturer
                                     </a>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
