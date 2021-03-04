@@ -186,6 +186,7 @@
 
 <script>
     $(function () {
+        $("#ajaxInsurerList, #ajaxVehicleSegmentList, #edit_ajaxInsurerList, #edit_ajaxVehicleSegmentList").select2();
         insurance_exclusionlist(page_url = false);
         allInsurer();
         allVehicleSegment();
@@ -241,6 +242,8 @@
                     $("#exclusion_mapping_idd").val(response.exclusion_mapping_id);
                     $("#edit_ajaxVehicleSegmentList").val(response.vehicle_segment_id);
                     $("#edit_ajaxInsurerList").val(response.insurer_id);
+                    $('#edit_ajaxInsurerList').trigger('change');
+                    $('#edit_ajaxVehicleSegmentList').trigger('change');
                     $("#edit_description").val(response.exclusion_description);
             }
         });

@@ -166,7 +166,7 @@
  var main_url = '<?php echo site_url('emission_standard_description/getEmissionStandardDescription') ?>';
 
 $(function(){   
-    $("#edit_emission_standard_id").select2();
+    $("#edit_emission_standard_id, #edit_vehicle_segment_id").select2();
     getListData(main_url,'ajaxTable');
 });
 

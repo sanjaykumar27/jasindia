@@ -311,7 +311,7 @@ $(function() {
                 searchdistrictList(data.state_id);
                 setTimeout(function() {
                     $("#selectUpdateDistrictID").val(data.district_id);
-                    $('#selectUpdateDistrictID').trigger('change')
+                    $('#selectUpdateDistrictID').trigger('change');
                 }, 500);
                 $("#update_pincode").hide();
             }

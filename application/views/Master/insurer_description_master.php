@@ -234,6 +234,7 @@
 
 <script>
     $(function () {
+        $("#ajaxCityListUpdate, #ajaxCityList").select2();
         $("#create_branch").hide();
         $("#update_branch").hide();
         insurer_descriptionlist(page_url = false);
@@ -310,6 +311,8 @@
                     $("#d_insurer_email").val(response.email);
                     $("#d_insurer_address").val(response.address);
                     $("#ajaxCityListUpdate").val(response.city_id);
+                    $('#ajaxCityListUpdate').trigger('change');
+
             }
         });
         $("#update_branch").show();
