@@ -29,15 +29,15 @@ class InsuranceExclusion extends CI_Controller {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
             $userid = $this->session->userdata('sess_user_id');
-            $exclusion_name = $this->input->POST('exclusion_name');
-			$is_exist = $this->InsuranceExclusion_model->checkInsuranceExclusionExist(trim($exclusion_name),'');
+            $exclusion_category = $this->input->POST('exclusion_category');
+			$is_exist = $this->InsuranceExclusion_model->checkInsuranceExclusionExist(trim($exclusion_category),'');
             if ($is_exist)
             {
-                $data = array('code' => 3, 'response' => 'This Insurance Exclusion already exist');
+                $data = array('code' => 3, 'response' => 'This Exclusion category already exist');
             } else
             {
                 $param = array(
-                    'exclusion_name' => trim($exclusion_name),
+                    'exclusion_category' => trim($exclusion_category),
                     'created_by' => $userid,
                 );
                 $cid = $this->Common_model->CommonInsert('m_insurance_exclusion',$param);
@@ -45,14 +45,14 @@ class InsuranceExclusion extends CI_Controller {
                 {
                     $log = array(
                         'action' => 'CreateInsuranceExclusion',
-                        'page' => 'Insurance Exclusion Master',
-                        'record' => 'Create New Insurance Exclusion .',
+                        'page' => 'Exclusion category Master',
+                        'record' => 'Create New Exclusion category .',
                         'success' => 'Y',
                         'ip_address' => $_SERVER['REMOTE_ADDR'],
                         'created_by' => $userid,
                     );
                     $this->Common_model->CommonInsert('audit_log',$log);
-                    $data = array('code' => 1, 'response' => 'Insurance Exclusion Created succesfully!');
+                    $data = array('code' => 1, 'response' => 'Exclusion category Created succesfully!');
                 } else
                 {
                     $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
@@ -85,22 +85,22 @@ class InsuranceExclusion extends CI_Controller {
             $pagelinks = $this->pagination->create_links();
             
             $i = $offset + 1;
-            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Insurance Exclusion </th>'
+            $html = '<div class="table-responsive"><table class="table m-table m-table--head-bg-success table-striped"><thead><tr><th>#</th><th>Exclusion category </th>'
                     . '<th>Action</th></tr></thead><tbody>';
             if (!empty($data['records']))
             {
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>'.$i.'</td><td>' . $value->exclusion_name . '</td><td class="text-truncate">'
+                    $html .= '<tr><td>'.$i.'</td><td>' . $value->exclusion_category . '</td><td class="text-truncate">'
                             . '<a href="javascript:void(0)" id="m_editbutton" data-bs-toggle="modal" value="'.$value->exclusion_id.'"  data-bs-target="#ModalUpdateInsuranceExclusion" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>
-                            <button  value="' . $value->exclusion_id . '" id="add_description" class="btn btn-outline-primary btn-sm " data-bs-target="#ModalNewMapping" data-bs-toggle="modal"  title="Company Vehicle Mappin" data-original-title="Company Vehicle Mapping"><i class="far fa-list-alt"></i> Mappings</button></td>';
+                            <button  value="' . $value->exclusion_id . '" id="add_description" class="btn btn-outline-primary btn-sm " data-bs-target="#ModalNewMapping" data-bs-toggle="modal"  title="Company Vehicle Mappin" data-original-title="Exclusion Heading"><i class="far fa-list-alt"></i> Headings</button></td>';
                 $i++; }
             }
-            $html .= '</tbody></table></div><h5>Total Insurance Exclusions: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
+            $html .= '</tbody></table></div><h5>Total Exclusion categorys: <span class="font-weight-bold">'.$total.'</span></h5>' . $pagelinks;
             $log = array(
                 'action' => 'getInsuranceExclusions',
-                'page' => 'Insurance Exclusion  Master',
-                'record' => 'Get Insurance Exclusion  List.',
+                'page' => 'Exclusion category  Master',
+                'record' => 'Get Exclusion category  List.',
                 'success' => 'Y',
                 'ip_address' => $_SERVER['REMOTE_ADDR'],
                 'created_by' => $userid,
@@ -119,16 +119,16 @@ class InsuranceExclusion extends CI_Controller {
         {
             $userid = $this->session->userdata('sess_user_id');
             $exclusion_id = $this->input->POST('exclusion_id');
-            $exclusion_name = $this->input->POST('exclusion_name');
+            $exclusion_category = $this->input->POST('exclusion_category');
 
-            $is_exist = $this->InsuranceExclusion_model->checkInsuranceExclusionExist(trim($exclusion_name),$exclusion_id);
+            $is_exist = $this->InsuranceExclusion_model->checkInsuranceExclusionExist(trim($exclusion_category),$exclusion_id);
             if ($is_exist)
             {
-                $data = array('code' => 3, 'response' => 'This Insurance Exclusion  already exist!');
+                $data = array('code' => 3, 'response' => 'This Exclusion category  already exist!');
             } else
             {
                 $param = array(
-                    'exclusion_name' => trim($exclusion_name),
+                    'exclusion_category' => trim($exclusion_category),
                     'updated_by' => $userid,
                     'updated_on' => date('Y-m-d H:i:s')
                 );
@@ -137,14 +137,14 @@ class InsuranceExclusion extends CI_Controller {
                 {
                     $log = array(
                         'action' => 'Update',
-                        'page' => 'Insurance Exclusion Master',
-                        'record' => 'Updated Insurance Exclusion .',
+                        'page' => 'Exclusion category Master',
+                        'record' => 'Updated Exclusion category .',
                         'success' => 'Y',
                         'ip_address' => $_SERVER['REMOTE_ADDR'],
                         'created_by' => $userid,
                     );
                     $this->Common_model->CommonInsert('audit_log',$log);
-                    $data = array('code' => 1, 'response' => 'Insurance Exclusion  Updated succesfully!');
+                    $data = array('code' => 1, 'response' => 'Exclusion category  Updated succesfully!');
                 } else
                 {
                     $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
@@ -183,14 +183,15 @@ class InsuranceExclusion extends CI_Controller {
         {
             $exclusion_id = $this->input->POST('exclusion_id');
             $data['records'] = $this->InsuranceExclusion_model->selectAllDescriptions($exclusion_id);
-            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Insurer</th><th>Vehicle Segment</th><th>Description</th><th>Action</th></tr></thead><tbody>';
+            //echo '<pre>';print_r($data);die;
+            $html = '<table class="table table-striped "><thead><tr><th>#</th><th>Heading</th><th>Description</th><th>Action</th></tr></thead><tbody>';
             if (!empty($data['records'][0]))
             {
                 $i = 1;
                 foreach ($data['records'] as $value)
                 {
-                    $html .= '<tr><td>' . $i . '</td><td>' . $value->insurer_name . '</td><td>'.$value->segment_name.'</td><td>'.$value->exclusion_description.'</td><td>'
-                            . '<a href="javascript:void(0)" id="m_editbranchbutton"  value="' . $value->exclusion_mapping_id . '" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
+                    $html .= '<tr><td>' . $i . '</td><td>' . $value->exclusion_heading . '</td><td>'.$value->exclusion_explaination.'</td><td>'
+                            . '<a href="javascript:void(0)" id="m_editbranchbutton"  value="' . $value->exclusion_heading_id . '" class="btn  btn-outline-success btn-sm"><i class="fa fa-pencil-alt"></i></a>'
                             . '</td>';
                     $i++;
                 }
@@ -210,30 +211,28 @@ class InsuranceExclusion extends CI_Controller {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
             $userid = $this->session->userdata('sess_user_id');
-            $insurer_id = $this->input->POST('insurer_id');
-            $exclusion_id = $this->input->POST('exclusion_id');
+            $exclusion_category_id = $this->input->POST('exclusion_category_id');
+            $exclusion_heading = $this->input->POST('exclusion_heading');
             $description = $this->input->POST('description');
-            $vehicle_segment_id = $this->input->POST('vehicle_segment_id');
 			$param = array(
-                'insurer_id' => $insurer_id,
-                'vehicle_segment_id' => $vehicle_segment_id,
-                'exclusion_id' => $exclusion_id,
-                'exclusion_description' => $description,
+                'exclusion_category_id' => $exclusion_category_id,
+                'exclusion_heading' => $exclusion_heading,
+                'exclusion_explaination' => $description,
                 'created_by' => $userid,
             );
-            $cid = $this->Common_model->CommonInsert('m_company_vehicle_exclusion_mapping',$param);
+            $cid = $this->Common_model->CommonInsert('m_insurance_exclusion_heading',$param);
             if ($cid != "")
             {
                 $log = array(
                     'action' => 'CreateInsuranceDescription',
-                    'page' => 'Insurance Exclusion Description Master',
-                    'record' => 'Create New Insurance Exclusion Description.',
+                    'page' => 'Exclusion category Description Master',
+                    'record' => 'Create New Exclusion category Description.',
                     'success' => 'Y',
                     'ip_address' => $_SERVER['REMOTE_ADDR'],
                     'created_by' => $userid,
                 );
                 $this->Common_model->CommonInsert('audit_log',$log);
-                $data = array('code' => 1, 'response' => 'Insurance Exclusion Description Created succesfully!');
+                $data = array('code' => 1, 'response' => 'Exclusion category Description Created succesfully!');
             } else
             {
                 $data = array('code' => 2, 'response' => 'Something went wrong, Please try again!');
@@ -264,19 +263,19 @@ class InsuranceExclusion extends CI_Controller {
         if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
         {
             $userid = $this->session->userdata('sess_user_id');
-            $exclusion_mapping_id = $this->input->POST('exclusion_mapping_id');
-            $exclusion_description = $this->input->POST('exclusion_description');
-            $vehicle_segment_id = $this->input->POST('vehicle_segment_id');
-            $insurer_id = $this->input->POST('insurer_id');
+            $exclusion_heading_id = $this->input->POST('exclusion_heading_id');
+            $exclusion_explaination = $this->input->POST('exclusion_explaination');
+            $exclusion_heading = $this->input->POST('exclusion_heading');
+            $exclusion_category_id = $this->input->POST('exclusion_category_id');
             
             $param = array(
-                'exclusion_description' => $exclusion_description,
-                'vehicle_segment_id' => $vehicle_segment_id,
-                'insurer_id' => $insurer_id,
+                'exclusion_explaination' => $exclusion_explaination,
+                'exclusion_heading' => $exclusion_heading,
+                'exclusion_category_id' => $exclusion_category_id,
                 'updated_by' => $userid,
                 'updated_on' => date('Y-m-d H:i:s')
             );
-            $cid = $this->InsuranceExclusion_model->updateExclustionMapping($param, $exclusion_mapping_id);
+            $cid = $this->InsuranceExclusion_model->updateExclustionMapping($param, $exclusion_heading_id);
             if ($cid != "")
             {
                 $data = array('code' => 1, 'response' => 'Branch Updated succesfully!');
@@ -286,6 +285,24 @@ class InsuranceExclusion extends CI_Controller {
             }
             echo json_encode($data);
         } else
+        {
+            redirect('/Auth');
+        }
+    }
+
+    function AllCategories()
+    {
+        if (strlen($this->session->userdata('is_logged_in')) and $this->session->userdata('is_logged_in') == 1)
+        {
+            $html ='';
+            $data['records'] = $this->InsuranceExclusion_model->selectAllCategories();
+            foreach($data['records'] as $value)
+            {
+                $html .='<option value='.$value->exclusion_id.'>'.$value->exclusion_category.'</option>';
+            }
+            echo $html;
+        }
+        else
         {
             redirect('/Auth');
         }

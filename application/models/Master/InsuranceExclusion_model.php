@@ -7,11 +7,11 @@ class InsuranceExclusion_model extends CI_Model {
         parent::__construct();
     }
 
-	function checkInsuranceExclusionExist($exclusion_name, $exclusion_id)
+	function checkInsuranceExclusionExist($exclusion_category, $exclusion_id)
 	{
 		$this->db->select('exclusion_id');
         $this->db->from('m_insurance_exclusion');
-        $this->db->where('exclusion_name', $exclusion_name);
+        $this->db->where('exclusion_category', $exclusion_category);
         if ($exclusion_id)
         {
             $this->db->where('exclusion_id !=', $exclusion_id);
@@ -33,14 +33,14 @@ class InsuranceExclusion_model extends CI_Model {
 	
     function selectAll($limit, $offset, $search, $count)
     {
-        $this->db->select('m_insurance_exclusion.exclusion_id,m_insurance_exclusion.exclusion_name');
+        $this->db->select('m_insurance_exclusion.exclusion_id,m_insurance_exclusion.exclusion_category');
         $this->db->from('m_insurance_exclusion');
         if ($search)
         {
             $keyword = $search['keyword'];
             if ($keyword)
             {
-                $this->db->where("m_insurance_exclusion.exclusion_name LIKE '%$keyword%'");
+                $this->db->where("m_insurance_exclusion.exclusion_category LIKE '%$keyword%'");
             }
         }
         if ($count)
@@ -69,7 +69,7 @@ class InsuranceExclusion_model extends CI_Model {
 
     function GetInsuranceExclusionDetails($exclusion_id)
     {
-        $this->db->select('exclusion_name, exclusion_id');
+        $this->db->select('exclusion_category, exclusion_id');
         $this->db->from('m_insurance_exclusion');
         $this->db->where('exclusion_id', $exclusion_id);
         $query = $this->db->get();
@@ -81,11 +81,9 @@ class InsuranceExclusion_model extends CI_Model {
 
     function selectAllDescriptions($exclusion_id)
     {
-        $this->db->select('m_company_vehicle_exclusion_mapping.exclusion_description,m_company_vehicle_exclusion_mapping.exclusion_mapping_id,m_insurer_description.insurer_name,m_vehicle_segment.segment_name');
-        $this->db->from('m_company_vehicle_exclusion_mapping');
-        $this->db->join('m_insurer_description', 'm_insurer_description.description_id = m_company_vehicle_exclusion_mapping.insurer_id', 'left');
-        $this->db->join('m_vehicle_segment', 'm_vehicle_segment.segment_id = m_company_vehicle_exclusion_mapping.vehicle_segment_id', 'left');
-        $this->db->where('m_company_vehicle_exclusion_mapping.exclusion_id', $exclusion_id);
+        $this->db->select('m_insurance_exclusion_heading.exclusion_heading_id,m_insurance_exclusion_heading.exclusion_heading,m_insurance_exclusion_heading.exclusion_category_id,m_insurance_exclusion_heading.exclusion_explaination');
+        $this->db->from('m_insurance_exclusion_heading');
+        $this->db->where('m_insurance_exclusion_heading.exclusion_category_id', $exclusion_id);
         $query = $this->db->get();
         if (count($query->result()) > 0)
         {
@@ -95,11 +93,10 @@ class InsuranceExclusion_model extends CI_Model {
 
     function getExclustionDetails($exclusion_mapping_id)
     {
-        $this->db->select('*');
-        $this->db->from('m_company_vehicle_exclusion_mapping');
-        $this->db->join('m_insurer_description', 'm_insurer_description.description_id = m_company_vehicle_exclusion_mapping.insurer_id', 'left');
-        $this->db->join('m_vehicle_segment', 'm_vehicle_segment.segment_id = m_company_vehicle_exclusion_mapping.vehicle_segment_id', 'left');
-        $this->db->where('exclusion_mapping_id', $exclusion_mapping_id);
+        $this->db->select('m_insurance_exclusion_heading.exclusion_heading_id,m_insurance_exclusion_heading.exclusion_heading,m_insurance_exclusion_heading.exclusion_category_id,m_insurance_exclusion_heading.exclusion_explaination,m_insurance_exclusion.exclusion_category');
+        $this->db->from('m_insurance_exclusion_heading');
+        $this->db->join('m_insurance_exclusion', 'm_insurance_exclusion.exclusion_id = m_insurance_exclusion_heading.exclusion_category_id', 'left');
+        $this->db->where('m_insurance_exclusion_heading.exclusion_heading_id', $exclusion_mapping_id);
         $query = $this->db->get();
         if ($query->num_rows() > 0)
         {
@@ -110,10 +107,22 @@ class InsuranceExclusion_model extends CI_Model {
 
     function updateExclustionMapping($param, $mapping_id)
     {
-        $this->db->where('exclusion_mapping_id', $mapping_id);
-        $this->db->update('m_company_vehicle_exclusion_mapping', $param);
+        $this->db->where('exclusion_heading_id', $mapping_id);
+        $this->db->update('m_insurance_exclusion_heading', $param);
         $affected_rows = $this->db->affected_rows();
         return $affected_rows;
+    }
+
+    function selectAllCategories()
+    {
+        $this->db->select('m_insurance_exclusion.exclusion_id, m_insurance_exclusion.exclusion_category');
+        $this->db->from('m_insurance_exclusion');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        return array();
     }
 
 }

@@ -1,15 +1,17 @@
-CREATE TABLE `m_insurance_exclusion` (
-  `exclusion_id` int(11) NOT NULL,
-  `exclusion_name` varchar(100) NOT NULL,
+ALTER TABLE `m_insurance_exclusion` CHANGE `exclusion_name` `exclusion_category` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+
+CREATE TABLE `m_insurance_exclusion_heading` (
+  `exclusion_heading_id` int(11) NOT NULL,
+  `exclusion_heading` text NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `updated_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `m_insurance_exclusion`
-  ADD PRIMARY KEY (`exclusion_id`);
+ALTER TABLE `m_insurance_exclusion_heading`
+  ADD PRIMARY KEY (`exclusion_heading_id`);
 
-  ALTER TABLE `m_insurance_exclusion`
-  MODIFY `exclusion_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `m_insurance_exclusion_heading`
+  MODIFY `exclusion_heading_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="d-flex align-items-center">
             <span class="h4 w-100 page-heading">
-                Insurance Exclusion
+                Exclusion Category
                 <button type="button" class="btn  btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalNewInsuranceExclusion">
                     <i class="fa fa-plus"></i>
                 </button>
@@ -35,7 +35,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                    Insurance Exclusion
+                    Exclusion Category
                     </h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -46,8 +46,8 @@
                 <div class="modal-body">
                     <form action="" method="post" id="create_insurance_exclusion">
                         <div class="form-group">
-                            <label>Enter Insurance Exclusion Name</label>
-                            <textarea rows="4" type="text" name="exclusion_name" class="form-control text-capitalize" required="" placeholder="Enter Insurance Exclusion Name... "></textarea>
+                            <label>Enter Exclusion Category Name</label>
+                            <input type="text" name="exclusion_category" class="form-control text-capitalize" required="" placeholder="Enter Exclusion Category Name... ">
                         </div>
                         <div class="form-group float-end">
                             <input type="submit" class="btn btn-primary" id="saveBtn" value="Save"> 
@@ -63,7 +63,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Update Insurance Exclusion
+                        Update Exclusion Category
                     </h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -74,9 +74,9 @@
                 <div class="modal-body">
                     <form action="" method="post" id="update_insurance_exclusion">
                         <div class="form-group">
-                            <label>Enter Insurance Exclusion Name</label>
+                            <label>Enter Exclusion Category Name</label>
                             <input type="hidden" name="exclusion_id" id="edit_exclusion_id">
-                            <textarea type="text" name="exclusion_name" id="edit_exclusion_name" class="form-control text-capitalize" required="" placeholder="Enter Insurance Exclusion Name... " rows="4"></textarea>
+                            <input type="text" name="exclusion_category" id="edit_exclusion_category" class="form-control text-capitalize" required="" placeholder="Enter Exclusion Category Name... ">
                         </div>
                         
                         <div class="form-group float-end">
@@ -95,7 +95,7 @@
                     <div class="row w-100">
                         <div class="col">
                             <h5 class="modal-title" id="exampleModalLabel">
-                                Vehicle Company Mapping
+                                Exclusion Heading and Explanation
                             </h5>
                         </div>
                         <div class="col text-end">
@@ -108,22 +108,17 @@
                     </div>
                     <form action="" class="w-100" method="post" id="update_mapping">
                         <div class="align-items-center bg-light border d-flex p-1 row">
-                        <input type="hidden" name="exclusion_mapping_idd" id="exclusion_mapping_idd">
-                        <div class="col-lg-5">
-                                <div class="form-group">
-                                    <select class="form-control" name="insurer_id" id="edit_ajaxInsurerList" required>
-                                        <option value="" selected disabled>Select Insurer</option>
-                                    </select>
-                                </div>
+                        <input type="hidden" name="exclusion_heading_id" id="exclusion_heading_id">
+                            <div class="col-4">
+                            <label>Exclusion Category</label>
+                                <select class="form-select" name="exclusion_category_id" required id="ajaxCategoriesList"></select>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <select class="form-control" name="vehicle_segment_id" id="edit_ajaxVehicleSegmentList" required>
-                                        <option value="" selected disabled>Select Vehicle Segment</option>
-                                    </select>
-                                </div>
+                            <div class="col-lg-8">
+                            <label>Exclusion Heading</label>
+                                <input type="text" class="form-control"  placeholder="Exclusion Heading" id="edit_exclusion_heading" name="exclusion_heading" required>
                             </div>
-                            <div class="col-lg-8 pb-1">
+                            <div class="col-lg-8 mt-3 pb-1">
+                            <label>Exclusion Description</label>
                                 <textarea placeholder="Description" name="description" id="edit_description"  required type="text" class="form-control"></textarea>
                             </div>
                             <div class="col-lg-3 d-flex align-items-center">
@@ -139,26 +134,17 @@
                     <div class="row">
                         <div class="col">
                             <button class="btn btn-sm btn-info float-end mb-1 py-1" id="add_new_mapping"  onclick="jsShow('create_mapping');jsHide('add_new_mapping')">
-                                Add Mapping
+                                Add Heading
                             </button>
                         </div>
                     </div>
                     <form action="" method="post" id="create_mapping">
                         <div class="align-items-center bg-light border d-flex p-1 row">
-                            <input type="hidden" name="exclusion_id" id="d_exclusion_id">
-                            <div class="col-lg-5">
-                                <div class="form-group">
-                                    <select class="form-control" name="insurer_id" id="ajaxInsurerList" required>
-                                        <option value="" selected disabled>Select Insurer</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <select class="form-control" name="vehicle_segment_id" id="ajaxVehicleSegmentList" required>
-                                        <option value="" selected disabled>Select Vehicle Segment</option>
-                                    </select>
-                                </div>
+                        
+                            <input type="hidden" name="exclusion_category_id" id="d_exclusion_category_id">
+                            <div class="col-lg-8 mb-3">
+                                
+                                <input type="text" class="form-control" placeholder="Exclusion Heading" name="exclusion_heading" required>
                             </div>
                             <div class="col-lg-8 pb-1">
                                 <textarea placeholder="Description" name="description"  required type="text" class="form-control"></textarea>
@@ -171,7 +157,6 @@
                             </div>
                         </div>
                     </form>
-                    
                     <div class="d-flex flex-row mt-3">
                         <div class="col-12 px-0">
                             <div id="ajaxDescriptionList" ></div>
@@ -186,10 +171,8 @@
 
 <script>
     $(function () {
-        $("#ajaxInsurerList, #ajaxVehicleSegmentList, #edit_ajaxInsurerList, #edit_ajaxVehicleSegmentList").select2();
+        getCategories();
         insurance_exclusionlist(page_url = false);
-        allInsurer();
-        allVehicleSegment();
         $("#create_mapping").hide();
         $("#update_mapping").hide();
     });
@@ -197,24 +180,23 @@
     $(document).on("click", "#updatebranchBtn", function (e) {
         if ($("#update_mapping").valid())
         {   
-            var exclusion_mapping_idd = $("#exclusion_mapping_idd").val();
             e.preventDefault();
             $.ajax({
                 url: "<?php echo base_url(); ?>exclusion/update",
                 type: 'POST',
                 dataType: "json",
                 data: {
-                    exclusion_mapping_id: exclusion_mapping_idd,
-                    exclusion_description: $("#edit_description").val(),
-                    vehicle_segment_id: $("#edit_ajaxVehicleSegmentList").val(),
-                    insurer_id: $("#edit_ajaxInsurerList").val(),
+                    exclusion_heading_id: $("#exclusion_heading_id").val(),
+                    exclusion_heading: $("#edit_exclusion_heading").val(),
+                    exclusion_explaination: $("#edit_description").val(),
+                    exclusion_category_id: $("#ajaxCategoriesList").val(),
                 },
                 success: function (data) {
                     if (data.code == 1)
                     {
                         swal.fire({title: "Success", text: data.response}).then(function () {
                             setTimeout(function(){  
-                                getDescriptions($("#d_exclusion_id").val());
+                                getDescriptions($("#d_exclusion_category_id").val());
                             }, 500);
                             $("#update_mapping").hide();
                             e.preventDefault();
@@ -239,40 +221,13 @@
             data: {exclusion_mapping_id: exclusion_mapping_idd},
             success: function (response) {
                 response  = JSON.parse(response)[0];
-                    $("#exclusion_mapping_idd").val(response.exclusion_mapping_id);
-                    $("#edit_ajaxVehicleSegmentList").val(response.vehicle_segment_id);
-                    $("#edit_ajaxInsurerList").val(response.insurer_id);
-                    $('#edit_ajaxInsurerList').trigger('change');
-                    $('#edit_ajaxVehicleSegmentList').trigger('change');
-                    $("#edit_description").val(response.exclusion_description);
+                    $("#exclusion_heading_id").val(response.exclusion_heading_id);
+                    $("#edit_description").val(response.exclusion_explaination);
+                    $("#edit_exclusion_heading").val(response.exclusion_heading);
             }
         });
         $("#update_mapping").show();
     });
-
-    function allInsurer()
-    {
-        $.ajax({
-            url: "<?php echo base_url(); ?>insurer/allInsurer",
-            type: "POST",
-            success: function (response) {
-                $("#ajaxInsurerList").html(response);
-                $("#edit_ajaxInsurerList").html(response);
-            }
-        });
-    }
-
-    function allVehicleSegment()
-    {
-        $.ajax({
-            url: "<?php echo base_url(); ?>vehicle_segment/allVehicleSegment",
-            type: "POST",
-            success: function (response) {
-                $("#ajaxVehicleSegmentList").html(response);
-                $("#edit_ajaxVehicleSegmentList").html(response);
-            }
-        });
-    }
 
     function getDescriptions(exclusion_id)
     {   
@@ -286,23 +241,36 @@
         });
     }
 
+    function getCategories()
+    {   
+        $.ajax({
+            url: "<?php echo base_url(); ?>insurance_exclusion/AllCategories",
+            type: "POST",
+            success: function (response) {
+                $("#ajaxCategoriesList").html(response);
+            }
+        });
+    }
+
     $('#create_mapping').submit(function (e) {
             e.preventDefault();
+            if ($("#create_mapping").valid()) {
             var formData = new FormData(this);
-            saveAjax('<?php echo base_url(); ?>exclusion_description/create', '', formData);
-            $("#create_mapping").trigger("reset");
-            $("#create_mapping").hide();
-            $("#add_new_mapping").show();
-            setTimeout(function(){  
-                getDescriptions($("#d_exclusion_id").val());
-            }, 500);
+                saveAjax('<?php echo base_url(); ?>exclusion_description/create', '', formData);
+                $("#create_mapping").trigger("reset");
+                $("#create_mapping").hide();
+                $("#add_new_mapping").show();
+                setTimeout(function(){  
+                    getDescriptions($("#d_exclusion_category_id").val());
+                }, 500);
+            }
     });
 
     $(document).on("click", "#add_description", function (e) {
         e.preventDefault();
-        var d_exclusion_id = $(this).attr("value");
-        $("#d_exclusion_id").val(d_exclusion_id);
-        getDescriptions(d_exclusion_id);
+        var d_exclusion_category_id = $(this).attr("value");
+        $("#d_exclusion_category_id").val(d_exclusion_category_id);
+        getDescriptions(d_exclusion_category_id);
     });
     
     $(document).on('click', ".pagination li a", function (event) {
@@ -385,7 +353,7 @@
             },
             success: function (data) {
                 $("#edit_exclusion_id").val(data.records.exclusion_id);
-                $("#edit_exclusion_name").val(data.records.exclusion_name);
+                $("#edit_exclusion_category").val(data.records.exclusion_category);
             }
         });
     });
@@ -394,7 +362,7 @@
         if ($("#update_insurance_exclusion").valid()) {
             e.preventDefault();
             var edit_exclusion_id = $("#edit_exclusion_id").val();
-            var edit_exclusion_name = $("#edit_exclusion_name").val();
+            var edit_exclusion_category = $("#edit_exclusion_category").val();
             var edit_from_date = $("#edit_from_date").val();
             var edit_to_date = $("#edit_to_date").val();
             $.ajax({
@@ -403,7 +371,7 @@
                 dataType: "json",
                 data: {
                     exclusion_id: edit_exclusion_id,
-                    exclusion_name: edit_exclusion_name,
+                    exclusion_category: edit_exclusion_category,
                     from_date: edit_from_date,
                     to_date: edit_to_date
                 },

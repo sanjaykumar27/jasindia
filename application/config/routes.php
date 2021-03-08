@@ -151,6 +151,8 @@ $route['insurance_exclusion/AllDescriptions'] = 'master/InsuranceExclusion/AllDe
 $route['exclusion_description/create'] = 'master/InsuranceExclusion/CreateInsuranceDescription';
 $route['exclusion/getExclusionDetails'] = 'master/InsuranceExclusion/getExclusionDetails';
 $route['exclusion/update'] = 'master/InsuranceExclusion/UpdateExclusion';
+$route['insurance_exclusion/AllCategories'] = 'master/InsuranceExclusion/AllCategories';
+
 
 //emission standard description
 $route['emission_standard_description/getEmissionStandardDescription'] = 'master/EmissionStandardDescription/getEmissionStandardDescription';
