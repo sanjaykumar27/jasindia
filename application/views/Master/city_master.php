@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 </form>
-                <form action="" method="post" id="update_city">
+                <form method="post" id="update_city">
                     <div class="row">
                         <div class="col-6 form-group">
                             <label>State</label>
@@ -142,6 +142,9 @@
                         </div>
                     </div>
                     <div id="updateform"></div>
+                    <div class="form-group text-center mt-3">
+                            <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
+                        </div>
                 </form>
             </div>
         </div>
@@ -221,19 +224,44 @@ $(function() {
         $("#d_district_rto_code").val($(this).attr("dd-rto-code"));
     });
 
-    $('#update_city').submit(function(e) {
+    $(document).on("click", "#updateBtn", function (e) {
         e.preventDefault();
-        var formData = new FormData(this);
-        saveAjax('<?php echo base_url(); ?>city/update', 'ModalUpdateCity', formData);
-        setTimeout(function() {
-            var page_url = '<?php echo base_url() ?>/master/city/getCities/' + ($(
-                "#active-page").text() - 1) * 10;
-            if ($("#search_key").val()) {
-                citylist(page_url = false);
-            } else {
-                citylist(page_url);
-            }
-        }, 500);
+        if ($("#update_city").valid())
+        {
+            var edit_district_id = $("#selectUpdateDistrictID").val();
+            var edit_city_id = $("#c_city_id").val();
+            var edit_city_name = $("#c_city_name").val();
+            $.ajax({
+                url: "<?php echo base_url(); ?>city/update",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    district_id: edit_district_id,
+                    city_name: edit_city_name,
+                    city_id: edit_city_id
+                },
+                success: function (data) {
+                    if (data.code == 1)
+                    {
+                        $('#ModalUpdateCity').modal('hide');
+                        swal.fire({title: "Success", text: data.response}).then(function () {
+                            setTimeout(function() {
+                                var page_url = '<?php echo base_url() ?>/master/city/getCities/' + ($("#active-page").text() - 1) * 10;
+                                if ($("#search_key").val()) {
+                                    citylist(page_url = false);
+                                } else {
+                                    citylist(page_url);
+                                }
+                            }, 500);
+                        });
+                    } else
+                    {
+                        $('#ModalUpdateState').unblock();
+                        swal.fire({title: "Error", text: data.response});
+                    }
+                }
+            });
+        }
     });
 
     $('#formNewPincode').submit(function(e) {

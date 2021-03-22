@@ -144,9 +144,7 @@ class City extends CI_Controller {
                     $html .= '</div></div>';
                 }
                
-                $html .= '</div></div><div class="form-group text-center mt-3">
-                            <input type="submit" class="btn btn-primary" id="updateBtn" value="Update"> 
-                        </div>
+                $html .= '</div></div>
                     ';
             }
 
@@ -164,13 +162,12 @@ class City extends CI_Controller {
         {
             $userid = $this->session->userdata('sess_user_id');
             $city = $this->input->POST('city_name');
-			$pincode = $this->input->POST('pincode');
-			$pincode_id = $this->input->POST('pincode_id');
+			// $pincode = $this->input->POST('pincode');
+			// $pincode_id = $this->input->POST('pincode_id');
             $city_id = $this->input->POST('city_id');
             $district_id = $this->input->POST('district_id');
             $city_exist = $this->City_model->checkCityExists(trim($city), $city_id, $district_id);
 			
-			//$pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), $pincode);
             if ($city_exist)
             {
                 $data = array('code' => 3, 'response' => 'This city already exist!');

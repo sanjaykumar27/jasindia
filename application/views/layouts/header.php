@@ -1,4 +1,4 @@
-<html lang="en" is="dmx-app">
+<html lang="en">
 <!-- begin::Head -->
 
 <head>
@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css" type="text/css">
     <link href="<?php echo base_url();?>assets/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" type="text/css">
-    <script src="<?php echo base_url();?>assets/js/dmxAppConnect.js"></script>
 </head>
 <!-- end::Head -->
 <!-- end::Body -->
