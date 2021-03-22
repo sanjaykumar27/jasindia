@@ -335,7 +335,8 @@ class City extends CI_Controller {
             $pincode = $this->input->POST('pincode');
             $pincode_id = $this->input->POST('pincode_id');
             $rto_code = $this->input->POST('rto_code');
-            $pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), $pincode_id);
+            $pincode_exist = 0;
+            // $pincode_exist = $this->City_model->checkPincodeExists(trim($pincode), $pincode_id);
             if ($pincode_exist)
             {
                 $data = array('code' => 3, 'response' => 'This pincode already exist!');
