@@ -167,3 +167,8 @@ $route['tire_manfacturer/create'] = 'master/TireManufacturer/CreateTireManufactu
 $route['tire_manfacturer/update'] = 'master/TireManufacturer/update';
 $route['tire_manfacturer/edit'] = 'master/TireManufacturer/edit';
 $route['master/tire_manufacturer'] = 'master/TireManufacturer/index';
+
+$route['exclusion_mapping/getExclusionMapping'] = 'master/ExclusionMapping/getExclusionMapping';
+$route['master/exclusion_mapping'] = 'master/ExclusionMapping/index';
+$route['exclusion_mapping/getHeadings'] = 'master/ExclusionMapping/getHeadings';
+$route['exclusion_mapping/CreateMapping'] = 'master/ExclusionMapping/CreateMapping';

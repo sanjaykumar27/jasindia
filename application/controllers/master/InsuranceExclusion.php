@@ -296,6 +296,7 @@ class InsuranceExclusion extends CI_Controller {
         {
             $html ='';
             $data['records'] = $this->InsuranceExclusion_model->selectAllCategories();
+            $html = '<option value="">Select Category</option>';
             foreach($data['records'] as $value)
             {
                 $html .='<option value='.$value->exclusion_id.'>'.$value->exclusion_category.'</option>';

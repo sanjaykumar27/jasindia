@@ -129,6 +129,15 @@
                                     </a>
                                 </td>
                             </tr> -->
+                            <tr>
+                                <td>12</td>
+                                <td>
+                                    <a href="<?php echo base_url() ?>master/exclusion_mapping"
+                                        class="btn btn-outline-accent  py-2">
+                                        Exclusion Mapping
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

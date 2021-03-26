@@ -82,6 +82,9 @@
                             <li><a href="<?php echo base_url() ?>master/emission_standard_description"
                                     class="dropdown-item">
                                     Emission Standard Description
+                                </a></li><li><a href="<?php echo base_url() ?>master/exclusion_mapping"
+                                    class="dropdown-item">
+                                    Exclusion Mapping
                                 </a></li>
                                 <!-- <li><a href="<?php echo base_url() ?>master/tire_manufacturer"
                                     class="dropdown-item">
